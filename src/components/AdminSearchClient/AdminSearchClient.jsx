@@ -19,7 +19,7 @@ class AdminSearchClient extends Component {
       <Grid container className={classes.root}>
         <Typography >
           I am the AdminSearchClient Component
-                </Typography>
+        </Typography>
                 
       </Grid>
     )

@@ -19,7 +19,7 @@ class AdminClientList extends Component {
       <Grid container className={classes.root}>
         <Typography >
           I am a AdminClientList Component
-                </Typography>
+        </Typography>
                 
       </Grid>
     )

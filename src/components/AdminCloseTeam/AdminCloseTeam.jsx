@@ -19,7 +19,7 @@ class AdminCloseTeam extends Component {
       <Grid container className={classes.root}>
         <Typography >
           I am the AdminCloseTeam Component
-                </Typography>
+        </Typography>
                 
       </Grid>
     )

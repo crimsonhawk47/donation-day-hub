@@ -16,6 +16,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import AdminClientList from '../AdminClientList/AdminClientList';
+import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
+import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
+import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList';
+import AdminTeamList from '../AdminTeamList/AdminTeamList'
 
 import './App.css';
 
@@ -54,6 +59,31 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/admin-team-page"
+              component={AdminTeamPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/admin-volunteer-page"
+              component={AdminVolunteerPage}
+            />
+             <ProtectedRoute
+              exact
+              path="/admin-client-list"
+              component={AdminClientList}
+            />
+            <ProtectedRoute
+              exact
+              path="/admin-volunteer-list"
+              component={AdminVolunteerList}
+            />
+            <ProtectedRoute
+              exact
+              path="/admin-team-list"
+              component={AdminTeamList}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
