@@ -17,6 +17,16 @@ class ClientGallery extends Component {
   }
 
 
+  getImage = (event) => {
+    let selectedImage = event.target.files[0]
+    this.setState({selectedImage})
+  }
+
+  uploadFile = (event) => {
+    this.props.dispatch({type: 'UPLOAD_TO_AWS', payload: this.state.selectedImage})
+  }
+
+
   render() {
     const { classes } = this.props;
     console.log(this.state);
@@ -29,7 +39,17 @@ class ClientGallery extends Component {
             I am a ClientGallery Component
         </Typography>
         </Grid>
-        {JSON.stringify(this.props.reduxStore)}
+
+        <h1>Upload an image to AWS S3 bucket</h1>
+        <input
+          id='upload-image'
+          type='file'
+          accept='image/*'
+          onChange={this.getImage}
+        />
+        <form onSubmit={this.uploadFile}>
+          <button id='file-upload-button'>Upload</button>
+        </form>
       </>
     )
 
