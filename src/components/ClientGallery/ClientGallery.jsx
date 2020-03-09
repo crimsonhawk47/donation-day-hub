@@ -12,14 +12,15 @@ const styles = theme => ({
 
 class ClientGallery extends Component {
 
-  getImage = () => {
-    console.log(`GET IMAGE RAN`);
-
+  state = {
+    selectedImage: ''
   }
 
 
   render() {
     const { classes } = this.props;
+    console.log(this.state);
+    
 
     return (
       <>
@@ -28,17 +29,7 @@ class ClientGallery extends Component {
             I am a ClientGallery Component
         </Typography>
         </Grid>
-
-        <h1>Upload an image to AWS S3 bucket</h1>
-        <input
-          id='upload-image'
-          type='file'
-          accept='image/*'
-          onChange={this.getImage}
-        />
-        <form onSubmit={this.uploadFile}>
-          <button id='file-upload-button'>Upload</button>
-        </form>
+        {JSON.stringify(this.props.reduxStore)}
       </>
     )
 
