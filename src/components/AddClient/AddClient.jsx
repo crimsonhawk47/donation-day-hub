@@ -18,7 +18,7 @@ class AddClient extends Component {
     return (
       <Grid container className={classes.root}>
         <Typography >
-          I am a AddClient Component
+          I am an AddClient Component
                 </Typography>
                 
       </Grid>
