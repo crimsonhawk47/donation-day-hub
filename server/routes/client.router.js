@@ -20,4 +20,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('in client post router');
+    const newClient = req.body;
+    console.log(newClient)
+    const queryText = `INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
+    VALUES ($1, $2, $3, $4, now(), $5);`;
+    const queryValues = [
+        newClient.name,
+        newClient.bio,
+        newClient.media_release,
+        newClient.location,
+        // newClient.date,
+        newClient.team_id,
+    ];
+    pool.query(queryText, queryValues)
+    .then(()=> {
+        res.sendStatus(201);
+        console.log(queryValues)
+    }).catch((err) => {
+        console.log('Error in router.post on client router', err);
+        res.sendStatus(500);
+    })
+});
+
 module.exports = router;
