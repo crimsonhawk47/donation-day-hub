@@ -132,7 +132,7 @@ class App extends Component {
               exact
               path="/client-gallery"
               component={ClientGallery}
-            />
+            /> 
             <ProtectedRoute
               exact
               path="/resources"
