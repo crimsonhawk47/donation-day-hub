@@ -25,13 +25,12 @@ import UserDashboard from '../UserDashboard/UserDashboard';
 import EditUser from '../EditUser/EditUser';
 import TeamPage from '../TeamPage/TeamPage';
 import AddClient from '../AddClient/AddClient';
-import ClientPage from '../ClientPage/ClientPage';
+import Client from '../Client/Client';
 import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 
 import './App.css';
-import { Client } from 'pg';
 
 class App extends Component {
   componentDidMount () {
@@ -121,8 +120,8 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-page"
-              component={ClientPage}
+              path="/client"
+              component={Client}
             />
             <ProtectedRoute
               exact
