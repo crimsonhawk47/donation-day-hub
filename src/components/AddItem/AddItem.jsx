@@ -18,9 +18,8 @@ class AddItem extends Component {
     return (
       <Grid container className={classes.root}>
         <Typography >
-          I am an AddItem Component
-                </Typography>
-                
+          I am the AddItem Component
+        </Typography>
       </Grid>
     )
 

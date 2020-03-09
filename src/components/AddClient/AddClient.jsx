@@ -19,8 +19,7 @@ class AddClient extends Component {
       <Grid container className={classes.root}>
         <Typography >
           I am an AddClient Component
-                </Typography>
-                
+        </Typography>
       </Grid>
     )
 
@@ -32,4 +31,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
+
 export default withStyles(styles)(connect(mapStateToProps)(AddClient))

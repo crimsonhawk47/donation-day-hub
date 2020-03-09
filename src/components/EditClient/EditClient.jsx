@@ -19,7 +19,7 @@ class EditClient extends Component {
       <Grid container className={classes.root}>
         <Typography >
           I am an EditClient Component
-                </Typography>
+        </Typography>
                 
       </Grid>
     )

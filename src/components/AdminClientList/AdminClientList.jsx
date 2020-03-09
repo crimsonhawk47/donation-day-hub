@@ -10,7 +10,7 @@ const styles = theme=> ({
   }
 });
 
-class AddClientList extends Component {
+class AdminClientList extends Component {
 
   render() {
     const { classes } = this.props;
@@ -18,9 +18,8 @@ class AddClientList extends Component {
     return (
       <Grid container className={classes.root}>
         <Typography >
-          I am an AddClientList Component
-                </Typography>
-                
+          I am the AdminClientList Component
+        </Typography>                
       </Grid>
     )
 
@@ -32,4 +31,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(AddClientList))
+
+export default withStyles(styles)(connect(mapStateToProps)(AdminClientList))
