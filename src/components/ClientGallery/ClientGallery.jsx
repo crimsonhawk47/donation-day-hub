@@ -14,7 +14,7 @@ class ClientGallery extends Component {
 
   getImage = () => {
     console.log(`GET IMAGE RAN`);
-    
+
   }
 
 
