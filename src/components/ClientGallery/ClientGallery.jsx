@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 
 
-const styles = theme=> ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
   }
@@ -12,16 +12,25 @@ const styles = theme=> ({
 
 class ClientGallery extends Component {
 
+  state = {
+    selectedImage: ''
+  }
+
+
   render() {
     const { classes } = this.props;
+    console.log(this.state);
+    
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am a ClientGallery Component
-                </Typography>
-                
-      </Grid>
+      <>
+        <Grid container className={classes.root}>
+          <Typography >
+            I am a ClientGallery Component
+        </Typography>
+        </Grid>
+        {JSON.stringify(this.props.reduxStore)}
+      </>
     )
 
   }
