@@ -6,7 +6,6 @@ function* uploadToAws(action) {
   
   try {
     let filename = action.payload.name
-
     const config = {
       headers: { 'Content-Type': 'application/json' },
       params: {

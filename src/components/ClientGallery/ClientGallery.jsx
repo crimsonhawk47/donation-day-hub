@@ -19,25 +19,25 @@ class ClientGallery extends Component {
 
   getImage = (event) => {
     let selectedImage = event.target.files[0]
-    this.setState({selectedImage})
+    this.setState({ selectedImage })
   }
 
   uploadFile = (event) => {
-    this.props.dispatch({type: 'UPLOAD_TO_AWS', payload: this.state.selectedImage})
+    this.props.dispatch({ type: 'UPLOAD_TO_AWS', payload: this.state.selectedImage })
   }
 
 
   render() {
     const { classes } = this.props;
     console.log(this.state);
-    
+
 
     return (
       <>
         <Grid container className={classes.root}>
           <Typography >
             I am a ClientGallery Component
-        </Typography>
+          </Typography>
         </Grid>
 
         <h1>Upload an image to AWS S3 bucket</h1>
