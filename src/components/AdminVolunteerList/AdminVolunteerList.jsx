@@ -11,17 +11,42 @@ const styles = theme=> ({
 });
 
 class AdminVolunteerList extends Component {
+    handleClientClick = () => {
+        console.log('clicking to Client View');
+        this.props.history.push(`/admin-client-list`)
+    }
+    
+    handleVolunteerClick = () => {
+        console.log('clicking to Volunteer View');
+        this.props.history.push(`/admin-volunteer-list`)
+    }
+    
+    handleTeamClick = () => {
+        console.log('clicking to Team View');
+        this.props.history.push(`/admin-team-list`)
+    }
 
   render() {
     const { classes } = this.props;
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the AdminVolunteerList Component
-        </Typography>
-                
-      </Grid>
+      <div container className={classes.root}>
+        <h1 >
+          Admin Volunteer List View
+        </h1> 
+        <button 
+            onClick={() => this.handleClientClick()}>
+            Client List
+        </button>  
+        <button
+            onClick={() => this.handleVolunteerClick()}>
+            Volunteer List
+        </button>     
+        <button
+            onClick={() => this.handleTeamClick()}>
+            Team List
+        </button>    
+      </div>
     )
 
   }
