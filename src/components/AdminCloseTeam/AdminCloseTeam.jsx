@@ -32,4 +32,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
+
 export default withStyles(styles)(connect(mapStateToProps)(AdminCloseTeam))

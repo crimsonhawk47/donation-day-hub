@@ -20,7 +20,6 @@ class AddItem extends Component {
         <Typography >
           I am the AddItem Component
         </Typography>
-                
       </Grid>
     )
 

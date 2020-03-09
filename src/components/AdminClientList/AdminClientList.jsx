@@ -18,9 +18,8 @@ class AdminClientList extends Component {
     return (
       <Grid container className={classes.root}>
         <Typography >
-          I am a AdminClientList Component
-        </Typography>
-                
+          I am the AdminClientList Component
+        </Typography>                
       </Grid>
     )
 
@@ -32,4 +31,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
+
 export default withStyles(styles)(connect(mapStateToProps)(AdminClientList))
