@@ -10,6 +10,7 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
+  console.log('in user router. req.user:', req.user)
 });
 
 // Handles POST request with new user data
@@ -18,11 +19,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {  
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const phoneNum = req.body.phoneNum;
+  const streetAddress = req.body.streetAddress;
+  const city = req.body.city;
+  const state = req.body.state;
+  const zip = req.body.zip;
+  // const accessLevel = req.body.accessLevel;
+  // const dateRegistered = req.body.dateRegistered;
 
-  const queryText = 'INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id';
-  pool.query(queryText, [username, password])
+//Make sure to install NOW plugin
+  const queryText = `INSERT INTO "user" (username, password, first_name, last_name, email, phone, street_address, city, state, zip, date_registered) 
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, now()) RETURNING id`;
+  pool.query(queryText, [username, password, firstName, lastName, email, phoneNum, streetAddress, city, state, zip])
     .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .catch((err) => {
+      console.log(err)
+    res.sendStatus(500)});
 });
 
 // Handles login form authenticate/login POST
