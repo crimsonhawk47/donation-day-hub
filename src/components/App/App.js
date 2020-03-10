@@ -29,7 +29,6 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
-import ClientPage from '../ClientPage/ClientPage';
 
 
 import './App.css';
