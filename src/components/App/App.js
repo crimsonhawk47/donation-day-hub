@@ -16,12 +16,20 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import ClientGallery from '../ClientGallery/ClientGallery'
 import AdminClientList from '../AdminClientList/AdminClientList';
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
 import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList';
-import AdminTeamList from '../AdminTeamList/AdminTeamList'
+import AdminTeamList from '../AdminTeamList/AdminTeamList';
+import UserDashboard from '../UserDashboard/UserDashboard';
+import EditUser from '../EditUser/EditUser';
+import TeamPage from '../TeamPage/TeamPage';
+import AddClient from '../AddClient/AddClient';
+import EditClient from '../EditClient/EditClient';
+import ClientGallery from '../ClientGallery/ClientGallery';
+import Resources from '../Resources/Resources';
+import ClientPage from '../ClientPage/ClientPage';
+
 
 import './App.css';
 
@@ -91,6 +99,47 @@ class App extends Component {
               path="/admin-team-list"
               component={AdminTeamList}
             />
+            <ProtectedRoute
+              exact
+              path="/user-dashboard"
+              component={UserDashboard}
+            />
+            <ProtectedRoute
+              exact
+              path="/edit-user"
+              component={EditUser}
+            />
+            <ProtectedRoute
+              exact
+              path="/team-page"
+              component={TeamPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/add-client"
+              component={AddClient}
+            />
+            <ProtectedRoute
+              exact
+              path="/client-page"
+              component={ClientPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/edit-client"
+              component={EditClient}
+            />
+            <ProtectedRoute
+              exact
+              path="/client-gallery"
+              component={ClientGallery}
+            /> 
+            <ProtectedRoute
+              exact
+              path="/resources"
+              component={Resources}
+            />
+            
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
