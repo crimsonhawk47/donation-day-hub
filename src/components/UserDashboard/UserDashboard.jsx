@@ -3,7 +3,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 
