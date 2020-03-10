@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 
-const styles = theme=> ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
   }
@@ -13,14 +13,18 @@ const styles = theme=> ({
 class UserDashboard extends Component {
 
   render() {
-console.log(this.props);
+    console.log(this.props);
 
     return (
       <>
-      <h1 id="welcome">
-        Welcome, { this.props.reduxStore.user.username }
-     </h1>
-    
+        <h1 id="welcome">
+          Welcome, {this.props.reduxStore.user.username}!
+        </h1>
+        <div>
+          <button>Team Page</button>
+          <button>Join Team</button>
+          <button>Edit Profile</button>
+        </div>
       </>
     )
   }
