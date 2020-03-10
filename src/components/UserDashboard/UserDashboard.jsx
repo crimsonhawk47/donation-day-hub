@@ -3,7 +3,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 
@@ -37,10 +37,7 @@ class UserDashboard extends Component {
         </div>
 
         {/* RENDER REGISTRATION PAGE/USER INFO */}
-        <div>
-          <button>Join Team</button>
-          <button>Edit Profile</button>
-        </div>
+        
       </>
     )
   }
