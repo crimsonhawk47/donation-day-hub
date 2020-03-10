@@ -62,7 +62,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              component={UserDashboard}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -80,11 +80,6 @@ class App extends Component {
               exact
               path="/admin-volunteer-page"
               component={AdminVolunteerPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/user-dashboard"
-              component={UserDashboard}
             />
             <ProtectedRoute
               exact
