@@ -21,17 +21,17 @@ const styles = theme => ({
 });
 
 let id = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(date, name, makeCaptain) {
     id += 1;
-    return { id, name, calories, fat, carbs, protein };
+    return { id, date, name, makeCaptain };
 }
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('1-2-20', 'Ed', 'Yes'),
+    createData('2-5-20', 'Mitch', 'No'),
+    createData('1-7-20', 'Sara', 'Yes'),
+    createData('1-1-20', 'Amber', 'Yes'),
+    createData('2-1-20', 'Meghan', 'Yes'),
 ];
 
 class AdminVolunteerList extends Component {
@@ -45,22 +45,18 @@ class AdminVolunteerList extends Component {
                     <TableHead>
                         <TableRow>
                             <TableCell>Date</TableCell>
-                            <TableCell align="right">Name</TableCell>
-                            <TableCell align="right">Make Captain? (g)</TableCell>
-                            <TableCell align="right">Carbs (g)</TableCell>
-                            <TableCell align="right">Protein (g)</TableCell>
+                            <TableCell align="left">Name</TableCell>
+                            <TableCell align="left">Make Captain?</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {row.date}
                                 </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
+                                <TableCell align="left">{row.name}</TableCell>
+                                <TableCell align="left">{row.makeCaptain}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
