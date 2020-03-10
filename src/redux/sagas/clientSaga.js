@@ -53,10 +53,15 @@ function* getMediaFromNames(action) {
   }
 }
 
+function* getItemList(action) {
+
+}
+
 function* clientSaga() {
   yield takeLatest('UPLOAD_TO_AWS', uploadToAws);
   yield takeLatest('GET_IMAGE_NAMES', getImageNames);
   yield takeLatest('GET_MEDIA_FROM_NAMES', getMediaFromNames)
+  yield takeLatest('FETCH_ITEM_LIST', getItemList)
 }
 
 export default clientSaga;

@@ -1,13 +1,13 @@
+import { connect } from 'react-redux';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import { Link } from 'react-router';
 
 
 
-
-const styles = theme=> ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
   }
@@ -22,7 +22,7 @@ class UserDashboard extends Component {
   
 
   render() {
-    const { classes } = this.props;
+    console.log(this.props);
 
     return (
       <>
@@ -37,9 +37,12 @@ class UserDashboard extends Component {
         </div>
 
         {/* RENDER REGISTRATION PAGE/USER INFO */}
+        <div>
+          <button>Join Team</button>
+          <button>Edit Profile</button>
+        </div>
       </>
     )
-
   }
 }
 
@@ -48,4 +51,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
+
 export default withStyles(styles)(connect(mapStateToProps)(UserDashboard))

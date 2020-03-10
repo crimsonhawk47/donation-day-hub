@@ -5,6 +5,15 @@ class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNum: '',
+    streetAddress: '',
+    city: '',
+    state: '',
+    zip: '',
+    accessLevel: ''
   };
 
   registerUser = (event) => {
@@ -16,6 +25,15 @@ class RegisterPage extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          email: this.state.email,
+          phoneNum: this.state.phoneNum,
+          streetAddress: this.state.streetAddress,
+          city: this.state.city,
+          state: this.state.state,
+          zip: this.state.zip,
+          accessLevel: 1
         },
       });
     } else {
@@ -61,6 +79,94 @@ class RegisterPage extends Component {
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="firstName">
+              First Name:
+              <input
+                type="firstName"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleInputChangeFor('firstName')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="lastName">
+              Last Name:
+              <input
+                type="lastName"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleInputChangeFor('lastName')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="phoneNum">
+              Phone:
+              <input
+                type="phoneNum"
+                name="phoneNum"
+                value={this.state.phoneNum}
+                onChange={this.handleInputChangeFor('phoneNum')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="streetAddress">
+              Address:
+              <input
+                type="streetAddress"
+                name="streetAddress"
+                value={this.state.streetAddress}
+                onChange={this.handleInputChangeFor('streetAddress')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="city">
+              City:
+              <input
+                type="city"
+                name="city"
+                value={this.state.city}
+                onChange={this.handleInputChangeFor('city')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="state">
+              State
+              <input
+                type="state"
+                name="state"
+                value={this.state.state}
+                onChange={this.handleInputChangeFor('state')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="zip">
+              Zip:
+              <input
+                type="zip"
+                name="zip"
+                value={this.state.zip}
+                onChange={this.handleInputChangeFor('zip')}
               />
             </label>
           </div>
