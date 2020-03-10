@@ -2,29 +2,46 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 
-
-const styles = theme=> ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 class TeamPage extends Component {
+  state = {
+    teamID: 1
+  }
+  
+
+  componentDidMount () {
+    this.props.dispatch ({
+      type: 'FETCH_TEAM',
+      payload: this.state.teamID
+    })
+  
+  this.props.dispatch ({
+    type: 'FETCH_CLIENTS_BY_TEAM',
+    payload: this.state.teamID
+  })
+}
+
+  handleAdd = () => {
+    console.log(`we trying to add clients`);
+    
+  }
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the TeamPage Component
-        </Typography>
-                
-      </Grid>
-    )
+<>
+<h1>
+  Team {this.props.reduxStore.teamById.captain_name}
+</h1>
+<Button
+variant="contained" 
+color="primary" 
+onClick={this.handleAdd}>Add Client</Button>
 
-  }
+</>
+    )
+}
 }
 
 const mapStateToProps = reduxStore => {
@@ -32,4 +49,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(TeamPage))
+export default withStyles()(connect(mapStateToProps)(TeamPage))
