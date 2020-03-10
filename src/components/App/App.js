@@ -24,6 +24,7 @@ import AdminTeamList from '../AdminTeamList/AdminTeamList';
 import UserDashboard from '../UserDashboard/UserDashboard';
 import EditUser from '../EditUser/EditUser';
 import TeamPage from '../TeamPage/TeamPage';
+import TeamSearch from '../TeamSearch/TeamSearch';
 import AddClient from '../AddClient/AddClient';
 import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
@@ -113,6 +114,11 @@ class App extends Component {
               exact
               path="/team-page"
               component={TeamPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/team-search"
+              component={TeamSearch}
             />
             <ProtectedRoute
               exact
