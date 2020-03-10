@@ -9,6 +9,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList'
+import AdminClientList from '../AdminClientList/AdminClientList'
+import AdminTeamList from '../AdminTeamList/AdminTeamList'
 
 function TabContainer(props) {
     return (
@@ -48,14 +50,14 @@ class AdminDashboard extends Component {
             <div className={classes.root}>
                 <AppBar position="static">
                     <Tabs value={this.state.value} onChange={this.handleChange}>
-                        <Tab label="Item One" />
-                        <Tab label="Item Two" />
-                        <Tab label="Item Three" />
+                        <Tab label="Volunteers" />
+                        <Tab label="Clients" />
+                        <Tab label="Teams" />
                     </Tabs>
                 </AppBar>
                 {this.state.value === 0 && <TabContainer><AdminVolunteerList /></TabContainer>}
-                {this.state.value === 1 && <TabContainer>Clients</TabContainer>}
-                {this.state.value === 2 && <TabContainer>Team</TabContainer>}
+                {this.state.value === 1 && <TabContainer><AdminClientList /></TabContainer>}
+                {this.state.value === 2 && <TabContainer><AdminTeamList /></TabContainer>}
             </div>
         );
     }
