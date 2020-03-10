@@ -1,8 +1,8 @@
+import { connect } from 'react-redux';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-
 
 const styles = theme=> ({
   root: {
@@ -13,17 +13,16 @@ const styles = theme=> ({
 class UserDashboard extends Component {
 
   render() {
-    const { classes } = this.props;
+console.log(this.props);
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the UserDashboard Component
-        </Typography>
-                
-      </Grid>
+      <>
+      <h1 id="welcome">
+        Welcome, { this.props.reduxStore.user.username }
+     </h1>
+    
+      </>
     )
-
   }
 }
 
@@ -32,4 +31,5 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
+
 export default withStyles(styles)(connect(mapStateToProps)(UserDashboard))
