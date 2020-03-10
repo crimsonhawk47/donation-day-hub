@@ -27,13 +27,13 @@ router.post('/register', (req, res, next) => {
   const city = req.body.city;
   const state = req.body.state;
   const zip = req.body.zip;
-  // const accessLevel = req.body.accessLevel;
+  const accessLevel = req.body.accessLevel;
   // const dateRegistered = req.body.dateRegistered;
 
 //Make sure to install NOW plugin
-  const queryText = `INSERT INTO "user" (username, password, first_name, last_name, email, phone, street_address, city, state, zip, date_registered) 
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, now()) RETURNING id`;
-  pool.query(queryText, [username, password, firstName, lastName, email, phoneNum, streetAddress, city, state, zip])
+  const queryText = `INSERT INTO "user" (username, password, first_name, last_name, email, phone, street_address, city, state, zip, access_level, date_registered) 
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, now()) RETURNING id`;
+  pool.query(queryText, [username, password, firstName, lastName, email, phoneNum, streetAddress, city, state, zip, accessLevel])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log(err)
