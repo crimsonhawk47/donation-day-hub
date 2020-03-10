@@ -45,8 +45,11 @@ class UserDashboard extends Component {
           <button onClick={this.handleEditProfile}>Edit Profile</button>
           <Link to="/resources">Important Links</Link>
         </div>
-
-        {/* RENDER REGISTRATION PAGE/USER INFO */}
+        {/* RENDER USER PHONE, EMAIL, AND ADDRESS */}
+        <>
+          {/* {JSON.stringify(this.props.reduxStore.RegisterPage.email)} */}
+        </>
+        
         
       </>
     )
