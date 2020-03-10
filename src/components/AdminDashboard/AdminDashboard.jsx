@@ -8,6 +8,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList'
+
 function TabContainer(props) {
     return (
         <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -51,7 +53,7 @@ class AdminDashboard extends Component {
                         <Tab label="Item Three" />
                     </Tabs>
                 </AppBar>
-                {this.state.value === 0 && <TabContainer>Volunteers</TabContainer>}
+                {this.state.value === 0 && <TabContainer><AdminVolunteerList /></TabContainer>}
                 {this.state.value === 1 && <TabContainer>Clients</TabContainer>}
                 {this.state.value === 2 && <TabContainer>Team</TabContainer>}
             </div>
