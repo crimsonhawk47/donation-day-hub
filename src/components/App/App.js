@@ -14,6 +14,10 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
+
+//import UserPage from '../UserPage/UserPage';
+
+
 import InfoPage from '../InfoPage/InfoPage';
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
@@ -26,6 +30,7 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
+import TeamSearch from '../TeamSearch/TeamSearch'
 import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './App.css';
@@ -123,6 +128,8 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
+              path="/team-search"
+              component={TeamSearch}
               path="/admin-dashboard"
               component={AdminDashboard}
             />
