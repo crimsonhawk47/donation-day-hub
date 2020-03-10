@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, Input, Button } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -16,14 +16,18 @@ class ClientGallery extends Component {
     selectedImage: ''
   }
 
-
   getImage = (event) => {
     let selectedImage = event.target.files[0]
     this.setState({ selectedImage })
   }
 
-  uploadFile = (event) => {
+  uploadFile = () => {
     this.props.dispatch({ type: 'UPLOAD_TO_AWS', payload: this.state.selectedImage })
+  }
+
+  displayAllImages = () => {
+    this.props.dispatch({type: 'DISPLAY_ALL_IMAGES'})
+    
   }
 
 
@@ -41,15 +45,15 @@ class ClientGallery extends Component {
         </Grid>
 
         <h1>Upload an image to AWS S3 bucket</h1>
-        <input
+        <Input
           id='upload-image'
           type='file'
           accept='image/*'
           onChange={this.getImage}
         />
-        <form onSubmit={this.uploadFile}>
-          <button id='file-upload-button'>Upload</button>
-        </form>
+        {/* Let's replace this with Material UI later */}
+          <Button onClick={this.uploadFile}>Upload</Button>
+          <Button onClick={this.displayAllImages}>DisplayAllImages</Button>
       </>
     )
 
