@@ -15,10 +15,20 @@ const styles = theme => ({
 
 class UserDashboard extends Component {
 
-  handleClick = () => {
-    this.props.history.push('/')
+  handleEditProfile = () => {
+    console.log('clicked Edit Profile button');
+    this.props.history.push('/edit-user')
+  }
+
+  handleJoinTeam = () => {
+    console.log('clicked Join Team button');
+    this.props.history.push('/team-search')
   }
   
+  handleTeamPage = () => {
+    console.log('clicked Team Page button');
+    this.props.history.push('/team-page')
+  }
   
 
   render() {
@@ -30,9 +40,9 @@ class UserDashboard extends Component {
           Welcome, {this.props.reduxStore.user.username}!
         </h1>
         <div>
-          <button>Team Page</button>
-          <button onClick={this.handleClick}>Join Team</button>
-          <button>Edit Profile</button>
+          <button onClick={this.handleTeamPage}>Team Page</button>
+          <button onClick={this.handleJoinTeam}>Join Team</button>
+          <button onClick={this.handleEditProfile}>Edit Profile</button>
           <Link to="/resources">Important Links</Link>
         </div>
 

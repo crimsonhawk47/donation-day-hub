@@ -29,6 +29,7 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
+import TeamSearch from '../TeamSearch/TeamSearch'
 
 
 import './App.css';
@@ -134,7 +135,11 @@ class App extends Component {
               path="/resources"
               component={Resources}
             />
-            
+            <ProtectedRoute
+              exact
+              path="/team-search"
+              component={TeamSearch}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
