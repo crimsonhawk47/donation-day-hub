@@ -27,7 +27,7 @@ import ShoppingItem from '../ShoppingItem/ShoppingItem'
 // reference https://material-ui.com/components/tables/#table
 // code for table was taken from here
 
-const styles = theme=> ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
   }
@@ -35,9 +35,15 @@ const styles = theme=> ({
 
 class ShoppingList extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_ITEM_LIST'
+    })
+  }
+
   handleCheck = () => {
     console.log(`we checking shit off`);
-    
+
   }
 
   render() {
@@ -45,32 +51,32 @@ class ShoppingList extends Component {
 
     return (
       <>
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the ShoppingList Component
+        <Grid container className={classes.root}>
+          <Typography >
+            I am the ShoppingList Component
         </Typography>
-                
-      </Grid>
-      <TableContainer><Table>
-      <TableHead>
-        <TableRow>
-          <TableCell padding ="checkbox">
-            <Checkbox onChange = {this.handleCheck}/>
+
+        </Grid>
+        <TableContainer><Table>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox onChange={this.handleCheck} />
+              </TableCell>
+              <TableCell >
+                Item and Item Description
           </TableCell>
-          <TableCell >
-            Item and Item Description
-          </TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell><ShoppingItem /></TableCell>
-                    
-          </TableRow>
-      </TableBody>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell><ShoppingItem /></TableCell>
+
+            </TableRow>
+          </TableBody>
         </Table></TableContainer>
       </>
     )

@@ -12,6 +12,8 @@ const styles = theme=> ({
 
 class ShoppingItem extends Component {
 
+  
+
   render() {
     const { classes } = this.props;
 
