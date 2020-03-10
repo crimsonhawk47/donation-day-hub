@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
-import clientSaga from './clientSaga'
+import clientSaga from './clientSaga';
 import teamSaga from './teamSaga';
 
 // rootSaga is the primary saga.
