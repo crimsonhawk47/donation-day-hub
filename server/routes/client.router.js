@@ -7,7 +7,7 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = 'SELECT * FROM "client";'
+    const queryText = `SELECT * FROM "client";`
     console.log('in team router.get')
     pool.query(queryText)
         .then(result => {
@@ -43,5 +43,29 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 });
+
+
+router.get('/list-of-images', (req, res) => {
+  console.log(req.query);
+  const client_id = req.query.client_id
+  
+  let queryText = `SELECT * FROM "media"
+                  WHERE "client_id" = $1`
+  let listOfImages = []
+  pool.query(queryText, [client_id])
+    .then(result => {
+      for (row of result.rows) {
+        listOfImages = [...listOfImages, row.link]
+      }
+      res.send(listOfImages)
+
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+
+    })
+
+})
 
 module.exports = router;
