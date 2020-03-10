@@ -26,7 +26,7 @@ class ClientGallery extends Component {
   }
 
   displayAllImages = () => {
-    this.props.dispatch({type: 'DISPLAY_ALL_IMAGES'})
+    this.props.dispatch({type: 'GET_IMAGE_NAMES'})
     
   }
 
@@ -54,6 +54,9 @@ class ClientGallery extends Component {
         {/* Let's replace this with Material UI later */}
           <Button onClick={this.uploadFile}>Upload</Button>
           <Button onClick={this.displayAllImages}>DisplayAllImages</Button>
+          {this.props.media.map((string, index) => {
+            return <img key={index} src={string} />
+          })}
       </>
     )
 
@@ -62,7 +65,7 @@ class ClientGallery extends Component {
 
 const mapStateToProps = reduxStore => {
   return (
-    { reduxStore }
+    { media: reduxStore.client.selectedClientMedia }
   )
 }
 export default withStyles(styles)(connect(mapStateToProps)(ClientGallery))

@@ -24,17 +24,39 @@ function* uploadToAws(action) {
   }
 }
 
-function* displayAllImages(){
+function* getImageNames() {
   // alert(`COMPLETE DISPLAYALLIMAGES SAGA LATER`);
-  let imageNames = yield axios.get('/api/aws/list-of-images')
-  console.log(imageNames);
-  
+  let response = yield axios.get('/api/aws/list-of-images')
+  console.log(response);
+  yield put({ type: 'GET_MEDIA_FROM_NAMES', payload: response.data })
+  // yield put({type: 'SET_SELECTED_CLIENT_MEDIA', payload: response.data})
+}
 
+function* getMediaFromNames(action) {
+  let selectedMedia = []
+  for (let imageName of action.payload) {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      params: {
+        Key: imageName,
+        ContentType: 'image/jpeg'
+      },
+      withCredentials: true,
+    };
+
+    yield axios.get('/api/aws/generate-get-url', config).then(res => {
+      console.log(res);
+      selectedMedia = [...selectedMedia, res.data]
+    });
+      yield put({type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia})
+
+  }
 }
 
 function* clientSaga() {
   yield takeLatest('UPLOAD_TO_AWS', uploadToAws);
-  yield takeLatest('DISPLAY_ALL_IMAGES', displayAllImages);
+  yield takeLatest('GET_IMAGE_NAMES', getImageNames);
+  yield takeLatest('GET_MEDIA_FROM_NAMES', getMediaFromNames)
 }
 
 export default clientSaga;
