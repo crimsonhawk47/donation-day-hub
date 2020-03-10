@@ -12,16 +12,14 @@ const styles = theme=> ({
 
 class ShoppingItem extends Component {
 
+  
+
   render() {
     const { classes } = this.props;
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the ShoppingItem Component
-        </Typography>
-                
-      </Grid>
+<>
+</>
     )
 
   }
