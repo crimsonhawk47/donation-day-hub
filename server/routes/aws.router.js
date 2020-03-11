@@ -6,25 +6,7 @@ const {
   generatePutUrl
 } = require('../modules/AWSPresigner');
 
-router.get('/list-of-images', (req, res) => {
-  let queryText = `SELECT * FROM "media"`
-  let listOfImages = []
-  pool.query(queryText)
-    .then(result => {
-      console.log(result.rows);
-      for (row of result.rows) {
-        listOfImages = [...listOfImages, row.link]
-      }
-      res.send(listOfImages)
 
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500)
-
-    })
-
-})
 
 router.get('/generate-get-url', (req, res) => {
   // Both Key and ContentType are defined in the client side.
@@ -38,7 +20,7 @@ router.get('/generate-get-url', (req, res) => {
     .then(getURL => {
       console.log(`displaying signed url for image:`);
       console.log(getURL);
-
+      
       res.send(getURL);
     })
     .catch(err => {
