@@ -24,7 +24,7 @@ const styles = theme => ({
 });
 
 class AdminClientList extends Component {
-  
+
   componentDidMount() {
     this.getClientList();
   }

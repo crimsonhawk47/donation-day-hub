@@ -76,13 +76,13 @@ class AdminVolunteerList extends Component {
                 <TableCell align="left">{volunteer.first_name} {volunteer.last_name}</TableCell>
                 <TableCell align="left">{volunteer.is_archived}
                   {/* Need to play with this for toggle to actually work */}
-                {/* <Switch
+                  {/* <Switch
                     checked={state.checkedB}
                     onChange={handleChange('checkedB')}
                     value="checkedB"
                     color="primary"
                   /> */}
-                  </TableCell>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
