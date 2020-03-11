@@ -54,7 +54,6 @@ class AdminTeamList extends Component {
               <TableCell>Donation Day</TableCell>
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Close Team?</TableCell>
-
             </TableRow>
           </TableHead>
           <TableBody>
