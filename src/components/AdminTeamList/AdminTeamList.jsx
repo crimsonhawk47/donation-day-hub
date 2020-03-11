@@ -37,8 +37,6 @@ class AdminTeamList extends Component {
     const { classes } = this.props;
 
     return (
-<div>
-{JSON.stringify(this.props.reduxStore.teamListReducer)}
 
       <Paper className={classes.root}>
 
@@ -72,7 +70,6 @@ class AdminTeamList extends Component {
           </TableBody>
         </Table>
       </Paper>
-      </div>
     );
   }
 }
