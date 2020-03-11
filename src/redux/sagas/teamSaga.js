@@ -14,16 +14,6 @@ function* getTeam(action) {
     }
 }
 
-
-
-function* teamSaga() {
-    yield takeLatest('FETCH_TEAM', getTeam)
-}
-
-export default teamSaga;
-import { put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
-
 function* fetchSearchTeams() {
     try {
         
@@ -41,6 +31,7 @@ function* fetchSearchTeams() {
 }
 
 function* teamSaga() {
+    yield takeLatest('FETCH_TEAM', getTeam)
     yield takeLatest('FETCH_SEARCH_TEAMS', fetchSearchTeams)
 }
 
