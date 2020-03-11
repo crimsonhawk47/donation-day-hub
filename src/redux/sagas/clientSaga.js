@@ -1,13 +1,17 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_USER" actions
 function* uploadToAws(action) {
+  console.log(action.payload);
+
   try {
-    let filename = action.payload.name
+    let filename = action.payload.file.name
+    console.log(filename);
+
     const config = {
       headers: { 'Content-Type': 'application/json' },
       params: {
+        client_id: action.payload.client_id,
         Key: filename,
         ContentType: 'image/jpeg'
       },
@@ -15,18 +19,29 @@ function* uploadToAws(action) {
     };
 
     let response = yield axios.get('/api/aws/generate-put-url', config)
+    console.log(response);
+    if (response.data.code) throw `Generate get url failed with code ${response.data.code}`
     let putUrl = response.data
-    console.log(putUrl);
-    let putResponse = yield axios.put(putUrl, action.payload)
-    console.log(putResponse);
+
+    let putResponse = yield axios.put(putUrl, action.payload.file)
+    if (putResponse.data.code) throw `Put image failed with code ${response.data.code}`
+    yield axios.post('/api/client/add-image-name', action.payload, config)
   } catch (error) {
-    console.log('User get request failed', error);
+    console.log('UPLOAD_TO_AWS ERROR', error);
   }
 }
 
-function* getImageNames() {
+function* getImageNames(action) {
   // alert(`COMPLETE DISPLAYALLIMAGES SAGA LATER`);
-  let response = yield axios.get('/api/aws/list-of-images')
+
+  const config = {
+    headers: { 'Content-Type': 'application/json' },
+    params: {
+      client_id: action.payload
+    },
+    withCredentials: true,
+  };
+  let response = yield axios.get('/api/client/list-of-images', config)
   console.log(response);
   yield put({ type: 'GET_MEDIA_FROM_NAMES', payload: response.data })
   // yield put({type: 'SET_SELECTED_CLIENT_MEDIA', payload: response.data})
@@ -48,7 +63,7 @@ function* getMediaFromNames(action) {
       console.log(res);
       selectedMedia = [...selectedMedia, res.data]
     });
-      yield put({type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia})
+    yield put({ type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia })
 
   }
 }

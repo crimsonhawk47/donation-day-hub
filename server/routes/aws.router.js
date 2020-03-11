@@ -38,7 +38,7 @@ router.get('/generate-get-url', (req, res) => {
     .then(getURL => {
       console.log(`displaying signed url for image:`);
       console.log(getURL);
-
+      
       res.send(getURL);
     })
     .catch(err => {
