@@ -20,25 +20,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             
 });
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
-    let id = req.params.id;
-    console.log(`in clients by team id`, id);
-    const queryText = 
-    `
-    SELECT * FROM "client"
-    WHERE "team_id" = $1;
-    `;
-
-    pool.query(queryText, [id])
-        .then(result => {
-            res.send(result.rows)
-        }).catch(error => {
-            console.log('error in team GET', error)
-            res.sendStatus(500);
-        })
-    
-})
-
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
   const newClient = req.body;
@@ -106,6 +87,25 @@ router.post('/add-image-name', (req, res) => {
     })
     console.log(`Leaving add image name`);
     
+})
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  let id = req.params.id;
+  console.log(`in clients by team id`, id);
+  const queryText = 
+  `
+  SELECT * FROM "client"
+  WHERE "team_id" = $1;
+  `;
+
+  pool.query(queryText, [id])
+      .then(result => {
+          res.send(result.rows)
+      }).catch(error => {
+          console.log('error in team GET', error)
+          res.sendStatus(500);
+      })
+  
 })
 
 module.exports = router;
