@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
+import ShoppingList from '../ShoppingList/ShoppingList'
 
 
 const styles = theme=> ({
@@ -20,7 +21,7 @@ class ClientPage extends Component {
         <Typography >
           I am a ClientPage Component
                 </Typography>
-                
+                <ShoppingList />
       </Grid>
     )
 

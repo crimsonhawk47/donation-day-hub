@@ -14,22 +14,24 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+
+//import UserPage from '../UserPage/UserPage';
+
+
 import InfoPage from '../InfoPage/InfoPage';
-import AdminClientList from '../AdminClientList/AdminClientList';
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
-import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList';
-import AdminTeamList from '../AdminTeamList/AdminTeamList';
 import UserDashboard from '../UserDashboard/UserDashboard';
 import EditUser from '../EditUser/EditUser';
 import TeamPage from '../TeamPage/TeamPage';
+import TeamSearch from '../TeamSearch/TeamSearch';
 import AddClient from '../AddClient/AddClient';
 import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
-
+import TeamSearch from '../TeamSearch/TeamSearch'
+import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './App.css';
 
@@ -65,7 +67,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              component={UserDashboard}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -84,26 +86,6 @@ class App extends Component {
               path="/admin-volunteer-page"
               component={AdminVolunteerPage}
             />
-             <ProtectedRoute
-              exact
-              path="/admin-client-list"
-              component={AdminClientList}
-            />
-            <ProtectedRoute
-              exact
-              path="/admin-volunteer-list"
-              component={AdminVolunteerList}
-            />
-            <ProtectedRoute
-              exact
-              path="/admin-team-list"
-              component={AdminTeamList}
-            />
-            <ProtectedRoute
-              exact
-              path="/user-dashboard"
-              component={UserDashboard}
-            />
             <ProtectedRoute
               exact
               path="/edit-user"
@@ -113,6 +95,11 @@ class App extends Component {
               exact
               path="/team-page"
               component={TeamPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/team-search"
+              component={TeamSearch}
             />
             <ProtectedRoute
               exact
@@ -139,7 +126,13 @@ class App extends Component {
               path="/resources"
               component={Resources}
             />
-            
+            <ProtectedRoute
+              exact
+              path="/team-search"
+              component={TeamSearch}
+              path="/admin-dashboard"
+              component={AdminDashboard}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
