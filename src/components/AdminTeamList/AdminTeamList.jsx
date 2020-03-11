@@ -26,10 +26,10 @@ const styles = theme => ({
 
 class AdminTeamList extends Component {
   componentDidMount() {
-    this.getTeams();
+    this.getTeamList();
   }
 
-  getTeams = () => {
+  getTeamList = () => {
     this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
   }
 
