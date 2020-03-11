@@ -20,7 +20,7 @@ class ClientGallery extends Component {
     selectedFile: ''
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
   }
 

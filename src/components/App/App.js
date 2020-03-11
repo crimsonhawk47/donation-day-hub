@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -19,6 +19,7 @@ import AboutPage from '../AboutPage/AboutPage';
 
 
 import InfoPage from '../InfoPage/InfoPage';
+import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
 import UserDashboard from '../UserDashboard/UserDashboard';
@@ -35,8 +36,8 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard'
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -66,7 +67,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserDashboard}
+              component={UserHandler}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -119,7 +120,7 @@ class App extends Component {
               exact
               path="/client-gallery"
               component={ClientGallery}
-            /> 
+            />
             <ProtectedRoute
               exact
               path="/resources"
@@ -138,7 +139,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);
