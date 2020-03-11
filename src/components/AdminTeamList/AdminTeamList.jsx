@@ -10,6 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+const moment = require('moment');
+
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -20,20 +23,6 @@ const styles = theme => ({
     minWidth: 300,
   },
 });
-
-let id = 0;
-function createData(date, name, closeTeam) {
-  id += 1;
-  return { id, date, name, closeTeam, };
-}
-
-const rows = [
-  createData('3-10-20', 'Sally', 'Open'),
-  createData('3-10-20', 'John', 'Closed'),
-  createData('3-12-20', 'Jill', 'Open'),
-  createData('3-5-20', 'Mae', 'Closed'),
-  createData('2-21-20', 'Darcy', 'Open'),
-];
 
 class AdminTeamList extends Component {
   componentDidMount() {
@@ -71,13 +60,13 @@ class AdminTeamList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.id}>
+            {this.props.reduxStore.teamList.map(team => (
+              <TableRow key={team.id}>
                 <TableCell component="th" scope="row">
-                  {row.date}
+                  {moment(team.date).format('LL')}
                 </TableCell>
-                <TableCell align="left">{row.name}</TableCell>
-                <TableCell align="left">{row.closeTeam}</TableCell>
+                <TableCell align="left">{team.captain_name}</TableCell>
+                <TableCell align="left">{team.is_archived}</TableCell>
               </TableRow>
             ))}
           </TableBody>
