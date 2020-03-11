@@ -46,9 +46,18 @@ class UserDashboard extends Component {
           <Link to="/resources">Important Links</Link>
         </div>
         {/* RENDER USER PHONE, EMAIL, AND ADDRESS */}
-        <>
-          {/* {JSON.stringify(this.props.reduxStore.RegisterPage.email)} */}
-        </>
+        <div>
+          {this.props.reduxStore.user.phone} <br />
+          {this.props.reduxStore.user.email} <br />
+          {this.props.reduxStore.user.street_address} <br />
+          {this.props.reduxStore.user.city}, {this.props.reduxStore.user.state} {this.props.reduxStore.user.zip} <br />
+        </div>
+          {/* {this.props.reduxStore.(user => {
+            return (
+              <user{user.phone} {user.email} {user.street_address} {user.city} {user.state} {user.zip}/>
+            )
+          })} */}
+        
         
         
       </>
