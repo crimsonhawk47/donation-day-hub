@@ -7,11 +7,11 @@ function* getImageNames(action) {
       headers: { 'Content-Type': 'application/json' },
       params: {
         client_id: action.payload,
-        ContentType: 'image/jpeg'
       },
       withCredentials: true,
     };
     const response = yield axios.get('/api/client/list-of-images', config)
+
     yield put({ type: 'GET_MEDIA_FROM_NAMES', payload: response.data })
   }
   catch (error) {

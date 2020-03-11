@@ -20,7 +20,7 @@ router.get('/generate-get-url', (req, res) => {
     .then(getURL => {
       console.log(`displaying signed url for image:`);
       console.log(getURL);
-      
+
       res.send(getURL);
     })
     .catch(err => {
@@ -36,15 +36,12 @@ router.get('/generate-put-url', (req, res) => {
   // Key refers to the remote name of the file.
   // ContentType refers to the MIME content type, in this case image/jpeg
   const { Key, ContentType } = req.query;
-  generatePutUrl(Key, ContentType).then(putURL => {
-    console.log(`displaying signed put url: `);
-    console.log(putURL);
-
-    res.send(putURL);
-  })
+  generatePutUrl(Key, ContentType)
+    .then(putURL => {
+      res.send(putURL);
+    })
     .catch(err => {
-      console.log(`sending err ${err}`);
-
+      console.log(err);
       res.send(err);
     });
 });

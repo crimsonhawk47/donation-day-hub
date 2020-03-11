@@ -49,7 +49,7 @@ router.get('/list-of-images', (req, res) => {
   console.log(req.query);
   const client_id = req.query.client_id
 
-  
+
   let queryText = `SELECT * FROM "media"
                   WHERE "client_id" = $1`
   let listOfImages = []
@@ -70,14 +70,11 @@ router.get('/list-of-images', (req, res) => {
 })
 
 router.post('/add-image-name', (req, res) => {
-  console.log(`In add image name`);
 
-  console.log(req.body);
-  console.log(req.query);
-  
-  const queryText = `INSERT INTO "media" ("client_id", "link")
-                      VALUES ($1, $2)`
-  pool.query(queryText, [Number(req.query.client_id), req.query.Key])
+
+  const queryText = `INSERT INTO "media" ("client_id", "link", "type", "date")
+                      VALUES ($1, $2, $3, NOW())`
+  pool.query(queryText, [Number(req.query.client_id), req.query.Key, req.query.ContentType])
     .then(result => {
       res.sendStatus(200)
     })
@@ -85,27 +82,26 @@ router.post('/add-image-name', (req, res) => {
       console.log(err);
       res.sendStatus(500)
     })
-    console.log(`Leaving add image name`);
-    
+
 })
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
   console.log(`in clients by team id`, id);
-  const queryText = 
-  `
+  const queryText =
+    `
   SELECT * FROM "client"
   WHERE "team_id" = $1;
   `;
 
   pool.query(queryText, [id])
-      .then(result => {
-          res.send(result.rows)
-      }).catch(error => {
-          console.log('error in team GET', error)
-          res.sendStatus(500);
-      })
-  
+    .then(result => {
+      res.send(result.rows)
+    }).catch(error => {
+      console.log('error in team GET', error)
+      res.sendStatus(500);
+    })
+
 })
 
 module.exports = router;
