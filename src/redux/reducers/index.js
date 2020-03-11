@@ -6,6 +6,7 @@ import client from './clientReducer';
 import teamById from './teamByIdReducer';
 import clientsByTeamId from './clientByTeamIdReducer'
 import teamReducer from './teamReducer'
+import teamListReducer from './teamListReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,7 +22,7 @@ const rootReducer = combineReducers({
   teamById,
   clientsByTeamId,
   teamReducer,
-  
+  teamListReducer
 });
 
 export default rootReducer;

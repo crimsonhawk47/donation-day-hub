@@ -36,12 +36,23 @@ const rows = [
 ];
 
 class AdminTeamList extends Component {
+  componentDidMount() {
+    this.getTeams();
+  }
+
+  getTeams = () => {
+    this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
+  }
 
   render() {
     const { classes } = this.props;
 
     return (
+<div>
+{JSON.stringify(this.props.reduxStore.teamListReducer)}
+
       <Paper className={classes.root}>
+
         <TextField
           id="outlined-search"
           label="Search Teams"
@@ -72,6 +83,7 @@ class AdminTeamList extends Component {
           </TableBody>
         </Table>
       </Paper>
+      </div>
     );
   }
 }
