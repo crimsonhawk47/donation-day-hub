@@ -16,6 +16,7 @@ const clientRouter = require('./routes/client.router');
 const teamRouter = require('./routes/team.router');
 const messageRouter = require('./routes/message.router');
 const awsRouter = require('./routes/aws.router')
+const teamById = require('./routes/teamById.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use('/api/client', clientRouter);
 app.use('/api/team', teamRouter);
 app.use('/api/message', messageRouter);
 app.use('/api/aws', awsRouter);
+app.use('/api/teamById', teamById);
 
 // Serve static files
 app.use(express.static('build'));

@@ -20,4 +20,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             
 });
 
+router.get('/search', rejectUnauthenticated, (req, res) => {
+    const queryText = 'SELECT * FROM "team" WHERE "is_archived" = FALSE ORDER BY "captain_name" ASC;'
+    console.log('in team router.get/search')
+    pool.query(queryText)
+        .then(result => {
+            console.log(result.rows)
+            res.send(result.rows)
+        }).catch(error => {
+            console.log('error in team search GET', error)
+            res.sendStatus(500);
+        })
+            
+});
+
+
 module.exports = router;

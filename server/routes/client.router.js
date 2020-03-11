@@ -7,18 +7,37 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "client";`
-  console.log('in team router.get')
-  pool.query(queryText)
-    .then(result => {
-      console.log(result.rows)
-      res.send(result.rows)
-    }).catch(error => {
-      console.log('error in client GET', error)
-      res.sendStatus(500);
-    })
-
+    const queryText = `SELECT * FROM "client";`
+    console.log('in team router.get')
+    pool.query(queryText)
+        .then(result => {
+            console.log(result.rows)
+            res.send(result.rows)
+        }).catch(error => {
+            console.log('error in client GET', error)
+            res.sendStatus(500);
+        })
+            
 });
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    let id = req.params.id;
+    console.log(`in clients by team id`, id);
+    const queryText = 
+    `
+    SELECT * FROM "client"
+    WHERE "team_id" = $1;
+    `;
+
+    pool.query(queryText, [id])
+        .then(result => {
+            res.send(result.rows)
+        }).catch(error => {
+            console.log('error in team GET', error)
+            res.sendStatus(500);
+        })
+    
+})
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
@@ -49,6 +68,7 @@ router.get('/list-of-images', (req, res) => {
   console.log(req.query);
   const client_id = req.query.client_id
 
+  
   let queryText = `SELECT * FROM "media"
                   WHERE "client_id" = $1`
   let listOfImages = []
