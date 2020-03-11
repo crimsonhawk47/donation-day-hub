@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 
 const styles = theme => ({
@@ -43,19 +45,43 @@ class AddClient extends Component {
           Add Client
       </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">ADD CLIENT</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send updates
-              occasionally.
-          </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Email Address"
-              type="email"
+              label="Name"
+              type="name"
               fullWidth
+            />
+            <TextField
+              
+              margin="dense"
+              id="location"
+              label="Location"
+              type="location"
+              fullWidth
+            />            
+            <DialogContentText>
+              <h4>Tell Me About Your Story:</h4>
+              <List>
+                <ListItem>Have you always been in MPLS? / where are you from?</ListItem>
+                <ListItem>How long have you been without a home? Do you stay in shelters?</ListItem>
+                <ListItem>What types of jobs are you good at?</ListItem>
+                <ListItem>What are some things you want to do when you get back on your feet?</ListItem>
+                <ListItem>What’s something you’d like people to know about you or people experiencing homelessness?</ListItem>
+              </List>
+          </DialogContentText>
+            <TextField
+              
+              margin="dense"
+              id="bio"
+              label="Bio"
+              type="bio"
+              fullWidth
+              multiline
+              rows="4"
             />
           </DialogContent>
           <DialogActions>
