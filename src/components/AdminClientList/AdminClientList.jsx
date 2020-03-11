@@ -10,6 +10,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+const moment = require('moment');
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -21,21 +23,14 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(date, name) {
-  id += 1;
-  return { id, date, name };
-}
-
-const rows = [
-  createData('2-20-20', 'Gerry'),
-  createData('3-5-20', 'Jimmy'),
-  createData('4-2-20', 'JoeBob'),
-  createData('2-4-20', 'SallyMae'),
-  createData('1-25-20', 'Carrie'),
-];
-
 class AdminClientList extends Component {
+  componentDidMount() {
+    this.getClientList();
+  }
+
+  getClientList = () => {
+    this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
+  }
 
   render() {
     const { classes } = this.props;
@@ -58,12 +53,12 @@ class AdminClientList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.id}>
+            {this.props.reduxStore.clientList.map(client => (
+              <TableRow key={client.id}>
                 <TableCell component="th" scope="row">
-                  {row.date}
+                  {moment(client.date).format('LL')}
                 </TableCell>
-                <TableCell align="left">{row.name}</TableCell>
+                <TableCell align="left">{client.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>
