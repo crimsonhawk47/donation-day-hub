@@ -20,6 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     clientSaga(),
     teamSaga(),
-    awsSaga
+    awsSaga()
   ]);
 }

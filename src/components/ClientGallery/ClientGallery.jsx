@@ -21,8 +21,8 @@ class ClientGallery extends Component {
   }
 
   setFile = (event) => {
-    let selectedImage = event.target.files[0]
-    this.setState({ selectedImage })
+    let selectedFile = event.target.files[0]
+    this.setState({ selectedFile })
   }
 
   uploadFile = () => {
@@ -37,6 +37,7 @@ class ClientGallery extends Component {
   }
 
   render() {
+    
     const { classes } = this.props;
 
     return (
