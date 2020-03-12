@@ -9,9 +9,11 @@ const router = express.Router();
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     let id = req.params.id;
     const queryText = `
-    SELECT "captain_name" FROM "team"
-    WHERE "id" = $1
-    ;`;
+SELECT "user".id, "user".username, "team".id AS team_id FROM "user" 
+JOIN "team_user" ON "user".id = "team_user".user_id
+JOIN "team" ON "team".id = "team_user".team_id
+WHERE "user".id = $1 AND "team".is_archived = FALSE;`
+;
 
     pool.query(queryText, [id])
         .then(result => {
