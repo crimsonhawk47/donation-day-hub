@@ -1,12 +1,13 @@
 const express = require('express');
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+//Admin Route
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const queryText = `SELECT * FROM "client";`
   console.log('in team router.get')
   pool.query(queryText)
@@ -20,6 +21,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 });
 
+//User Route
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
   const newClient = req.body;
@@ -44,7 +46,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-
+//User route
 router.get('/list-of-images', (req, res) => {
   console.log(req.query);
   const client_id = req.query.client_id
@@ -69,9 +71,8 @@ router.get('/list-of-images', (req, res) => {
 
 })
 
+//User Route
 router.post('/add-image-name', (req, res) => {
-
-
   const queryText = `INSERT INTO "media" ("client_id", "link", "type", "date")
                       VALUES ($1, $2, $3, NOW())`
   pool.query(queryText, [Number(req.query.client_id), req.query.Key, req.query.ContentType])
@@ -84,6 +85,7 @@ router.post('/add-image-name', (req, res) => {
     })
 
 })
+
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;

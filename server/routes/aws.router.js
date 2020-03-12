@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 const {
   generateGetUrl,
@@ -8,7 +9,7 @@ const {
 
 
 
-router.get('/generate-get-url', (req, res) => {
+router.get('/generate-get-url', rejectUnauthenticated, (req, res) => {
   // Both Key and ContentType are defined in the client side.
   // Key refers to the remote name of the file.
   console.log(`IN GET URL`);
@@ -29,7 +30,7 @@ router.get('/generate-get-url', (req, res) => {
 });
 
 // PUT URL
-router.get('/generate-put-url', (req, res) => {
+router.get('/generate-put-url', rejectUnauthenticated, (req, res) => {
   console.log(`IN PUT URL`);
 
   // Both Key and ContentType are defined in the client side.
