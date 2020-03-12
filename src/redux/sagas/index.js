@@ -5,7 +5,9 @@ import userSaga from './userSaga';
 import clientSaga from './clientSaga';
 import teamSaga from './teamSaga';
 import awsSaga from './awsSaga'
-import teamListSaga from './teamListSaga'
+import teamListSaga from './teamListSaga';
+import clientListSaga from './clientListSaga';
+import volunteerListSaga from './volunteerListSaga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +25,7 @@ export default function* rootSaga() {
     teamSaga(),
     awsSaga(),
     teamListSaga(),
+    clientListSaga(),
+    volunteerListSaga(),
   ]);
 }

@@ -32,16 +32,16 @@ const useStyles = theme => ({
 
 class AdminDashboard extends Component {
     state = {
-        value: ''
+        value: 0
     }
 
     handleChange = (event, newValue) => {
-        this.setState({value: newValue});
+        this.setState({ value: newValue });
     }
 
     render() {
         const classes = this.props;
-        
+
         return (
             <div className={classes.root}>
                 <AppBar position="static">
