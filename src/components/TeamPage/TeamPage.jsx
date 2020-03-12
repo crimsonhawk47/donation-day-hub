@@ -22,19 +22,19 @@ import AddClient from '../AddClient/AddClient';
 
 class TeamPage extends Component {
   state = {
-    teamID: 1,
+    teamID: this.props.reduxStore.userTeam,
     open: false,
     setOpen: false,
   }
 
 
-   handleClickOpen = () => {
+  handleClickOpen = () => {
     this.setState({
       open: true
     })
   };
 
-   handleClose = () => {
+  handleClose = () => {
     this.setState({
       setOpen: true
     })
