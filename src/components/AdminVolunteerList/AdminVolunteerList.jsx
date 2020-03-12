@@ -46,6 +46,15 @@ class AdminVolunteerList extends Component {
     this.props.dispatch({ type: 'FETCH_VOLUNTEER_LIST' });
   }
 
+  handleVolunteerClick = () => {
+    this.props.dispatch({
+      type: 'FETCH_VOLUNTEER_INFO',
+      payload: id
+    })
+    this.props.history.push(`/admin-volunteer-page/${id}`);
+  }
+
+
   render() {
     const { classes } = this.props;
 
@@ -69,7 +78,10 @@ class AdminVolunteerList extends Component {
           </TableHead>
           <TableBody>
             {this.props.reduxStore.volunteerList.map(volunteer => (
-              <TableRow key={volunteer.id}>
+              <TableRow 
+              key={volunteer.id}
+              onClick={this.handleVolunteerClick}
+              >
                 <TableCell component="th" scope="row">
                   {moment(volunteer.date).format('LL')}
                 </TableCell>
