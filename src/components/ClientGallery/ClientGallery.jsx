@@ -20,6 +20,10 @@ class ClientGallery extends Component {
     selectedFile: ''
   }
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
+  }
+
   setFile = (event) => {
     let selectedFile = event.target.files[0]
     this.setState({ selectedFile })
@@ -37,7 +41,7 @@ class ClientGallery extends Component {
   }
 
   render() {
-    
+
     const { classes } = this.props;
 
     return (
