@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import UserDashboard from '../UserDashboard/UserDashboard'
+import AdminDashboard from '../AdminDashboard/AdminDashboard'
 import { connect } from 'react-redux'
 
 class UserHandler extends Component {
 
   render() {
     const access_level = this.props.access_level
-
+    console.log('ACCESS LEVEL = ', access_level)
     if (access_level < 3) {
-      return (
-        <UserDashboard />
-      )
+      return <UserDashboard />
     }
     else if (access_level === 3) {
-      return (
-        <h1>Admin Component</h1>
-      )
+      return <AdminDashboard />
     }
-
-
   }
 }
 

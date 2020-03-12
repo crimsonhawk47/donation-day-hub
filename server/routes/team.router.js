@@ -1,12 +1,13 @@
 const express = require('express');
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+//Route for Admins
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     const queryText = 'SELECT * FROM "team";'
     console.log('in team router.get')
     pool.query(queryText)
@@ -17,9 +18,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             console.log('error in team GET', error)
             res.sendStatus(500);
         })
-            
 });
 
+//Route for Users
 router.get('/search', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "team" WHERE "is_archived" = FALSE ORDER BY "captain_name" ASC;'
     console.log('in team router.get/search')
@@ -31,7 +32,7 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
             console.log('error in team search GET', error)
             res.sendStatus(500);
         })
-            
+
 });
 
 
