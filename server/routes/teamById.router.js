@@ -6,16 +6,17 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
-    let id = req.params.id;
+router.get('/', rejectUnauthenticated, (req, res) => {
+    let id = req.user.id;
+    
     const queryText = `
-SELECT "user".id, "user".username, "team".id AS team_id FROM "user" 
+SELECT "user".id, "user".username, "team".captain_name, "team".id AS team_id FROM "user" 
 JOIN "team_user" ON "user".id = "team_user".user_id
 JOIN "team" ON "team".id = "team_user".team_id
-WHERE "user".id = $1 AND "team".is_archived = FALSE;`
+WHERE "user".id = ${id} AND "team".is_archived = FALSE;`
 ;
 
-    pool.query(queryText, [id])
+    pool.query(queryText)
         .then(result => {
             console.log(result.rows[0]);
             res.send(result.rows[0])
