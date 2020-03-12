@@ -63,11 +63,22 @@ function* getClientsById(action) {
   }
 }
 
+// function* postClient(action) {
+//   console.log(`we in post client saga`, action.payload);
+//   try {
+//     yield axios.post(`/api/client/add`, action.payload)
+//     yield put({
+//       type: 'SET_CLIENT_BY_TEAM'
+//     })
+//   }
+// }
+
 function* clientSaga() {
   yield takeLatest('UPLOAD_TO_AWS', uploadToAws);
   yield takeLatest('GET_IMAGE_NAMES', getImageNames);
   yield takeLatest('GET_MEDIA_FROM_NAMES', getMediaFromNames)
   yield takeLatest('FETCH_CLIENTS_BY_TEAM', getClientsById)
+  // yield takeLatest('POST_CLIENT', postClient)
 }
 
 export default clientSaga;

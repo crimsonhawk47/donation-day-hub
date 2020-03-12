@@ -22,7 +22,10 @@ class AddClient extends Component {
 
   state = {
     open: false,
-    setOpen: false
+    setOpen: false,
+    name: '',
+    location: '',
+    bio: '',
   }
 
   handleClickOpen = () => {
@@ -31,13 +34,41 @@ class AddClient extends Component {
     })
   };
 
-  handleClose = () => {
-    this.setState({
-      open: false
-    })
+  handleClose = (id) => {
+    console.log(id);
+
+    if (id==='add'){
+      console.log(Date());
+      this.props.dispatch({
+        type: "ADD_CLIENT",
+        payload: {
+          name: this.state.name,
+          bio: this.state.bio,
+          location: this.state.location,
+          date: Date()
+        }
+      })
+      this.setState({
+        open: false
+      })
+    } else{
+      this.setState({
+        open: false
+      })
+    }
+
   };
 
+  
+
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value
+    })
+  }
+
   render() {
+console.log(this.state);
 
     return (
       <div>
@@ -54,9 +85,10 @@ class AddClient extends Component {
               label="Name"
               type="name"
               fullWidth
+              onChange={this.handleInputChangeFor('name')}
             />
             <TextField
-              
+              onChange={this.handleInputChangeFor('location')}
               margin="dense"
               id="location"
               label="Location"
@@ -74,7 +106,7 @@ class AddClient extends Component {
               </List>
           </DialogContentText>
             <TextField
-              
+              onChange={this.handleInputChangeFor('bio')}
               margin="dense"
               id="bio"
               label="Bio"
@@ -85,10 +117,10 @@ class AddClient extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={(e) => this.handleClose('cancel', e)} color="primary">
               Cancel
           </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={(e) => this.handleClose('add', e)} color="primary">
               Add Client
           </Button>
           </DialogActions>
