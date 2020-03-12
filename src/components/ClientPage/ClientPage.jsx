@@ -11,7 +11,12 @@ const styles = theme=> ({
   }
 });
 
+
 class ClientPage extends Component {
+
+  componentDidMount() {
+
+  }
 
   render() {
     const { classes } = this.props;

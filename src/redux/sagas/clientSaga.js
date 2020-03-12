@@ -20,6 +20,7 @@ function* getImageNames(action) {
 }
 
 function* getClientsById(action) {
+  
   console.log(`we in client's by id saga`, action.payload);
   try {
     const response = yield axios.get(`/api/client/${action.payload}`)
@@ -29,19 +30,22 @@ function* getClientsById(action) {
   }
 }
 
-// function* postClient(action) {
-//   console.log(`we in post client saga`, action.payload);
-//   try {
-//     yield axios.post(`/api/client/add`, action.payload)
-//     yield put({
-//       type: 'SET_CLIENT_BY_TEAM'
-//     })
-//   }
-// }
+function* postClient(action) {
+  console.log(`we in post client saga`, action.payload);
+  try {
+    yield axios.post(`/api/client/add`, action.payload)
+yield put({type:`FETCH_CLIENTS_BY_TEAM`, payload: action.payload.team_id})
+  }
+  catch(error) {
+    console.log(`error in postClient`, error);
+    
+  }
+}
 
 function* clientSaga() {
   yield takeLatest('GET_IMAGE_NAMES', getImageNames);
   yield takeLatest('FETCH_CLIENTS_BY_TEAM', getClientsById)
+  yield takeLatest(`ADD_CLIENT`, postClient)
   // yield takeLatest('POST_CLIENT', postClient)
 }
 

@@ -22,9 +22,9 @@ import AddClient from '../AddClient/AddClient';
 
 class TeamPage extends Component {
   state = {
-    teamID: 1,
     open: false,
     setOpen: false,
+    teamId: 1
   }
 
 
@@ -40,17 +40,20 @@ class TeamPage extends Component {
     })
   };
 
-
   componentDidMount() {
     this.props.dispatch({
       type: 'FETCH_TEAM',
-      payload: this.state.teamID
     })
-
     this.props.dispatch({
       type: 'FETCH_CLIENTS_BY_TEAM',
-      payload: this.state.teamID
+      payload: this.state.teamId
     })
+
+  }
+
+  handleClientFetch= () =>{
+    console.log(`testing`);
+    
   }
 
   render() {
@@ -76,7 +79,7 @@ class TeamPage extends Component {
               <TableCell>
                 {this.props.reduxStore.clientsByTeamId.map((clients) => {
                   return (
-                    <ClientList id={clients.id} name={clients.name} />
+                    <ClientList onChange={this.handleClientFetch} id={clients.id} name={clients.name} />
                   )
                 })}
               </TableCell>
