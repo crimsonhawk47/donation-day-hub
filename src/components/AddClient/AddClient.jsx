@@ -20,6 +20,9 @@ const styles = theme => ({
 
 class AddClient extends Component {
 
+  componentDidMount () {
+  }
+
   state = {
     open: false,
     setOpen: false,
