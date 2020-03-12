@@ -3,7 +3,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import { Router, Route, Link, withRouter } from 'react-router-dom';
+
 
 
 
@@ -63,4 +64,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(UserDashboard))
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(UserDashboard)))
