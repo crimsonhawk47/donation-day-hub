@@ -5,7 +5,7 @@ function* getTeam(action) {
   console.log('we in saga', action.payload);
 
   try {
-    const response = yield axios.get(`/api/teamById/${action.payload}`)
+    const response = yield axios.get(`/api/teamById/`)
     console.log(response);
 
     yield put({ type: `SET_TEAM_BY_ID`, payload: response.data })
@@ -24,6 +24,7 @@ function* fetchSearchTeams() {
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
+    yield put({ type: `SET_CLIENT_BY_TEAM`, payload: response.data })
 
   } catch (error) {
     console.log('Error with Get teams search:', error);

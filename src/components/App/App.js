@@ -93,7 +93,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/team-page"
+              path="/team-page/"
               component={TeamPage}
             />
             <ProtectedRoute
@@ -108,7 +108,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-page"
+              path="/client-page/:id"
               component={ClientPage}
             />
             <ProtectedRoute
