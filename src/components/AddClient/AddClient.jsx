@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+const moment = require('moment');
 
 
 const styles = theme => ({
@@ -21,6 +22,9 @@ const styles = theme => ({
 class AddClient extends Component {
 
   componentDidMount () {
+    this.props.dispatch({
+      type: 'FETCH_TEAM',
+    })
   }
 
   state = {
@@ -33,7 +37,8 @@ class AddClient extends Component {
 
   handleClickOpen = () => {
     this.setState({
-      open: true
+      open: true,
+      team_id: this.props.reduxStore.teamById.team_id,
     })
   };
 
@@ -48,11 +53,15 @@ class AddClient extends Component {
           name: this.state.name,
           bio: this.state.bio,
           location: this.state.location,
-          date: Date()
+          date: moment(Date()).format('LL'),
+          team_id: this.state.team_id
         }
       })
       this.setState({
-        open: false
+        open: false,
+        name: '',
+        location: '',
+        bio: '',
       })
     } else{
       this.setState({
