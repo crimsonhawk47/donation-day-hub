@@ -5,58 +5,65 @@ import { Paper, Grid, Typography, Input, Button } from '@material-ui/core'
 
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
+  clientMedia: {
+    maxWidth: '150px',
+    maxHeight: '150px'
   }
 });
+
+//FOR NOW PRETENDING IT'S CLIENT WITH ID OF 1
+const client_id = 1
 
 class ClientGallery extends Component {
 
   state = {
-    selectedImage: ''
+    selectedFile: ''
   }
 
-  getImage = (event) => {
-    let selectedImage = event.target.files[0]
-    this.setState({ selectedImage })
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
+  }
+
+  setFile = (event) => {
+    let selectedFile = event.target.files[0]
+    this.setState({ selectedFile })
   }
 
   uploadFile = () => {
-    this.props.dispatch({ type: 'UPLOAD_TO_AWS', payload: this.state.selectedImage })
+    this.props.dispatch({
+      type: 'UPLOAD_TO_AWS',
+      payload: { file: this.state.selectedFile, client_id: client_id }
+    })
   }
 
-  displayAllImages = () => {
-    this.props.dispatch({type: 'GET_IMAGE_NAMES'})
-    
+  displayAllFiles = () => {
+    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
   }
-
 
   render() {
-    const { classes } = this.props;
-    console.log(this.state);
 
+    const { classes } = this.props;
 
     return (
       <>
-        <Grid container className={classes.root}>
-          <Typography >
-            I am a ClientGallery Component
-          </Typography>
-        </Grid>
-
         <h1>Upload an image to AWS S3 bucket</h1>
-        <Input
-          id='upload-image'
-          type='file'
-          accept='image/*'
-          onChange={this.getImage}
-        />
-        {/* Let's replace this with Material UI later */}
-          <Button onClick={this.uploadFile}>Upload</Button>
-          <Button onClick={this.displayAllImages}>DisplayAllImages</Button>
+        <Grid container>
+          <Input
+            id='upload-image'
+            type='file'
+            accept='image/*'
+            onChange={this.setFile} />
+          <Button variant="contained" onClick={this.uploadFile}>Upload</Button>
+          <Button variant="contained" onClick={this.displayAllFiles}>DisplayAllImages</Button>
+        </Grid>
+        <Grid container>
           {this.props.media.map((string, index) => {
-            return <img key={index} src={string} />
+            return <img
+              className={classes.clientMedia}
+              key={index}
+              src={string} />
           })}
+        </Grid>
       </>
     )
 
