@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import TeamSuggestions from '../TeamSuggestions/TeamSuggestions'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 
 
-const styles = theme=> ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
   }
@@ -55,10 +55,10 @@ class TeamSearch extends Component {
   //     )
   //   }
 
-    state = {
-      search: '',
-      team: [],
-      backIcon: false
+  state = {
+    search: '',
+    team: [],
+    backIcon: false
   }
 
   componentDidMount() {
@@ -69,20 +69,13 @@ class TeamSearch extends Component {
     this.props.dispatch({ type: 'FETCH_SEARCH_TEAMS' });
   }
 
-  setTeams = () => {
-    let array = []
-    this.props.reduxStore.teamReducer.map(team => 
-      array.push(team))
-      this.setState({
-        ...this.state,
-        team: array
-      })
-  }
-
   searchBar = (event) => {
     this.setState({
-        ...this.state,
-        search: event.target.value
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
     })
   }
 
@@ -91,18 +84,22 @@ class TeamSearch extends Component {
   }
 
   render() {
-
-    let filteredTeams = this.state.team.filter(
-      (team) => {
-          return team.name.toLowerCase().indexOf(
-              this.state.search.toLowerCase()) !== -1;
-      }
-    );
+    let teams = this.props.reduxStore.teamReducer
+    let filteredTeams = []
+      
+    if (teams) {
+      filteredTeams = teams.filter(
+        (team) => {
+          return team.captain_name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
 
     return (
       <>
         <div className="SearchBar">
-          <input className="Search" placeholder="Search Bar" onClick={this.setLocations} onChange={(event) => this.searchBar(event)} />
+          <input className="Search" placeholder="Search Bar" onChange={(event) => this.searchBar(event)} />
         </div>
         <div className="Results">
           {filteredTeams.map(team => {
@@ -110,7 +107,8 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} onClick={() => this.handleClick(team.id)}>
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  
+                  <button onClick={this.joinTeam}>Join</button>
+
                 </div>
               </div>
             )

@@ -4,6 +4,7 @@ const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
+
 const router = express.Router();
 
 //Admin Route
@@ -73,6 +74,7 @@ router.get('/list-of-images', (req, res) => {
 
 //User Route
 router.post('/add-image-name', (req, res) => {
+  
   const queryText = `INSERT INTO "media" ("client_id", "link", "type", "date")
                       VALUES ($1, $2, $3, NOW())`
   pool.query(queryText, [Number(req.query.client_id), req.query.Key, req.query.ContentType])
@@ -84,6 +86,27 @@ router.post('/add-image-name', (req, res) => {
       res.sendStatus(500)
     })
 
+})
+// User route
+router.post('/add', (req,res) => {
+  console.log('is this team id?', req.teamById);
+
+  console.log('we in post client server', req.body);
+  const { name, bio, media_release, location, date, team_id } = req.body
+  console.log('testing', name, bio, media_release, location, date, team_id);
+  
+  const queryText = `
+  INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
+  VALUES ($1, $2, $3, $4, $5, $6)
+  `
+  pool.query(queryText, [name, bio, media_release, location, date, team_id])
+  .then(result => {
+    res.sendStatus(200)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500)
+  })
 })
 
 
@@ -100,7 +123,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     .then(result => {
       res.send(result.rows)
     }).catch(error => {
-      console.log('error in team GET', error)
+      console.log('error in client get in your team view', error)
       res.sendStatus(500);
     })
 

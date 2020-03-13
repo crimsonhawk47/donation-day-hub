@@ -10,6 +10,7 @@
 --  You should be able to run the whole table when making changes. If DROP TABLE commands yell
 --  At you about tables not existing, simply highlight everything below
 
+
 DROP TABLE "media";
 DROP TABLE "team_user";
 DROP TABLE "item";
@@ -91,7 +92,8 @@ VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 
 ('Meghan', '$2a$10$cghoHshxw31jgKsRAYt02OUmthPdlMdaFIRosVaCXaZGLYWcc.v.C', 'Meghan', 'Gunderson', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
 ('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
 ('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW());
+('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
+('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 3, NOW());
 
 INSERT INTO "team" ("captain_name", "is_archived", "date")
 VALUES ('Jessica', FALSE, NOW()),
@@ -99,10 +101,10 @@ VALUES ('Jessica', FALSE, NOW()),
 
 INSERT INTO "team_user" ("team_id", "user_id")
 VALUES (1, 3),
-(1, 4),
+(2, 4),
 (1, 5),
 (2, 2), 
-(2, 1);
+(1, 1);
 
 INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
 VALUES ('Batman', 'He is Batman', NULL, 'Gotham', NOW(), 1);

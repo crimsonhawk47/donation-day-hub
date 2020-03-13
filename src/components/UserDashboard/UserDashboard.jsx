@@ -3,7 +3,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import { Router, Route, Link, withRouter } from 'react-router-dom';
+
 
 
 
@@ -46,11 +47,12 @@ class UserDashboard extends Component {
           <Link to="/resources">Important Links</Link>
         </div>
         {/* RENDER USER PHONE, EMAIL, AND ADDRESS */}
-        <>
-          {/* {JSON.stringify(this.props.reduxStore.RegisterPage.email)} */}
-        </>
-        
-        
+        <div>
+          {this.props.reduxStore.user.phone} <br />
+          {this.props.reduxStore.user.email} <br />
+          {this.props.reduxStore.user.street_address} <br />
+          {this.props.reduxStore.user.city}, {this.props.reduxStore.user.state} {this.props.reduxStore.user.zip} <br />
+        </div>
       </>
     )
   }
@@ -62,4 +64,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(UserDashboard))
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(UserDashboard)))

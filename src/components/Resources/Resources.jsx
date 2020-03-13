@@ -16,12 +16,15 @@ class Resources extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the Resources Component
-        </Typography>
-                
-      </Grid>
+      <>
+        <h1>Resources</h1>
+        <div>
+          <p>PLACEHODER FOR WAIVER LINK</p>
+          <p>PLACEHOLDER FOR FUNDRAISING LINK</p>
+          <a href="https://www.google.com/maps/d/viewer?mid=1YNvABle8y-WI0FApN89Lv9vb9uvhxXfe&ll=44.97750434462346%2C-93.27893059999997&z=14">Donation Day Map</a>
+        </div>
+
+      </>
     )
 
   }
