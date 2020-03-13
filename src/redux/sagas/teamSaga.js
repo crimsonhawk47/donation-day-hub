@@ -9,6 +9,10 @@ function* getTeam(action) {
     console.log(response);
 
     yield put({ type: `SET_TEAM_BY_ID`, payload: response.data })
+    const teamId = response.data.team_id
+    // if (response.data){
+      yield put({type: 'FETCH_CLIENTS_BY_TEAM', payload: teamId})
+    // }
   } catch (error) {
     console.log(error);
   }
