@@ -39,9 +39,8 @@ class EditUser extends Component {
   }
 
 
-  //handleSaveEdit
+  //PUT/UPDATE route
   //dispatches edit to redux
-  //PUT route
   //needs to save info and return to user dashboard
   handleSaveEdit =() => {
     console.log('clicked Save button');
