@@ -25,8 +25,14 @@ function* fetchUser() {
   }
 }
 
+// PUT/UPDATE request
+function* updateUser(action) {
+  
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('UPDATE_USER', updateUser);
 }
 
 export default userSaga;
