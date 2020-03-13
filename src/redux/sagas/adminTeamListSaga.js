@@ -2,11 +2,11 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 
-function* teamListSaga() {
-  yield takeEvery('FETCH_TEAM_LIST', getTeamList)
+function* adminTeamListSaga() {
+  yield takeEvery('FETCH_TEAM_LIST', getAdminTeamList)
 }
 
-function* getTeamList(){
+function* getAdminTeamList(){
     try {
         const response = yield axios.get('/api/team');
         console.log(response.data)
@@ -19,4 +19,4 @@ function* getTeamList(){
 
 
 
-export default teamListSaga
+export default adminTeamListSaga

@@ -12,14 +12,12 @@ const styles = theme=> ({
 class AdminVolunteerPage extends Component {
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am the AdminVolunteerPage Component
-        </Typography> 
-      </Grid>
+      <div>
+        <h1>Volunteer Page</h1>
+      </div>
     )
 
   }
