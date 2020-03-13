@@ -39,16 +39,18 @@ class TeamPage extends Component {
     })
   };
 
-  // componentDidMount() {
-  //   this.props.dispatch({
-  //     type: 'FETCH_CLIENTS_BY_TEAM', //Gets all clients by your current Team
-  //   })
-
-  // }
-
   handleClientFetch = () => {
     console.log(`testing`);
 
+  }
+
+  componentDidMount () {
+    if (!this.props.reduxStore.teamById.id){
+      this.props.dispatch({
+        type: 'FETCH_TEAM',
+      })
+    }
+    
   }
 
   render() {
