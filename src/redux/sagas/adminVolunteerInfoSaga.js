@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-function* adminVolunteerInfoSaga(){
+function* adminVolunteerInfoSaga() {
     yield takeEvery('FETCH_VOLUNTEER_INFO', fetchAdminVolunteerInfo)
 }
 
-function* fetchAdminVolunteerInfo(action){
-    try{
+function* fetchAdminVolunteerInfo(action) {
+    try {
         let response = yield axios.get(`/api/volunteer/${action.payload}`);
         console.log(response.data);
-    // the word "put" === dispatch
+        // the word "put" === dispatch
         yield put({ type: 'SET_VOLUNTEER_INFO', payload: response.data[0] });
     }
     catch (error) {

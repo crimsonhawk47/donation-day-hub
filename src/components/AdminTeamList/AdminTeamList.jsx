@@ -10,8 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
-const moment = require('moment');
+import { withRouter } from 'react-router-dom';
 
+const moment = require('moment');
 
 const styles = theme => ({
   root: {
@@ -25,16 +26,46 @@ const styles = theme => ({
 });
 
 class AdminTeamList extends Component {
-  componentDidMount() {
-    this.getTeamList();
+
+  state = {
+    search: '',
+    team: [],
+    backIcon: false
   }
 
-  getTeamList = () => {
+  componentDidMount() {
     this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
   }
 
+  handleTeamClick = (id) => {
+    this.props.history.push(`/admin-team-page/${id}`)
+  }
+
+  searchBar = (event) => {
+    this.setState({
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
+    })
+  }
+
+  // Need a handleTeamClick function here
+
   render() {
     const { classes } = this.props;
+    let teams = this.props.reduxStore.adminTeamList
+    let filteredTeams = []
+      
+    if (teams) {
+      filteredTeams = teams.filter(
+        (team) => {
+          return team.captain_name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
 
     return (
 
@@ -47,6 +78,7 @@ class AdminTeamList extends Component {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          onChange={(event) => this.searchBar(event)}
         />
         <Table className={classes.table}>
           <TableHead>
@@ -57,7 +89,8 @@ class AdminTeamList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxStore.adminTeamList.map(team => (
+            {filteredTeams.map(team => {
+              return (
               <TableRow key={team.id}>
                 <TableCell component="th" scope="row">
                   {moment(team.date).format('LL')}
@@ -65,7 +98,8 @@ class AdminTeamList extends Component {
                 <TableCell align="left">{team.captain_name}</TableCell>
                 <TableCell align="left">{team.is_archived}</TableCell>
               </TableRow>
-            ))}
+              )
+            })}
           </TableBody>
         </Table>
       </Paper>
@@ -84,4 +118,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminTeamList))
+export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminTeamList)))
