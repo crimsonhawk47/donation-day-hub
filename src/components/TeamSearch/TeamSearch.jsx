@@ -107,7 +107,7 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={this.joinTeam} onClick={() => this.handleClick(team.id)}>Join</button>
+                  <button onClick={() => this.handleClick(team.id)}>Join</button>
 
                 </div>
               </div>
