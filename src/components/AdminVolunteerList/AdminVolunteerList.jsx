@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
+import InputBase from '@material-ui/core/InputBase'
 import Switch from '@material-ui/core/Switch'
 
 import { withRouter } from 'react-router-dom';
@@ -40,8 +41,24 @@ const styles = theme => ({
 
 class AdminVolunteerList extends Component {
 
+  state = {
+    search: '',
+    volunteer: [],
+    backIcon: false
+  }
+
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_VOLUNTEER_LIST' });
+  }
+
+  searchBar = (event) => {
+    this.setState({
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
+    })
   }
 
   handleVolunteerClick = (id) => {
@@ -51,7 +68,20 @@ class AdminVolunteerList extends Component {
   render() {
     const { classes } = this.props;
 
+    let volunteers = this.props.reduxStore.adminVolunteerList
+    let filteredVolunteers = []
+      
+    if (volunteers) {
+      filteredVolunteers = volunteers.filter(
+        (volunteer) => {
+          return volunteer.first_name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
+
     return (
+      <>
       <Paper className={classes.root}>
         <TextField
           id="outlined-search"
@@ -60,6 +90,7 @@ class AdminVolunteerList extends Component {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          onChange={(event) => this.searchBar(event)}
         />
         <Table className={classes.table}>
           <TableHead>
@@ -69,12 +100,13 @@ class AdminVolunteerList extends Component {
               <TableCell align="left">Make Captain?</TableCell>
             </TableRow>
           </TableHead>
+          
           <TableBody>
-            {this.props.reduxStore.adminVolunteerList.map(volunteer => (
-              <TableRow
-                key={volunteer.id}
-                onClick={() => this.handleVolunteerClick(volunteer.id)}
-              >
+          {filteredVolunteers.map(volunteer => {
+              return (
+              <TableRow 
+              key={volunteer.id}
+              onClick={() => this.handleVolunteerClick(volunteer.id)}
                 <TableCell component="th" scope="row">
                   {moment(volunteer.date).format('LL')}
                 </TableCell>
@@ -89,10 +121,13 @@ class AdminVolunteerList extends Component {
                   /> */}
                 </TableCell>
               </TableRow>
-            ))}
+              )
+            })}
           </TableBody>
+           
         </Table>
       </Paper>
+      </>
     );
   }
 }

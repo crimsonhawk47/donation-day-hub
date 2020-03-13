@@ -27,6 +27,12 @@ const styles = theme => ({
 
 class AdminClientList extends Component {
 
+  state = {
+    search: '',
+    client: [],
+    backIcon: false
+  }
+
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
   }
@@ -35,8 +41,32 @@ class AdminClientList extends Component {
     this.props.history.push(`/client-page/${id}`)
   }
 
+  searchBar = (event) => {
+    this.setState({
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
+    })
+  }
+
+  // Need a handle client click function here
+
   render() {
     const { classes } = this.props;
+
+    let clients = this.props.reduxStore.adminClientList
+    let filteredClients = []
+      
+    if (clients) {
+      filteredClients = clients.filter(
+        (client) => {
+          return client.name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
 
     return (
       <Paper className={classes.root}>
@@ -47,6 +77,7 @@ class AdminClientList extends Component {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          onChange={(event) => this.searchBar(event)}
         />
         <Table className={classes.table}>
           <TableHead>
@@ -56,17 +87,16 @@ class AdminClientList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxStore.adminClientList.map(client => (
-              <TableRow 
-              key={client.id}
-              onClick={() => this.handleClientClick(client.id)}
-              >
+            {filteredClients.map(client => {
+              return (
+              <TableRow key={client.id}>
                 <TableCell component="th" scope="row">
                   {moment(client.date).format('LL')}
                 </TableCell>
                 <TableCell align="left">{client.name}</TableCell>
               </TableRow>
-            ))}
+              )
+            })}
           </TableBody>
         </Table>
       </Paper>
