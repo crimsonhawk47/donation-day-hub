@@ -28,6 +28,7 @@ class AdminVolunteerPage extends Component {
     return (
       <div>
           <h1>{volunteer.first_name} {volunteer.last_name}</h1>
+          <h3>Make captain?</h3>
           <p>Username: {volunteer.username}</p>
           <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
           <p>{volunteer.email}</p>
