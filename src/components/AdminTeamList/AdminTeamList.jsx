@@ -10,8 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
-const moment = require('moment');
+import { withRouter } from 'react-router-dom';
 
+const moment = require('moment');
 
 const styles = theme => ({
   root: {
@@ -33,11 +34,11 @@ class AdminTeamList extends Component {
   }
 
   componentDidMount() {
-    this.getTeamList();
+    this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
   }
 
-  getTeamList = () => {
-    this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
+  handleTeamClick = (id) => {
+    this.props.history.push(`/admin-team-page/${id}`)
   }
 
   searchBar = (event) => {
@@ -117,4 +118,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminTeamList))
+export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminTeamList)))

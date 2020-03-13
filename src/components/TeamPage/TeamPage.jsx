@@ -18,41 +18,38 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddClient from '../AddClient/AddClient';
 
-
+//
 
 class TeamPage extends Component {
   state = {
     open: false,
     setOpen: false,
-    teamId: 1
   }
 
 
-   handleClickOpen = () => {
+  handleClickOpen = () => {
     this.setState({
       open: true
     })
   };
 
-   handleClose = () => {
+  handleClose = () => {
     this.setState({
       setOpen: true
     })
   };
 
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'FETCH_TEAM',
-    })
-    this.props.dispatch({
-      type: 'FETCH_CLIENTS_BY_TEAM',
-      payload: this.state.teamId
-    })
+  handleClientFetch = () => {
+    console.log(`testing`);
 
   }
 
-  handleClientFetch= () =>{
-    console.log(`testing`);
+  componentDidMount () {
+    if (!this.props.reduxStore.teamById.id){
+      this.props.dispatch({
+        type: 'FETCH_TEAM',
+      })
+    }
     
   }
 

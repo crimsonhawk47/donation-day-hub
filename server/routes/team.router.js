@@ -20,6 +20,29 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
         })
 });
 
+router.get('/team-info/:id', (req, res) => {
+
+
+    const queryText = `SELECT * FROM "user"
+                        JOIN "team_user" ON "team_user".user_id = "user".id
+                        JOIN "team" ON "team_user".team_id = "team".id
+                        WHERE "team".id = $1`
+
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        console.log(result.rows);
+        
+        res.send(result.rows)
+    })
+    .catch(err => {
+        console.log(err);
+        console.log(req.body);
+        
+        
+    })
+    
+})
+
 //Route for Users
 router.get('/search', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "team" WHERE "is_archived" = FALSE ORDER BY "captain_name" ASC;'
@@ -34,6 +57,26 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
         })
 
 });
+
+router.post('/join-team', rejectUnauthenticated, (req, res) => {
+    const teamId = req.body.data
+    const userId = req.user.id
+    console.log(userId);
+
+
+    const queryText = `INSERT INTO "team_user" ("team_id", "user_id")
+                    VALUES ($1, $2)`
+    pool.query(queryText, [teamId, userId])
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500)
+        })
+
+
+})
 
 
 module.exports = router;
