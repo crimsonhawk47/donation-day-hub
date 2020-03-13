@@ -20,7 +20,7 @@ function* getImageNames(action) {
 }
 
 function* getClientsById(action) {
-  
+
   console.log(`we in client's by id saga`, action.payload);
   try {
     const response = yield axios.get(`/api/client/${action.payload}`)
@@ -34,11 +34,11 @@ function* postClient(action) {
   console.log(`we in post client saga`, action.payload);
   try {
     yield axios.post(`/api/client/add`, action.payload)
-yield put({type:`FETCH_CLIENTS_BY_TEAM`, payload: action.payload.team_id})
+    yield put({ type: `FETCH_CLIENTS_BY_TEAM`, payload: action.payload.team_id })
   }
-  catch(error) {
+  catch (error) {
     console.log(`error in postClient`, error);
-    
+
   }
 }
 
