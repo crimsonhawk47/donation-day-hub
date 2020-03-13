@@ -6,9 +6,9 @@ import client from './clientReducer';
 import teamById from './teamByIdReducer';
 import clientsByTeamId from './clientByTeamIdReducer'
 import teamReducer from './teamReducer';
-import teamList from './teamListReducer';
-import clientList from './clientListReducer'
-import volunteerList from './volunteerListReducer'
+import adminTeamList from './adminTeamListReducer';
+import adminClientList from './adminClientListReducer'
+import adminVolunteerList from './adminVolunteerListReducer'
 import adminVolunteerInfo from './adminVolunteerInfoReducer'
 
 // rootReducer is the primary reducer for our entire project
@@ -25,9 +25,9 @@ const rootReducer = combineReducers({
   teamById,
   clientsByTeamId,
   teamReducer,
-  teamList,
-  clientList,
-  volunteerList,
+  adminTeamList,
+  adminClientList,
+  adminVolunteerList,
   adminVolunteerInfo
 });
 

@@ -2,11 +2,11 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 
-function* clientListSaga() {
-  yield takeEvery('FETCH_CLIENT_LIST', getClientList)
+function* adminClientListSaga() {
+  yield takeEvery('FETCH_CLIENT_LIST', getAdminClientList)
 }
 
-function* getClientList(){
+function* getAdminClientList(){
     try {
         const response = yield axios.get('/api/client');
         console.log(response.data)
@@ -17,4 +17,4 @@ function* getClientList(){
       }
 }
 
-export default clientListSaga
+export default adminClientListSaga

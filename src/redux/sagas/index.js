@@ -5,9 +5,9 @@ import userSaga from './userSaga';
 import clientSaga from './clientSaga';
 import teamSaga from './teamSaga';
 import awsSaga from './awsSaga'
-import teamListSaga from './teamListSaga';
-import clientListSaga from './clientListSaga';
-import volunteerListSaga from './volunteerListSaga'
+import adminTeamListSaga from './adminTeamListSaga';
+import adminClientListSaga from './adminClientListSaga';
+import adminVolunteerListSaga from './adminVolunteerListSaga'
 import adminVolunteerInfoSaga from './adminVolunteerInfoSaga'
 
 // rootSaga is the primary saga.
@@ -25,9 +25,9 @@ export default function* rootSaga() {
     clientSaga(),
     teamSaga(),
     awsSaga(),
-    teamListSaga(),
-    clientListSaga(),
-    volunteerListSaga(),
+    adminTeamListSaga(),
+    adminClientListSaga(),
+    adminVolunteerListSaga(),
     adminVolunteerInfoSaga(),
   ]);
 }
