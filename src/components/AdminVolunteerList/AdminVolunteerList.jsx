@@ -49,10 +49,7 @@ class AdminVolunteerList extends Component {
   }
 
   handleVolunteerClick = (id) => {
-    this.props.dispatch({
-      type: 'FETCH_VOLUNTEER_INFO',
-      payload: id
-    })
+    
     this.props.history.push(`/admin-volunteer-page/${id}`)
   }
 
