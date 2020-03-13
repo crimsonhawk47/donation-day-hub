@@ -21,12 +21,21 @@ class AdminTeamPage extends Component {
 
   render() {
     // const { classes } = this.props;
-    let team = this.props.reduxStore.adminTeamList;
+    let team = this.props.reduxStore.adminTeamInfo;
 
     return (
       <div>
         <h1>Team Page</h1>
-        <h1>{team.captain_name}</h1>
+        {/* <h2>{team.captain_name}</h2> */}
+        <div>
+          {team.map(team => (
+          <div>
+          <p>{team.first_name} {team.last_name}</p>
+            </div>
+        ))}
+
+        </div>
+
       </div>
     )
 
