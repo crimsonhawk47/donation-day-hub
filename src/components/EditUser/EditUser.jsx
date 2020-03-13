@@ -28,6 +28,7 @@ class EditUser extends Component {
     zip: this.props.reduxStore.user.zip
   }
 
+  // Update local state as user inputs data
   editProfile = (event, propertyValue) => {
     //build a new object in state
     //console.log('editing profile', this.state);
@@ -38,13 +39,25 @@ class EditUser extends Component {
   }
 
 
-  //handleSaveEdit
+  //PUT/UPDATE route
   //dispatches edit to redux
-  //PUT route
   //needs to save info and return to user dashboard
+  handleSaveEdit =() => {
+    console.log('clicked Save button');
+    // start the PUT route for edits
+    this.props.dispatch({
+      type:'UPDATE_USER',
+      payload: this.state,
+    })
+    this.props.history.push('/home')
+  }
 
-  //handleCancel
-  //needs to cancel changes and return to user dashboard
+  
+  // Cancel changes and return to user dashboard
+  handleCancel = () => {
+    //console.log('clicked cancel button');
+    this.props.history.push('/home')
+  }
 
   render() {
     return (
@@ -146,7 +159,7 @@ class EditUser extends Component {
         />
         <br />
         <br />
-        {/* <Button
+        <Button
           type="button"
           className="link-button"
           variant="contained"
@@ -154,38 +167,16 @@ class EditUser extends Component {
           onClick={this.handleCancel}>
           Cancel
         </Button>
-        <Popup
-          trigger={
-            <Button
-              type="button"
-              className="link-button"
-              variant="contained"
-              color="primary"
-            >
-              Save Changes
-            </Button>}
-          modal>
-          {close => (
-            <div className="popup">
-              <h2>Are you sure you want to save these changes?</h2>
-              <div>
-                <Button
-                  type="button"
-                  className="link-button"
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => { close(); }} >
-                  No
-                </Button>
-                <Button
-                  type="button"
-                  className="link-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => this.handleSaveEdit()}>
-                  Yes
-                </Button>
-              </div> */}
+        <Button
+          type="button"
+          className="link-button"
+          variant="contained"
+          color="primary"
+          onClick={this.handleSaveEdit}>
+            Save
+          </Button>
+          
+
       </div>
     )
 
