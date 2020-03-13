@@ -9,6 +9,10 @@ function* getTeam(action) {
     console.log(response);
 
     yield put({ type: `SET_TEAM_BY_ID`, payload: response.data })
+    const teamId = response.data.team_id
+    // if (response.data){
+      yield put({type: 'FETCH_CLIENTS_BY_TEAM', payload: teamId})
+    // }
   } catch (error) {
     console.log(error);
   }
@@ -31,9 +35,24 @@ function* fetchSearchTeams() {
   }
 }
 
+function* joinTeam(action) {
+  try {
+    let teamId = action.payload.id
+    let history = action.payload.history
+    yield axios.post(`/api/team/join-team`, { data: teamId })
+    yield put({type: 'SET_USER_TEAM', payload: teamId})
+    history.push('/team-page')
+  }catch(err){
+    console.log(err);
+    
+  }
+  
+}
+
 function* teamSaga() {
   yield takeLatest('FETCH_TEAM', getTeam)
   yield takeLatest('FETCH_SEARCH_TEAMS', fetchSearchTeams)
+  yield takeLatest('JOIN_TEAM', joinTeam)
 }
 
 export default teamSaga

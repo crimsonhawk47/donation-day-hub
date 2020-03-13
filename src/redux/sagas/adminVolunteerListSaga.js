@@ -2,11 +2,11 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 
-function* volunteerListSaga() {
-    yield takeEvery('FETCH_VOLUNTEER_LIST', getVolunteerList)
+function* adminVolunteerListSaga() {
+    yield takeEvery('FETCH_VOLUNTEER_LIST', getAdminVolunteerList)
 }
 
-function* getVolunteerList() {
+function* getAdminVolunteerList() {
     try {
         const response = yield axios.get('/api/volunteer');
         console.log(response.data)
@@ -19,4 +19,4 @@ function* getVolunteerList() {
 
 
 
-export default volunteerListSaga
+export default adminVolunteerListSaga

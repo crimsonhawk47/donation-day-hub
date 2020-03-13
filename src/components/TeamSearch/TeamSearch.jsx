@@ -80,13 +80,13 @@ class TeamSearch extends Component {
   }
 
   handleClick = (id) => {
-    this.props.history.push(`/team/${id}`)
+    this.props.dispatch({ type: 'JOIN_TEAM', payload: {id: id, history: this.props.history} })
   }
 
   render() {
     let teams = this.props.reduxStore.teamReducer
     let filteredTeams = []
-      
+
     if (teams) {
       filteredTeams = teams.filter(
         (team) => {
@@ -104,10 +104,10 @@ class TeamSearch extends Component {
         <div className="Results">
           {filteredTeams.map(team => {
             return (
-              <div className="SearchTeamShow" key={team.id} onClick={() => this.handleClick(team.id)}>
+              <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={this.joinTeam}>Join</button>
+                  <button onClick={() => this.handleClick(team.id)}>Join</button>
 
                 </div>
               </div>
