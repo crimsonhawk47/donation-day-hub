@@ -27,4 +27,34 @@ router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
         });
 });
 
+//admin Make Captain
+router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
+    try {
+        console.log(`YOU GOT TO MAKE CAPTAIN`);
+        console.log(req.body.first_name);
+        const name = req.body.first_name
+
+
+        const makeTeamText = `INSERT INTO "team"
+                        ("captain_name", "is_archived", "date")
+                        VALUES ($1, FALSE, NOW())
+                        RETURNING "id"`
+        let makeTeamResponse = await pool.query(makeTeamText, [name])
+        const newTeamId = makeTeamResponse.rows[0].id
+
+        const putUserInTeamText = `INSERT INTO "team_user"
+                                    ("team_id", "user_id")
+                                    VALUES ($1, $2)`
+        await pool.query(putUserInTeamText, [newTeamId, req.user.id])
+        res.sendStatus(200)
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500)
+    }
+
+
+
+})
+
 module.exports = router;
