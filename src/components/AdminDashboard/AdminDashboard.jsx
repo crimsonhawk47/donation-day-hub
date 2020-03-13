@@ -39,6 +39,11 @@ class AdminDashboard extends Component {
         this.setState({ value: newValue });
     }
 
+    navToVolunteerList = (id) => {
+        this.props.history.push(`/admin-volunteer-page/${id}`)
+    }
+
+
     render() {
         const classes = this.props;
 
@@ -51,7 +56,12 @@ class AdminDashboard extends Component {
                         <Tab label="Teams" />
                     </Tabs>
                 </AppBar>
-                {this.state.value === 0 && <TabContainer><AdminVolunteerList /></TabContainer>}
+                {this.state.value === 0 && 
+                <TabContainer>
+                    <AdminVolunteerList 
+                        navToVolunteerList={this.navToVolunteerList} 
+                    />
+                </TabContainer>}
                 {this.state.value === 1 && <TabContainer><AdminClientList /></TabContainer>}
                 {this.state.value === 2 && <TabContainer><AdminTeamList /></TabContainer>}
             </div>

@@ -11,6 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch'
 
+import { withRouter } from 'react-router-dom';
+
 const moment = require('moment');
 
 const styles = theme => ({
@@ -46,12 +48,12 @@ class AdminVolunteerList extends Component {
     this.props.dispatch({ type: 'FETCH_VOLUNTEER_LIST' });
   }
 
-  handleVolunteerClick = () => {
+  handleVolunteerClick = (id) => {
     this.props.dispatch({
       type: 'FETCH_VOLUNTEER_INFO',
       payload: id
     })
-    this.props.history.push(`/admin-volunteer-page/${id}`);
+    this.props.history.push(`/admin-volunteer-page/${id}`)
   }
 
 
@@ -80,7 +82,7 @@ class AdminVolunteerList extends Component {
             {this.props.reduxStore.volunteerList.map(volunteer => (
               <TableRow 
               key={volunteer.id}
-              onClick={this.handleVolunteerClick}
+              onClick={() => this.handleVolunteerClick(volunteer.id)}
               >
                 <TableCell component="th" scope="row">
                   {moment(volunteer.date).format('LL')}
@@ -115,4 +117,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminVolunteerList))
+export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminVolunteerList)))

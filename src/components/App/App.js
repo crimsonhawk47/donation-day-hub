@@ -83,7 +83,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/admin-volunteer-page"
+              path="/admin-volunteer-page/:id"
               component={AdminVolunteerPage}
             />
             <ProtectedRoute
@@ -130,9 +130,12 @@ class App extends Component {
               exact
               path="/team-search"
               component={TeamSearch}
+            />
+            {/* <ProtectedRoute
+              exact
               path="/admin-dashboard"
               component={AdminDashboard}
-            />
+            /> */}
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
