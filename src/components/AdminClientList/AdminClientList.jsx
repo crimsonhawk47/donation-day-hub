@@ -54,7 +54,7 @@ class AdminClientList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxStore.clientList.map(client => (
+            {this.props.reduxStore.adminClientList.map(client => (
               <TableRow key={client.id}>
                 <TableCell component="th" scope="row">
                   {moment(client.date).format('LL')}
