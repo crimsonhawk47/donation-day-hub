@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 });
 
 // admin dashboard : targets individual volunteer/user from clicking 1 person on volunteer list
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     const queryText = `SELECT * FROM "user" WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => { res.send(result.rows); })

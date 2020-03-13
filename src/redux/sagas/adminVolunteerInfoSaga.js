@@ -2,10 +2,10 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 function* adminVolunteerInfoSaga(){
-    yield takeEvery('FETCH_VOLUNTEER_INFO', fetchVolunteerInfo)
+    yield takeEvery('FETCH_VOLUNTEER_INFO', fetchAdminVolunteerInfo)
 }
 
-function* fetchVolunteerInfo(action){
+function* fetchAdminVolunteerInfo(action){
     try{
         let response = yield axios.get(`/api/volunteer/${action.payload}`);
         console.log(response.data);

@@ -79,7 +79,7 @@ class AdminVolunteerList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxStore.volunteerList.map(volunteer => (
+            {this.props.reduxStore.adminVolunteerList.map(volunteer => (
               <TableRow 
               key={volunteer.id}
               onClick={() => this.handleVolunteerClick(volunteer.id)}
