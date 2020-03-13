@@ -12,6 +12,12 @@ const styles = theme=> ({
 });
 
 class AdminVolunteerPage extends Component {
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'FETCH_VOLUNTEER_INFO',
+      payload: this.props.match.params.id
+    })
+  }
 
   render() {
     // const { classes } = this.props;
