@@ -18,14 +18,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddClient from '../AddClient/AddClient';
 
-
+//
 
 class TeamPage extends Component {
   state = {
-    teamID: this.props.reduxStore.userTeam,
     open: false,
     setOpen: false,
-    teamId: 1
   }
 
 
@@ -43,18 +41,15 @@ class TeamPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'FETCH_TEAM',
-    })
-    this.props.dispatch({
-      type: 'FETCH_CLIENTS_BY_TEAM',
-      payload: this.state.teamId
+      type: 'FETCH_CLIENTS_BY_TEAM', //Gets all clients by your current Team
+      payload: this.props.reduxStore.teamById.team_id
     })
 
   }
 
-  handleClientFetch= () =>{
+  handleClientFetch = () => {
     console.log(`testing`);
-    
+
   }
 
   render() {

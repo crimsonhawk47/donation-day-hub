@@ -16,6 +16,14 @@ const styles = theme => ({
 
 class UserDashboard extends Component {
 
+  componentDidMount = () => {
+    //Grabs the first team the user is in, that ISN'T archived
+    //This should only ever return one object or undefined
+    this.props.dispatch({
+      type: 'FETCH_TEAM', 
+    })
+  }
+  
   handleEditProfile = () => {
     console.log('clicked Edit Profile button');
     this.props.history.push('/edit-user')
