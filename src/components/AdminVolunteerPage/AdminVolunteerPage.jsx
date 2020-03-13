@@ -33,8 +33,11 @@ class AdminVolunteerPage extends Component {
         <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
         <p>{volunteer.email}</p>
         <p>{volunteer.phone}</p>
-        <p>{volunteer.street_address}</p>
-        <p>{volunteer.city}, {volunteer.state} {volunteer.zip}</p>
+        <p>
+          {volunteer.street_address}
+          <br />
+          {volunteer.city}, {volunteer.state} {volunteer.zip}
+        </p>
 
 
       </div>
