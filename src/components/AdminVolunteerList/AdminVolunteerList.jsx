@@ -41,18 +41,12 @@ const styles = theme => ({
 class AdminVolunteerList extends Component {
 
   componentDidMount() {
-    this.getVolunteerList();
-  }
-
-  getVolunteerList = () => {
     this.props.dispatch({ type: 'FETCH_VOLUNTEER_LIST' });
   }
 
   handleVolunteerClick = (id) => {
-    
     this.props.history.push(`/admin-volunteer-page/${id}`)
   }
-
 
   render() {
     const { classes } = this.props;
@@ -77,9 +71,9 @@ class AdminVolunteerList extends Component {
           </TableHead>
           <TableBody>
             {this.props.reduxStore.adminVolunteerList.map(volunteer => (
-              <TableRow 
-              key={volunteer.id}
-              onClick={() => this.handleVolunteerClick(volunteer.id)}
+              <TableRow
+                key={volunteer.id}
+                onClick={() => this.handleVolunteerClick(volunteer.id)}
               >
                 <TableCell component="th" scope="row">
                   {moment(volunteer.date).format('LL')}
@@ -114,4 +108,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminVolunteerList)))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(AdminVolunteerList)))
