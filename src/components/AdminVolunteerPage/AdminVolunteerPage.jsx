@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, Button } from '@material-ui/core'
 
 const moment = require('moment');
 
@@ -19,16 +19,31 @@ class AdminVolunteerPage extends Component {
     })
   }
 
+  makeCaptain = () => {
+    this.props.dispatch({
+      type: 'ADMIN_MAKE_CAPTAIN',
+      payload: this.props.reduxStore.adminVolunteerInfo
+    })
+  }
+
+  goToTeam = () => {
+    
+  }
+
   render() {
     // const { classes } = this.props;
 
-    let volunteer = this.props.reduxStore.adminVolunteerInfo
+    let volunteer = this.props.reduxStore.adminVolunteerInfo;
 
 
     return (
       <div>
         <h1>{volunteer.first_name} {volunteer.last_name}</h1>
-        <h3>Make captain?</h3>
+        {this.props.reduxStore.adminVolunteerInfo.access_level === 2 ?
+          <></>
+          :
+          <Button variant="contained" onClick={this.makeCaptain}>Make Captain</Button>}
+        <Button variant="contained" onClick={this.goToTeam}>Go To Team</Button>
         <p>Username: {volunteer.username}</p>
         <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
         <p>{volunteer.email}</p>
