@@ -10,6 +10,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+import { withRouter } from 'react-router-dom';
+
 const moment = require('moment');
 
 const styles = theme => ({
@@ -26,11 +28,11 @@ const styles = theme => ({
 class AdminClientList extends Component {
 
   componentDidMount() {
-    this.getClientList();
+    this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
   }
 
-  getClientList = () => {
-    this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
+  handleClientClick = (id) => {
+    this.props.history.push(`/client-page/${id}`)
   }
 
   render() {
@@ -55,7 +57,10 @@ class AdminClientList extends Component {
           </TableHead>
           <TableBody>
             {this.props.reduxStore.adminClientList.map(client => (
-              <TableRow key={client.id}>
+              <TableRow 
+              key={client.id}
+              onClick={() => this.handleClientClick(client.id)}
+              >
                 <TableCell component="th" scope="row">
                   {moment(client.date).format('LL')}
                 </TableCell>
@@ -80,4 +85,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminClientList))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(AdminClientList)))
