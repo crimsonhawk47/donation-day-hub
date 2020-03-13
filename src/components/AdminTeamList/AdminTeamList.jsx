@@ -40,7 +40,6 @@ class AdminTeamList extends Component {
     return (
 
       <Paper className={classes.root}>
-
         <TextField
           id="outlined-search"
           label="Search Teams"
