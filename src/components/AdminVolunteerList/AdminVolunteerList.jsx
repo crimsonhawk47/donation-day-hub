@@ -106,7 +106,7 @@ class AdminVolunteerList extends Component {
               return (
               <TableRow 
               key={volunteer.id}
-              onClick={() => this.handleVolunteerClick(volunteer.id)}
+              onClick={() => this.handleVolunteerClick(volunteer.id)}>
                 <TableCell component="th" scope="row">
                   {moment(volunteer.date).format('LL')}
                 </TableCell>
