@@ -14,7 +14,7 @@ const styles = theme => ({
 class AdminTeamPage extends Component {
   componentDidMount() {
     this.props.dispatch({
-      type: 'FETCH_TEAM_LIST',
+      type: 'ADMIN_FETCH_TEAM_INFO',
       payload: this.props.match.params.id
     })
   }

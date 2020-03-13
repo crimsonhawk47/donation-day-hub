@@ -10,6 +10,7 @@ import adminClientListSaga from './adminClientListSaga';
 import adminVolunteerListSaga from './adminVolunteerListSaga'
 import adminVolunteerInfoSaga from './adminVolunteerInfoSaga'
 import adminMakeCaptainSaga from './adminMakeCaptainSaga'
+import adminTeamInfoSaga from './adminTeamInfoSaga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -30,6 +31,7 @@ export default function* rootSaga() {
     adminClientListSaga(),
     adminVolunteerListSaga(),
     adminVolunteerInfoSaga(),
-    adminMakeCaptainSaga()
+    adminMakeCaptainSaga(),
+    adminTeamInfoSaga()
   ]);
 }
