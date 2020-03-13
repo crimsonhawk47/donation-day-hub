@@ -22,7 +22,7 @@ class AdminVolunteerPage extends Component {
   render() {
     // const { classes } = this.props;
 
-    let volunteer = this.props.reduxStore.adminVolunteerInfo;
+    let volunteer = this.props.reduxStore.adminVolunteerInfo
 
 
     return (

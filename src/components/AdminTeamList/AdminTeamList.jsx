@@ -14,7 +14,6 @@ import { withRouter } from 'react-router-dom';
 
 const moment = require('moment');
 
-
 const styles = theme => ({
   root: {
     width: '100%',
