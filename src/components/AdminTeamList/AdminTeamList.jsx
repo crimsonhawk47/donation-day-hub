@@ -90,7 +90,8 @@ class AdminTeamList extends Component {
           <TableBody>
             {filteredTeams.map(team => {
               return (
-              <TableRow key={team.id}>
+              <TableRow key={team.id}
+              onClick={() => this.handleTeamClick(team.id)} >
                 <TableCell component="th" scope="row">
                   {moment(team.date).format('LL')}
                 </TableCell>
