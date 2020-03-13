@@ -39,6 +39,12 @@ router.post('/register', (req, res, next) => {
     res.sendStatus(500)});
 });
 
+// PUT/UPDATE user from database with matching ID
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  console.log(`in router-side PUT/UPDATE`, req.body);
+
+})
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful

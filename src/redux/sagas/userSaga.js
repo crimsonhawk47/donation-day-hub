@@ -27,7 +27,13 @@ function* fetchUser() {
 
 // PUT/UPDATE request
 function* updateUser(action) {
-  
+  console.log(`in UPDATE_USER PUT`, action);
+  try {
+    let response = yield axios.put(`/api/user/${action.payload.id}`, action.payload);
+    yield put ({ type: 'FETCH_USER'});
+  } catch(error) {
+    alert('error in PUT/UPDATE user', error);
+  }
 }
 
 function* userSaga() {

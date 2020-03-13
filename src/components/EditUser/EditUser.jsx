@@ -50,7 +50,7 @@ class EditUser extends Component {
       type:'UPDATE_USER',
       payload: this.state,
     })
-    this.props.histor.push('/home')
+    this.props.history.push('/home')
   }
 
   
