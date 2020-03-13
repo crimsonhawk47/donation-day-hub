@@ -35,5 +35,25 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
 
 });
 
+router.post('/join-team', (req, res) => {
+    const teamId = req.body.data
+    const userId = req.user.id
+    console.log(userId);
+
+
+    const queryText = `INSERT INTO "team_user" ("team_id", "user_id")
+                    VALUES ($1, $2)`
+    pool.query(queryText, [teamId, userId])
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500)
+        })
+
+
+})
+
 
 module.exports = router;
