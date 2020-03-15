@@ -27,6 +27,8 @@ class AdminVolunteerPage extends Component {
   }
 
   goToTeam = () => {
+    const currentVolunteerId = this.props.reduxStore.adminVolunteerInfo.active_team
+    this.props.history.push(`/admin-team-page/${currentVolunteerId}`)
     
   }
 
@@ -39,7 +41,7 @@ class AdminVolunteerPage extends Component {
     return (
       <div>
         <h1>{volunteer.first_name} {volunteer.last_name}</h1>
-        {this.props.reduxStore.adminVolunteerInfo.access_level === 2 ?
+        {volunteer.access_level === 2 || volunteer.active_team ?
           <></>
           :
           <Button variant="contained" onClick={this.makeCaptain}>Make Captain</Button>}
