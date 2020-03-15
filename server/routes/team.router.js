@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 router.get('/team-info/:id', (req, res) => {
 
 
-    const queryText = `SELECT * FROM "user"
+    const queryText = `SELECT "user".* FROM "user"
                         JOIN "team_user" ON "team_user".user_id = "user".id
                         JOIN "team" ON "team_user".team_id = "team".id
                         WHERE "team".id = $1`
