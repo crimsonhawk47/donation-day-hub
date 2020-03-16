@@ -40,6 +40,7 @@ function* joinTeam(action) {
     let teamId = action.payload.id
     let history = action.payload.history
     yield axios.post(`/api/team/join-team`, { data: teamId })
+    yield put({type: 'FETCH_USER'})
     history.push('/team-page')
   }catch(err){
     console.log(err);
