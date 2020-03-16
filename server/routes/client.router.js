@@ -110,7 +110,7 @@ router.post('/add', (req,res) => {
 })
 
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
   console.log(`in clients by team id`, id);
   const queryText =
@@ -127,6 +127,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     })
 
+})
+
+router.get(`/list`, (req, res) => {
+  console.log(`we in server now`, req.body);
+  
 })
 
 module.exports = router;
