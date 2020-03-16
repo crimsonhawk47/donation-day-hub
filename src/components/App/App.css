@@ -9,12 +9,12 @@ body {
 }
 
 .log-in-form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+    width: auto;
+    text-align: center;
+    /* height: 250px; */
+    /* margin: 20px auto; */
+    /* padding: 25px; */
+    /* border-radius: 2px; */
 }
 
 .register-form {
@@ -29,13 +29,14 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
+  background-color: #6d89b1;
   border-radius: 4px;
   color: #f8f8f8;
   min-height: 50px;
   min-width: 100px;
   outline:0;
   cursor: pointer;
+  font-size: medium;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {

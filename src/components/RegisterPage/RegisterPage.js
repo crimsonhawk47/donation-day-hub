@@ -4,14 +4,22 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
+import Fab from '@material-ui/core/Fab';
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
-    // '#283748',
-    // secondary: '#6d89b1',
-    // tertiary: '#808281',
-    // quaternary: '#f6f6f6'
+    primary: {
+      main: '#283748',
+    },
+    secondary: {
+      main: '#6d89b1'
+    },
+    tertiary: {
+      main: '#808281'
+    },
+    quaternary: {
+      main: '#f6f6f6'
+    }
   }
 })
 
@@ -78,7 +86,7 @@ class RegisterPage extends Component {
             onSubmit={this.registerUser}
             className="register-form
           ">
-            <h1>Register User</h1>
+            <h1>Register</h1>
             <div>
               <label htmlFor="username">
                 <TextField
@@ -203,12 +211,18 @@ class RegisterPage extends Component {
               </label>
             </div>
             <div>
-              <input
+              <Fab
+                variant="extended"
+                size="medium"
+                color="secondary"
+                aria-label="Add"
                 className="register"
                 type="submit"
                 name="submit"
                 value="REGISTER"
-              />
+              >
+                REGISTER
+              </Fab>
             </div>
           </form>
           <center>
