@@ -23,7 +23,7 @@ function* getClientsById(action) {
 
   console.log(`we in client's by id saga`, action.payload);
   try {
-    const response = yield axios.get(`/api/client/${action.payload}`)
+    const response = yield axios.get(`/api/client/team/${action.payload}`)
     yield put({ type: `SET_CLIENT_BY_TEAM`, payload: response.data })
   } catch (error) {
     console.log(error);

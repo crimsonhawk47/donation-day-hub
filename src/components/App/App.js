@@ -106,7 +106,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-page/:id"
+              path="/client-page/:id/:teamId/:name"
               component={ClientPage}
             />
             <ProtectedRoute
