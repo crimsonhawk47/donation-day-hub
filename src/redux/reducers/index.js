@@ -11,6 +11,7 @@ import adminClientList from './adminClientListReducer'
 import adminVolunteerList from './adminVolunteerListReducer'
 import adminVolunteerInfo from './adminVolunteerInfoReducer'
 import adminTeamInfo from './adminTeamInfoReducer'
+import dialogReducer from './dialogReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   adminClientList,
   adminVolunteerList,
   adminVolunteerInfo,
-  adminTeamInfo
+  adminTeamInfo,
+  dialogReducer
 });
 
 export default rootReducer;

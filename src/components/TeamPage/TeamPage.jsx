@@ -77,6 +77,7 @@ class TeamPage extends Component {
                 {this.props.reduxStore.clientsByTeamId.map((clients) => {
                   return (
                     <ClientList onChange={this.handleClientFetch} id={clients.id} name={clients.name} />
+                    
                   )
                 })}
               </TableCell>
