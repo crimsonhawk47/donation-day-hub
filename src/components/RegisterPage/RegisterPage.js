@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
-    // primary: '#283748',
+    primary:  blue,
+    // '#283748',
     // secondary: '#6d89b1',
     // tertiary: '#808281',
     // quaternary: '#f6f6f6'
@@ -198,14 +200,11 @@ class RegisterPage extends Component {
               </label>
             </div>
             <div>
-              <Button
-                type="button"
+              <input
                 className="register"
-                variant="contained"
-                color="secondary"
                 type="submit"
                 name="submit"
-                value="Register"
+                value="REGISTER"
               />
             </div>
           </form>
