@@ -8,7 +8,8 @@ function* adminMakeCaptainSaga() {
 
 function* makeCaptain(action) {
   try {
-    axios.post('/api/volunteer/make-captain', action.payload)
+    yield axios.post('/api/volunteer/make-captain', action.payload)
+    yield put({type: 'FETCH_VOLUNTEER_INFO', payload: action.payload.id})
 
   } catch (error) {
     console.log('Error with Make Captain:', error);

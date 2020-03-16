@@ -71,7 +71,7 @@ class EditUser extends Component {
           margin="dense"
           style={{ width: 300 }}
           value={this.state.firstName}
-          onChange={(event) => this.editProfile(event, 'first_name')}
+          onChange={(event) => this.editProfile(event, 'firstName')}
         />
         <br />
         <br />
@@ -83,7 +83,7 @@ class EditUser extends Component {
           margin="dense"
           style={{ width: 300 }}
           value={this.state.lastName}
-          onChange={(event) => this.editProfile(event, 'last_name')}
+          onChange={(event) => this.editProfile(event, 'lastName')}
         />
         <br />
         <br />
@@ -119,7 +119,7 @@ class EditUser extends Component {
           margin="dense"
           style={{ width: 300 }}
           value={this.state.streetAddress}
-          onChange={(event) => this.editProfile(event, 'street_address')}
+          onChange={(event) => this.editProfile(event, 'streetAddress')}
         />
         <br />
         <br />
