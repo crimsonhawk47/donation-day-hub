@@ -17,7 +17,6 @@ import AboutPage from '../AboutPage/AboutPage';
 
 //import UserPage from '../UserPage/UserPage';
 
-
 import InfoPage from '../InfoPage/InfoPage';
 import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
@@ -31,7 +30,6 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
-import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './App.css';
 
@@ -108,7 +106,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-page/:id"
+              path="/client-page/:id/:teamId/:name"
               component={ClientPage}
             />
             <ProtectedRoute

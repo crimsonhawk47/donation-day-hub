@@ -9,18 +9,14 @@
 
 --  You should be able to run the whole table when making changes. If DROP TABLE commands yell
 --  At you about tables not existing, simply highlight everything below
-
-
-
 DROP TABLE "media";
 DROP TABLE "team_user";
 DROP TABLE "item";
 DROP TABLE "messages";
-DROP TABLE "user";
 DROP TABLE "client";
 DROP TABLE "team";
+DROP TABLE "user";
 
---Create Tables
 CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
 	"username" VARCHAR (80) UNIQUE NOT NULL,
@@ -116,3 +112,19 @@ INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
 VALUES (1, 'image.png', 'img', NULL, NOW(), 3), 
 (1, 'download.jpeg', 'img', NULL, NOW(), 3), 
 (1, 'Untitled.png', 'img', NULL, NOW(), 3);
+
+ INSERT INTO "client"
+	("name", "bio", "media_release", "location", "date", "team_id")
+VALUES
+	('The Other Amber', 'got it from Texas', 'true', 'mean streets of Texas', '02-02-2020', '1'),
+	('The Other Gabriel', 'aka akimbojesus', 'true', 'streets of Minnesota', '02-02-2020', '1'),
+	('The Other Meghan', 'got it from the gutter', 'true', 'streets of Downtown Minneapolis', '02-02-2020', '1'),
+	('The Other Jessica', 'got it from the skreets', 'true', 'streets of Eden Prairie?', '02-02-2020', '1');
+	
+	
+INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
+VALUES
+ ('pimp cane', '2', '1', 'false'),
+ ('pimp hat', '2', '1', 'false'),
+ ('white gloves', '2', '1', 'false'),
+ ('purple suit', '2', '1', 'false');
