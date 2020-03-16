@@ -8,13 +8,19 @@ body {
     margin: 50px;
 }
 
-form {
+.log-in-form {
     background-color: #dbd5d5;
     width: 30%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
     border-radius: 2px;
+}
+
+.register-form {
+    width: auto;
+    height: 725px;
+    text-align: center;
 }
 
 input {

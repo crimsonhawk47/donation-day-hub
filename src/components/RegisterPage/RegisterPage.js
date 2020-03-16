@@ -7,7 +7,7 @@ import { blue } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
-    primary:  blue,
+    primary: blue,
     // '#283748',
     // secondary: '#6d89b1',
     // tertiary: '#808281',
@@ -74,7 +74,10 @@ class RegisterPage extends Component {
               {this.props.errors.registrationMessage}
             </h2>
           )}
-          <form onSubmit={this.registerUser}>
+          <form
+            onSubmit={this.registerUser}
+            className="register-form
+          ">
             <h1>Register User</h1>
             <div>
               <label htmlFor="username">
