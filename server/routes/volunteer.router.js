@@ -32,7 +32,7 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
     try {
         console.log(`YOU GOT TO MAKE CAPTAIN`);
         console.log(req.body.first_name);
-        const name = req.body.first_name
+        const name = req.body.first_name + ' ' + req.body.last_name
 
 
         const makeTeamText = `INSERT INTO "team"
@@ -46,6 +46,10 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
                                     ("team_id", "user_id")
                                     VALUES ($1, $2)`
         await pool.query(putUserInTeamText, [newTeamId, req.user.id])
+        const changeAccessLevel = `UPDATE "user"
+                                    SET "user".access_level = 2
+                                    WHERE "user".id = `
+        await pool.query(changeAccessLevel, [req.user.id])
         res.sendStatus(200)
 
     } catch (err) {
