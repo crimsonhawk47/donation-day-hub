@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    // primary: '#283748',
+    // secondary: '#6d89b1',
+    // tertiary: '#808281',
+    // quaternary: '#f6f6f6'
+  }
+})
 
 class RegisterPage extends Component {
   state = {
@@ -37,7 +49,7 @@ class RegisterPage extends Component {
         },
       });
     } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }
   } // end registerUser
 
@@ -49,146 +61,166 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.errors.registrationMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.registrationMessage}
-          </h2>
-        )}
-        <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
+      <ThemeProvider theme={theme}>
+
+        <div>
+          {this.props.errors.registrationMessage && (
+            <h2
+              className="alert"
+              role="alert"
+            >
+              {this.props.errors.registrationMessage}
+            </h2>
+          )}
+          <form onSubmit={this.registerUser}>
+            <h1>Register User</h1>
+            <div>
+              <label htmlFor="username">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Username"
+                  margin="dense"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password">
+                <TextField
+                  required
+                  id="standard-password-input"
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                  margin="dense"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="firstName">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="First Name"
+                  margin="dense"
+                  value={this.state.firstName}
+                  onChange={this.handleInputChangeFor('firstName')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Last Name"
+                  margin="dense"
+                  value={this.state.lastName}
+                  onChange={this.handleInputChangeFor('lastName')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="email">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Email"
+                  margin="dense"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleInputChangeFor('email')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="phoneNum">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Phone Number"
+                  margin="dense"
+                  value={this.state.phoneNum}
+                  onChange={this.handleInputChangeFor('phoneNum')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="streetAddress">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Street Address"
+                  margin="dense"
+                  value={this.state.streetAddress}
+                  onChange={this.handleInputChangeFor('streetAddress')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="city">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="City"
+                  margin="dense"
+                  value={this.state.city}
+                  onChange={this.handleInputChangeFor('city')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="state">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="State"
+                  margin="dense"
+                  value={this.state.state}
+                  onChange={this.handleInputChangeFor('state')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="zip">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Zip"
+                  margin="dense"
+                  value={this.state.zip}
+                  onChange={this.handleInputChangeFor('zip')}
+                />
+              </label>
+            </div>
+            <div>
+              <Button
+                type="button"
+                className="register"
+                variant="contained"
+                color="secondary"
+                type="submit"
+                name="submit"
+                value="Register"
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="firstName">
-              First Name:
-              <input
-                type="firstName"
-                name="firstName"
-                value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="lastName">
-              Last Name:
-              <input
-                type="lastName"
-                name="lastName"
-                value={this.state.lastName}
-                onChange={this.handleInputChangeFor('lastName')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="phoneNum">
-              Phone:
-              <input
-                type="phoneNum"
-                name="phoneNum"
-                value={this.state.phoneNum}
-                onChange={this.handleInputChangeFor('phoneNum')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="streetAddress">
-              Address:
-              <input
-                type="streetAddress"
-                name="streetAddress"
-                value={this.state.streetAddress}
-                onChange={this.handleInputChangeFor('streetAddress')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="city">
-              City:
-              <input
-                type="city"
-                name="city"
-                value={this.state.city}
-                onChange={this.handleInputChangeFor('city')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="state">
-              State
-              <input
-                type="state"
-                name="state"
-                value={this.state.state}
-                onChange={this.handleInputChangeFor('state')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="zip">
-              Zip:
-              <input
-                type="zip"
-                name="zip"
-                value={this.state.zip}
-                onChange={this.handleInputChangeFor('zip')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
-        </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button>
-        </center>
-      </div>
+            </div>
+          </form>
+          <center>
+            <Button
+              type="button"
+              className="link-button"
+              onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
+            >
+              Login
+          </Button>
+          </center>
+        </div>
+      </ThemeProvider>
+
     );
   }
 }
