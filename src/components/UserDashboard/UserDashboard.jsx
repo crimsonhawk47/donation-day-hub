@@ -16,6 +16,10 @@ const styles = theme => ({
 
 class UserDashboard extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
+  }
+
   handleEditProfile = () => {
     console.log('clicked Edit Profile button');
     this.props.history.push('/edit-user')

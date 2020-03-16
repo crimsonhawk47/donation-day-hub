@@ -36,8 +36,7 @@ router.get('/team-info/:id', (req, res) => {
     })
     .catch(err => {
         console.log(err);
-        console.log(req.body);
-        
+        res.sendStatus(500)
         
     })
     
@@ -49,7 +48,6 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
     console.log('in team router.get/search')
     pool.query(queryText)
         .then(result => {
-            console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
             console.log('error in team search GET', error)
@@ -57,7 +55,7 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
         })
 
 });
-
+//User - Join a specific Team
 router.post('/join-team', rejectUnauthenticated, async (req, res) => {
     try {
         const teamId = req.body.data
@@ -65,9 +63,11 @@ router.post('/join-team', rejectUnauthenticated, async (req, res) => {
         console.log(userId);
 
 
+        //Link the user and team in the junction table
         let queryText = `INSERT INTO "team_user" ("team_id", "user_id")
                     VALUES ($1, $2)`
         await pool.query(queryText, [teamId, userId])
+        //Set the users active_team column to the team ID
         queryText = `UPDATE "user"
                     SET "active_team" = $1
                     WHERE "user".id = $2`
@@ -82,13 +82,14 @@ router.post('/join-team', rejectUnauthenticated, async (req, res) => {
 router.put('/close-team/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
     try {
         const teamId = req.params.id
-        console.log(`IN CLOSE TEAM`);
+        //Archive the team
         const queryText = `UPDATE "team"
                         SET "is_archived" = true
                         WHERE "team".id = $1; 
                         `
         await pool.query(queryText, [teamId])
 
+        //Revoke captain for all users of that team, and set their active team to 0
         const closeTeam = `UPDATE "user" SET "active_team" = 0, "access_level" = 1
                                 FROM "team_user"
                                 WHERE "team_user".user_id = "user".id AND "team_user".team_id = $1`
