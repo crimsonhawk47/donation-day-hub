@@ -74,11 +74,11 @@ class AdminVolunteerList extends Component {
     if (volunteers) {
       filteredVolunteers = volunteers.filter(
         (volunteer) => {
-          const fullName = volunteer.first_name +' '+  volunteer.last_name
+          const fullName = volunteer.first_name + ' ' + volunteer.last_name
           return fullName.toLowerCase().indexOf(
             this.state.search.toLowerCase()) !== -1;
         }
-      );
+      ).filter(volunteer => volunteer.access_level !== 3);
     }
 
     return (
