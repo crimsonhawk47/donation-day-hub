@@ -143,4 +143,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(AddClient))
+export default withStyles(styles)(connect(mapStateToProps)(AddClient))  

@@ -7,6 +7,7 @@ import teamSaga from './teamSaga';
 import awsSaga from './awsSaga'
 import adminTeamListSaga from './adminTeamListSaga';
 import adminClientListSaga from './adminClientListSaga';
+import itemSaga from './itemSaga';
 import adminVolunteerListSaga from './adminVolunteerListSaga'
 import adminVolunteerInfoSaga from './adminVolunteerInfoSaga'
 import adminMakeCaptainSaga from './adminMakeCaptainSaga'
@@ -31,6 +32,7 @@ export default function* rootSaga() {
     adminClientListSaga(),
     adminVolunteerListSaga(),
     adminVolunteerInfoSaga(),
+    itemSaga(),
     adminMakeCaptainSaga(),
     adminTeamInfoSaga()
   ]);

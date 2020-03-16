@@ -10,6 +10,7 @@ import adminTeamList from './adminTeamListReducer';
 import adminClientList from './adminClientListReducer'
 import adminVolunteerList from './adminVolunteerListReducer'
 import adminVolunteerInfo from './adminVolunteerInfoReducer'
+import shoppingListReducer from './shoppingListReducer'
 import adminTeamInfo from './adminTeamInfoReducer'
 
 // rootReducer is the primary reducer for our entire project
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   adminClientList,
   adminVolunteerList,
   adminVolunteerInfo,
+  shoppingListReducer,
   adminTeamInfo
 });
 
