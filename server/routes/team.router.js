@@ -78,31 +78,26 @@ router.post('/join-team', rejectUnauthenticated, (req, res) => {
 
 })
 
-router.put('/close-team/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-    const teamId = req.params.id
-    console.log(`IN CLOSE TEAM`);
-    const queryText = `UPDATE "team"
+router.put('/close-team/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
+    try {
+        const teamId = req.params.id
+        console.log(`IN CLOSE TEAM`);
+        const queryText = `UPDATE "team"
                         SET "is_archived" = true
                         WHERE "team".id = $1; 
                         `
-    pool.query(queryText, [teamId])
-        .then(result => {
-            const closeTeam = `UPDATE "user" SET "active_team" = 0
+        await pool.query(queryText, [teamId])
+
+        const closeTeam = `UPDATE "user" SET "active_team" = 0, "access_level" = 1
                                 FROM "team_user"
                                 WHERE "team_user".user_id = "user".id AND "team_user".team_id = $1`
-            pool.query(closeTeam, [teamId])
-                .then(result => {
-                    res.sendStatus(200)
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(500)
+        await pool.query(closeTeam, [teamId])
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500)
 
-        })
+    }
 })
 
 
