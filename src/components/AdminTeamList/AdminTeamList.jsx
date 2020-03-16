@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import Table from '@material-ui/core/Table';
@@ -51,6 +51,11 @@ class AdminTeamList extends Component {
     })
   }
 
+  closeTeam = (teamId) => {
+    this.props.dispatch({type: 'CLOSE_TEAM', payload: teamId})
+    
+  }
+
   // Need a handleTeamClick function here
 
   render() {
@@ -90,14 +95,16 @@ class AdminTeamList extends Component {
           <TableBody>
             {filteredTeams.map(team => {
               return (
-              <TableRow key={team.id}
-              onClick={() => this.handleTeamClick(team.id)} >
-                <TableCell component="th" scope="row">
-                  {moment(team.date).format('LL')}
-                </TableCell>
-                <TableCell align="left">{team.captain_name}</TableCell>
-                <TableCell align="left">{team.is_archived}</TableCell>
-              </TableRow>
+                <TableRow key={team.id}
+                >
+                  <TableCell component="th" scope="row">
+                    {moment(team.date).format('LL')}
+                  </TableCell>
+                  <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
+                  <TableCell align="left">{!team.is_archived ?
+                    <Button variant='outlined' onClick={() => {this.closeTeam(team.id)}}>Close</Button>
+                    : <></>}</TableCell>
+                </TableRow>
               )
             })}
           </TableBody>
