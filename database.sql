@@ -116,3 +116,10 @@ INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
 VALUES (1, 'image.png', 'img', NULL, NOW(), 3), 
 (1, 'download.jpeg', 'img', NULL, NOW(), 3), 
 (1, 'Untitled.png', 'img', NULL, NOW(), 3);
+
+INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
+VALUES
+ ('pimp cane', '2', '1', 'false'),
+ ('pimp hat', '2', '1', 'false'),
+ ('white gloves', '2', '1', 'false'),
+ ('purple suit', '2', '1', 'false');
