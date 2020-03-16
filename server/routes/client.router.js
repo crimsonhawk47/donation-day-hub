@@ -129,9 +129,23 @@ router.get('/team/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
-router.get(`/list`, (req, res) => {
-  console.log(`we in server now`, req.body);
-  
+router.get(`/list/:id`, (req, res) => {
+  console.log(`we in server now`, req.params.id);
+  let id = req.params.id
+  const queryText = `
+  SELECT * FROM "item"
+  WHERE "client_id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.send(result.rows)
+    console.log(result.rows);
+    
+  })
+  .catch((error) => {
+    console.log(`error in shopping list get in server`, error);
+    res.sendStatus(500)
+  })
 })
 
 module.exports = router;
