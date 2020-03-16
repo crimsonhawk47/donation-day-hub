@@ -21,7 +21,7 @@ class ClientList extends Component {
 
   handleView = () => {
     console.log('button clicked', this.props.id);
-    this.props.history.push(`/client-page/${this.props.id}`)
+    this.props.history.push(`/client-page/${this.props.id}/${this.props.reduxStore.teamById.team_id}/${this.props.name}`)
   }
 
   render() {
