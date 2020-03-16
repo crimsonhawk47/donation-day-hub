@@ -74,10 +74,11 @@ class AdminVolunteerList extends Component {
     if (volunteers) {
       filteredVolunteers = volunteers.filter(
         (volunteer) => {
-          return volunteer.first_name.toLowerCase().indexOf(
+          const fullName = volunteer.first_name + ' ' + volunteer.last_name
+          return fullName.toLowerCase().indexOf(
             this.state.search.toLowerCase()) !== -1;
         }
-      );
+      ).filter(volunteer => volunteer.access_level !== 3);
     }
 
     return (
@@ -97,7 +98,7 @@ class AdminVolunteerList extends Component {
             <TableRow>
               <TableCell>Date</TableCell>
               <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Make Captain?</TableCell>
+              <TableCell align="left">Team Status</TableCell>
             </TableRow>
           </TableHead>
           
@@ -111,7 +112,13 @@ class AdminVolunteerList extends Component {
                   {moment(volunteer.date).format('LL')}
                 </TableCell>
                 <TableCell align="left">{volunteer.first_name} {volunteer.last_name}</TableCell>
-                <TableCell align="left">{volunteer.is_archived}
+                  {volunteer.active_team ?
+                    volunteer.access_level === 2 ?
+                      <TableCell align="left">Captain</TableCell>
+                      :
+                      <TableCell align="left">Member</TableCell>
+                    :
+                    <TableCell align="left">No Team</TableCell>}
                   {/* Need to play with this for toggle to actually work */}
                   {/* <Switch
                     checked={state.checkedB}
@@ -119,7 +126,6 @@ class AdminVolunteerList extends Component {
                     value="checkedB"
                     color="primary"
                   /> */}
-                </TableCell>
               </TableRow>
               )
             })}

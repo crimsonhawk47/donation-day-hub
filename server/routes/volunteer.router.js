@@ -30,22 +30,29 @@ router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 //admin Make Captain
 router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
     try {
-        console.log(`YOU GOT TO MAKE CAPTAIN`);
-        console.log(req.body.first_name);
-        const name = req.body.first_name
+        const name = req.body.first_name + ' ' + req.body.last_name
+        const userId = req.body.id
 
 
+        //Make the new team, with the new captains name
         const makeTeamText = `INSERT INTO "team"
                         ("captain_name", "is_archived", "date")
                         VALUES ($1, FALSE, NOW())
                         RETURNING "id"`
         let makeTeamResponse = await pool.query(makeTeamText, [name])
+        
         const newTeamId = makeTeamResponse.rows[0].id
-
+        //Take the newly created team ID and insert the new captain into the junction table
         const putUserInTeamText = `INSERT INTO "team_user"
                                     ("team_id", "user_id")
                                     VALUES ($1, $2)`
-        await pool.query(putUserInTeamText, [newTeamId, req.user.id])
+        await pool.query(putUserInTeamText, [newTeamId, userId])
+
+        //Set the user to captain level, and set their active team to the new team id
+        const changeAccessLevel = `UPDATE "user"
+                                    SET "access_level" = 2, "active_team" = $1
+                                    WHERE "user".id = $2`
+        await pool.query(changeAccessLevel, [newTeamId, userId])
         res.sendStatus(200)
 
     } catch (err) {

@@ -40,19 +40,24 @@ function* joinTeam(action) {
     let teamId = action.payload.id
     let history = action.payload.history
     yield axios.post(`/api/team/join-team`, { data: teamId })
-    yield put({type: 'SET_USER_TEAM', payload: teamId})
+    yield put({type: 'FETCH_USER'})
     history.push('/team-page')
   }catch(err){
     console.log(err);
     
   }
-  
+}
+
+function* closeTeam(action){
+  yield axios.put(`/api/team/close-team/${action.payload}`)
+  yield put({type: 'FETCH_TEAM_LIST'})
 }
 
 function* teamSaga() {
   yield takeLatest('FETCH_TEAM', getTeam)
   yield takeLatest('FETCH_SEARCH_TEAMS', fetchSearchTeams)
   yield takeLatest('JOIN_TEAM', joinTeam)
+  yield takeLatest('CLOSE_TEAM', closeTeam)
 }
 
 export default teamSaga

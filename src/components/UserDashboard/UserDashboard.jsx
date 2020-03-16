@@ -16,6 +16,10 @@ const styles = theme => ({
 
 class UserDashboard extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
+  }
+
   handleEditProfile = () => {
     console.log('clicked Edit Profile button');
     this.props.history.push('/edit-user')
@@ -41,8 +45,11 @@ class UserDashboard extends Component {
           Welcome, {this.props.reduxStore.user.username}!
         </h1>
         <div>
-          <button onClick={this.handleTeamPage}>Team Page</button>
-          <button onClick={this.handleJoinTeam}>Join Team</button>
+          {!this.props.reduxStore.user.active_team ?
+            <button onClick={this.handleJoinTeam}>Join Team</button>
+            :
+            <button onClick={this.handleTeamPage}>Team Page</button>
+          }
           <button onClick={this.handleEditProfile}>Edit Profile</button>
           <Link to="/resources">Important Links</Link>
         </div>
