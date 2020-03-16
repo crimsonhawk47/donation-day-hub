@@ -50,7 +50,6 @@ class TeamPage extends Component {
         type: 'FETCH_TEAM',
       })
     }
-    
   }
 
   render() {
