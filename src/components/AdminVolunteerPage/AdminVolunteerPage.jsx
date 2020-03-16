@@ -45,7 +45,12 @@ class AdminVolunteerPage extends Component {
           <></>
           :
           <Button variant="contained" onClick={this.makeCaptain}>Make Captain</Button>}
-        <Button variant="contained" onClick={this.goToTeam}>Go To Team</Button>
+        {volunteer.active_team ?
+          <Button variant="contained" onClick={this.goToTeam}>Go To Team</Button>
+          :
+          <></>
+        }
+
         <p>Username: {volunteer.username}</p>
         <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
         <p>{volunteer.email}</p>
