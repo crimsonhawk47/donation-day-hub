@@ -46,13 +46,18 @@ function* joinTeam(action) {
     console.log(err);
     
   }
-  
+}
+
+function* closeTeam(action){
+  yield axios.put(`/api/team/close-team/${action.payload}`)
+  yield put({type: 'FETCH_TEAM_LIST'})
 }
 
 function* teamSaga() {
   yield takeLatest('FETCH_TEAM', getTeam)
   yield takeLatest('FETCH_SEARCH_TEAMS', fetchSearchTeams)
   yield takeLatest('JOIN_TEAM', joinTeam)
+  yield takeLatest('CLOSE_TEAM', closeTeam)
 }
 
 export default teamSaga
