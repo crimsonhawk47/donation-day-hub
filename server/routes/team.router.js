@@ -58,24 +58,25 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
 
 });
 
-router.post('/join-team', rejectUnauthenticated, (req, res) => {
-    const teamId = req.body.data
-    const userId = req.user.id
-    console.log(userId);
+router.post('/join-team', rejectUnauthenticated, async (req, res) => {
+    try {
+        const teamId = req.body.data
+        const userId = req.user.id
+        console.log(userId);
 
 
-    const queryText = `INSERT INTO "team_user" ("team_id", "user_id")
+        let queryText = `INSERT INTO "team_user" ("team_id", "user_id")
                     VALUES ($1, $2)`
-    pool.query(queryText, [teamId, userId])
-        .then(result => {
-            res.sendStatus(200)
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(500)
-        })
-
-
+        await pool.query(queryText, [teamId, userId])
+        queryText = `UPDATE "user"
+                    SET "active_team" = $1
+                    WHERE "user".id = $2`
+        await pool.query(queryText, [teamId, userId])
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500)
+    }
 })
 
 router.put('/close-team/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
