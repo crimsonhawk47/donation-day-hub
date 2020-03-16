@@ -33,6 +33,7 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
         console.log(`YOU GOT TO MAKE CAPTAIN`);
         console.log(req.body.first_name);
         const name = req.body.first_name + ' ' + req.body.last_name
+        const userId = req.body.id
 
 
         const makeTeamText = `INSERT INTO "team"
@@ -40,16 +41,16 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
                         VALUES ($1, FALSE, NOW())
                         RETURNING "id"`
         let makeTeamResponse = await pool.query(makeTeamText, [name])
+        
         const newTeamId = makeTeamResponse.rows[0].id
-
         const putUserInTeamText = `INSERT INTO "team_user"
                                     ("team_id", "user_id")
                                     VALUES ($1, $2)`
-        await pool.query(putUserInTeamText, [newTeamId, req.user.id])
+        await pool.query(putUserInTeamText, [newTeamId, userId])
         const changeAccessLevel = `UPDATE "user"
-                                    SET "user".access_level = 2
-                                    WHERE "user".id = `
-        await pool.query(changeAccessLevel, [req.user.id])
+                                    SET "access_level" = 2, "active_team" = $1
+                                    WHERE "user".id = $2`
+        await pool.query(changeAccessLevel, [newTeamId, userId])
         res.sendStatus(200)
 
     } catch (err) {
