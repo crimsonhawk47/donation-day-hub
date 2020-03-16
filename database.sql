@@ -123,3 +123,11 @@ VALUES
  ('pimp hat', '2', '1', 'false'),
  ('white gloves', '2', '1', 'false'),
  ('purple suit', '2', '1', 'false');
+
+ INSERT INTO "client"
+	("name", "bio", "media_release", "location", "date", "team_id")
+VALUES
+	('The Other Amber', 'got it from Texas', 'true', 'mean streets of Texas', '02-02-2020', '1'),
+	('The Other Gabriel', 'aka akimbojesus', 'true', 'streets of Minnesota', '02-02-2020', '1'),
+	('The Other Meghan', 'got it from the gutter', 'true', 'streets of Downtown Minneapolis', '02-02-2020', '1'),
+	('The Other Jessica', 'got it from the skreets', 'true', 'streets of Eden Prairie?', '02-02-2020', '1')
