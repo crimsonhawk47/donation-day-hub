@@ -11,6 +11,7 @@
 --  At you about tables not existing, simply highlight everything below
 
 
+
 DROP TABLE "media";
 DROP TABLE "team_user";
 DROP TABLE "item";
@@ -33,7 +34,8 @@ CREATE TABLE "user" (
 	"state" VARCHAR(255),
 	"zip" INT,
 	"access_level" INT,
-	"date_registered" TIMESTAMP with time zone
+	"date_registered" TIMESTAMP with time zone,
+	"active_team" INT
 );
 
 CREATE TABLE "team" (
@@ -87,13 +89,14 @@ CREATE TABLE "messages" (
 
 -- Dummy Data
 
-INSERT INTO "user" ("username", "password", "first_name", "last_name", "email", "phone", "street_address", "city", "state", "zip", "access_level", "date_registered")
-VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 'Gabriel', 'Hawk', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Meghan', '$2a$10$cghoHshxw31jgKsRAYt02OUmthPdlMdaFIRosVaCXaZGLYWcc.v.C', 'Meghan', 'Gunderson', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW()),
-('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 3, NOW());
+INSERT INTO "user" ("username", "password", "first_name", "last_name", "email", "phone", "street_address", "city", "state", "zip", "access_level", "date_registered", "active_team")
+VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 'Gabriel', 'Hawk', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 1),
+('Meghan', '$2a$10$cghoHshxw31jgKsRAYt02OUmthPdlMdaFIRosVaCXaZGLYWcc.v.C', 'Meghan', 'Gunderson', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 2),
+('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 2, NOW(), 1),
+('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 2, NOW(), 2),
+('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 1),
+('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Andrea', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 3, NOW(), 0),
+('Akimbo', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Akimbo', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 0);
 
 INSERT INTO "team" ("captain_name", "is_archived", "date")
 VALUES ('Jessica', FALSE, NOW()),

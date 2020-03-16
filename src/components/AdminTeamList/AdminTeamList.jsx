@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import Table from '@material-ui/core/Table';
@@ -10,8 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
-const moment = require('moment');
+import { withRouter } from 'react-router-dom';
 
+const moment = require('moment');
 
 const styles = theme => ({
   root: {
@@ -25,21 +26,55 @@ const styles = theme => ({
 });
 
 class AdminTeamList extends Component {
-  componentDidMount() {
-    this.getTeamList();
+
+  state = {
+    search: '',
+    team: [],
+    backIcon: false
   }
 
-  getTeamList = () => {
+  componentDidMount() {
     this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
   }
 
+  handleTeamClick = (id) => {
+    this.props.history.push(`/admin-team-page/${id}`)
+  }
+
+  searchBar = (event) => {
+    this.setState({
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
+    })
+  }
+
+  closeTeam = (teamId) => {
+    this.props.dispatch({type: 'CLOSE_TEAM', payload: teamId})
+    
+  }
+
+  // Need a handleTeamClick function here
+
   render() {
     const { classes } = this.props;
+    let teams = this.props.reduxStore.adminTeamList
+    let filteredTeams = []
+      
+    if (teams) {
+      filteredTeams = teams.filter(
+        (team) => {
+          return team.captain_name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
 
     return (
 
       <Paper className={classes.root}>
-
         <TextField
           id="outlined-search"
           label="Search Teams"
@@ -47,6 +82,7 @@ class AdminTeamList extends Component {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          onChange={(event) => this.searchBar(event)}
         />
         <Table className={classes.table}>
           <TableHead>
@@ -57,15 +93,20 @@ class AdminTeamList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxStore.adminTeamList.map(team => (
-              <TableRow key={team.id}>
-                <TableCell component="th" scope="row">
-                  {moment(team.date).format('LL')}
-                </TableCell>
-                <TableCell align="left">{team.captain_name}</TableCell>
-                <TableCell align="left">{team.is_archived}</TableCell>
-              </TableRow>
-            ))}
+            {filteredTeams.map(team => {
+              return (
+                <TableRow key={team.id}
+                >
+                  <TableCell component="th" scope="row">
+                    {moment(team.date).format('LL')}
+                  </TableCell>
+                  <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
+                  <TableCell align="left">{!team.is_archived ?
+                    <Button variant='outlined' onClick={() => {this.closeTeam(team.id)}}>Close</Button>
+                    : <></>}</TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </Paper>
@@ -84,4 +125,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminTeamList))
+export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminTeamList)))

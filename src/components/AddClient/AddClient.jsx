@@ -21,12 +21,6 @@ const styles = theme => ({
 
 class AddClient extends Component {
 
-  componentDidMount () {
-    this.props.dispatch({
-      type: 'FETCH_TEAM',
-    })
-  }
-
   state = {
     open: false,
     setOpen: false,

@@ -17,7 +17,6 @@ import AboutPage from '../AboutPage/AboutPage';
 
 //import UserPage from '../UserPage/UserPage';
 
-
 import InfoPage from '../InfoPage/InfoPage';
 import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
@@ -31,7 +30,6 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
-import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './App.css';
 
@@ -78,7 +76,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/admin-team-page"
+              path="/admin-team-page/:id"
               component={AdminTeamPage}
             />
             <ProtectedRoute
@@ -131,11 +129,6 @@ class App extends Component {
               path="/team-search"
               component={TeamSearch}
             />
-            {/* <ProtectedRoute
-              exact
-              path="/admin-dashboard"
-              component={AdminDashboard}
-            /> */}
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
