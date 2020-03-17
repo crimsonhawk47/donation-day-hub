@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; The Intersection
+    &copy; Donation Day Hub
   </footer>
 );
 
