@@ -51,8 +51,8 @@ class TeamSearch extends Component {
   }
 
   // Popup open and close
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpen = (teamId) => {
+    this.setState({ open: teamId });
   };
 
   handleClosePopup = () => {
@@ -83,13 +83,13 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={this.handleClickOpen}>Join</button>
+                  <button onClick={() => {this.handleClickOpen(team.id)}}>Join</button>
                   <div>
-                    <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+                    <Dialog open={this.state.open === team.id} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
                     <DialogContent>
                       <DialogContentText>
-                        Are you sure you want to join this team?
+                        Are you sure you want to join this team {team.captain_name}?
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>

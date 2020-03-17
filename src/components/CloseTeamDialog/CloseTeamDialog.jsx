@@ -14,17 +14,17 @@ const styles = theme => ({
 class CloseTeamDalog extends Component {
 
   handleClickOpen = () => {
-    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG'})
+    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG', payload: this.props.teamId})
 
   };
 
   handleDisagree = () => {
-    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG'})
+    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG', payload: false})
   };
 
   handleAgree = () => {
     this.props.agreeFunction(); 
-    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG'})
+    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG', payload: false})
   };
 
   render() {
@@ -36,7 +36,7 @@ class CloseTeamDalog extends Component {
           Close
         </Button>
         <Dialog
-          open={this.props.reduxStore.dialogReducer && this.props.reduxStore.dialogReducer.closeTeamDialog}
+          open={this.props.reduxStore.dialogReducer.closeTeamDialog == this.props.teamId}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
