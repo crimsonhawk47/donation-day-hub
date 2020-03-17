@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   adminVolunteerInfo,
   adminTeamInfo,
   shoppingListReducer,
-  dialogReducer
+  dialogReducer,
 });
 
 export default rootReducer;
