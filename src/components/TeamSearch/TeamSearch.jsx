@@ -83,7 +83,7 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={() => this.handleClick(team.id)}>Join</button>
+                  <button onClick={this.handleClickOpen}>Join</button>
                   <div>
                     <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
@@ -94,10 +94,10 @@ class TeamSearch extends Component {
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={this.handleClosePopup} color="primary">
-                        Yes
-                      </Button>
-                      <Button onClick={this.handleClosePopup} color="primary">
                         No
+                      </Button>
+                      <Button onClick={() => this.handleClick(team.id)} color="primary">
+                        Yes
                       </Button>
                     </DialogActions>
                     </Dialog>
