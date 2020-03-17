@@ -102,7 +102,7 @@ console.log(this.state);
               fullWidth
             />            
             <DialogContentText>
-              <h4>Tell Me About Your Story:</h4>
+              <p>Tell Me About Your Story:</p>
               <List>
                 <ListItem>Have you always been in MPLS? / where are you from?</ListItem>
                 <ListItem>How long have you been without a home? Do you stay in shelters?</ListItem>

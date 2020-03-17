@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import ShoppingList from '../ShoppingList/ShoppingList'
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = theme=> ({
@@ -19,7 +20,8 @@ class ClientPage extends Component {
     team_id: this.props.match.params.teamId,
   }
 
-  componentDidMount() {
+  goToMedia = (clientId) => {
+    this.props.history.push(`/client-gallery/${clientId}`)
   }
 
   render() {
@@ -30,12 +32,16 @@ console.log(client_id, team_id);
     return (
       <>
 
-      <Grid container className={classes.root}>
-        <Typography >
-          {this.props.match.params.name}'s Shopping List
-                </Typography>
+                <h3>Items Requested</h3> 
+                <h4>Item and description</h4>
+                <TextField 
+                variant="outlined" 
+                fullWidth 
+                placeholder='Add Item'/>
+                <Button  variant='contained'>Click To Add</Button>
                 <ShoppingList client_id={client_id} team_id={team_id}/>
-      </Grid>
+
+      <Button variant="outlined" onClick={() => {this.goToMedia(client_id)}}>Media</Button>
       </>
     )
 

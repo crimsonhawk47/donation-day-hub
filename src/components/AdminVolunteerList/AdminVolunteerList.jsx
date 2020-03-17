@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import Table from '@material-ui/core/Table';
@@ -44,7 +44,8 @@ class AdminVolunteerList extends Component {
   state = {
     search: '',
     volunteer: [],
-    backIcon: false
+    backIcon: false,
+    open: false
   }
 
   componentDidMount() {
@@ -64,6 +65,7 @@ class AdminVolunteerList extends Component {
   handleVolunteerClick = (id) => {
     this.props.history.push(`/admin-volunteer-page/${id}`)
   }
+
 
   render() {
     const { classes } = this.props;
@@ -130,7 +132,7 @@ class AdminVolunteerList extends Component {
               )
             })}
           </TableBody>
-           
+          
         </Table>
       </Paper>
       </>

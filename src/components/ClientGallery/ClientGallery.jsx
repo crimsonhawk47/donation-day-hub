@@ -12,16 +12,16 @@ const styles = theme => ({
 });
 
 //FOR NOW PRETENDING IT'S CLIENT WITH ID OF 1
-const client_id = 1
 
 class ClientGallery extends Component {
 
   state = {
-    selectedFile: ''
+    selectedFile: '',
+    clientId: this.props.match.params.clientId
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
+    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: this.state.clientId })
   }
 
   setFile = (event) => {
@@ -32,15 +32,18 @@ class ClientGallery extends Component {
   uploadFile = () => {
     this.props.dispatch({
       type: 'UPLOAD_TO_AWS',
-      payload: { file: this.state.selectedFile, client_id: client_id }
+      payload: { file: this.state.selectedFile, client_id: this.state.clientId }
     })
   }
 
   displayAllFiles = () => {
-    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: client_id })
+    this.props.dispatch({ type: 'GET_IMAGE_NAMES', payload: this.state.clientId })
   }
 
   render() {
+    console.log(this.state.clientId);
+    console.log(this.props.match);
+    
 
     const { classes } = this.props;
 
@@ -57,11 +60,21 @@ class ClientGallery extends Component {
           <Button variant="contained" onClick={this.displayAllFiles}>DisplayAllImages</Button>
         </Grid>
         <Grid container>
-          {this.props.media.map((string, index) => {
-            return <img
+          {this.props.media.map((file, index) => {
+            if (file.type.split('/')[0] == 'video') {
+              return (
+                  <video width="320" height="240" controls>
+                    <source src={file.link} type={file.type} />
+                      Your browser does not support the video tag.
+                    </video>
+              )
+            }
+            else{
+              return <img
               className={classes.clientMedia}
               key={index}
-              src={string} />
+              src={file.link} />
+            }
           })}
         </Grid>
       </>
