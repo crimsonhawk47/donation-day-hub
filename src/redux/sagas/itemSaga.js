@@ -12,11 +12,22 @@ function* getItemsById(action) {
     }
 }
 
+function* addItem(action) {
+    try{
+        yield axios.post(`api/client/item/add`, action.payload);
+        yield put({ type: `FETCH_ITEM_LIST`,  payload: action.payload.client_id})
+    }
+    catch (error) {
+        console.log(`error in post item`, error);
+        
+    }
+}
 
 
 
 function* itemSaga() {
     yield takeLatest(`FETCH_ITEM_LIST`, getItemsById)
+    yield takeLatest(`ADD_ITEM`, addItem)
 }
 
 export default itemSaga;
