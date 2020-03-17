@@ -5,6 +5,9 @@ require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
+const attachSocketMethods = require('./socket/attachSocketMethods')
+const socket = require('socket.io')
+
 
 const passport = require('./strategies/user.strategy');
 const cors = require('cors')
@@ -47,6 +50,35 @@ app.use(express.static('build'));
 const PORT = process.env.PORT || 5000;
 
 /** Listen * */
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
+});
+
+//Adds auth info to sockets
+//Dane and I set this up for my solo. I'm not totally sure how it works yet
+//But it seems to attach the session to the socket
+const io = socket(server).use(function (socket, next) {
+  // Wrap the express middleware
+  sessionMiddleware(socket.request, {}, next);
+})
+
+//When a client makes a connection to the server, this anonymous function will run
+io.on("connection", function (socket) {
+  console.log(`New connection with id: ${socket.id}`);
+  //Checking if we actually have a session (from the session middleware)
+  let userId = socket.request.session
+    && socket.request.session.passport
+    && socket.request.session.passport.user;
+
+  //If the user is authenticated...
+  if (userId) {
+    //...We want to attach listeners to that socket
+    //We are putting all our socket events in an external file.
+    //We pass a function everything it needs to attach those events
+    attachSocketMethods(socket, io)
+  }
+  else {
+    console.log(`[SECURITY ISSUE] Socket Connection was attempted before user was authorized`);
+    socket.disconnect();
+  }
 });
