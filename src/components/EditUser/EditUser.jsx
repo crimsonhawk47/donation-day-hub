@@ -29,8 +29,9 @@ class EditUser extends Component {
     streetAddress: this.props.reduxStore.user.street_address,
     city: this.props.reduxStore.user.city,
     state: this.props.reduxStore.user.state,
-    zip: this.props.reduxStore.user.zip
-  }
+    zip: this.props.reduxStore.user.zip,
+    open: false
+  };
 
   // Update local state as user inputs data
   editProfile = (event, propertyValue) => {
@@ -40,7 +41,7 @@ class EditUser extends Component {
       ...this.state,
       [propertyValue]: event.target.value,
     })
-  }
+  };
 
 
   //PUT/UPDATE route
@@ -54,14 +55,24 @@ class EditUser extends Component {
       payload: this.state,
     })
     this.props.history.push('/home')
-  }
+  };
 
   
   // Cancel changes and return to user dashboard
   handleCancel = () => {
     //console.log('clicked cancel button');
     this.props.history.push('/home')
-  }
+  };
+
+  // Popup open and close
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ open: false });
+  };
+
 
   render() {
     return (
@@ -179,7 +190,26 @@ class EditUser extends Component {
           onClick={this.handleSaveEdit}>
             Save
           </Button>
-          
+          {/* POPUP AFTER SAVE BUTTON SELECTED */}
+          <div>
+            <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">SAVE CHANGES</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to save these changes?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClosePopup} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleClosePopup} color= "primary">
+                Save
+              </Button>
+            </DialogActions>
+
+            </Dialog>  
+          </div>
 
       </div>
     )
