@@ -81,11 +81,7 @@ router.post('/add-image-name', (req, res) => {
 })
 // User route
 router.post('/add', (req,res) => {
-  console.log('is this team id?', req.teamById);
-
-  console.log('we in post client server', req.body);
   const { name, bio, media_release, location, date, team_id } = req.body
-  console.log('testing', name, bio, media_release, location, date, team_id);
   
   const queryText = `
   INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
@@ -97,6 +93,23 @@ router.post('/add', (req,res) => {
   })
   .catch(err => {
     console.log(err);
+    res.sendStatus(500)
+  })
+})
+
+router.post('/item/add', (req, res) => {
+  const {name, client_id, team_id, purchased} = req.body;
+
+  const queryText = `
+  INSERT INTO "item" ("name", "client_id", "team_id", "purchased" )
+  VALUES ($1, $2, $3, $4);
+  `;
+  pool.query(queryText, [name, client_id, team_id, purchased])
+  .then(result => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    console.log(error);
     res.sendStatus(500)
   })
 })

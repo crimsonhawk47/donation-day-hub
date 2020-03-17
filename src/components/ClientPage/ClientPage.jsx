@@ -16,8 +16,27 @@ const styles = theme=> ({
 class ClientPage extends Component {
 
   state = {
+    name: '',
     client_id: this.props.match.params.id,
     team_id: this.props.match.params.teamId,
+    purchased: false,
+  }
+
+  handleAddItem = (event) => {
+    console.log(event.target.value);
+    this.setState({
+    name: event.target.value
+    })
+    console.log(this.state);
+    
+  }
+
+  handleSubmit = () => {
+    this.props.dispatch({
+      type: 'ADD_ITEM',
+      payload: this.state
+    })
+    
   }
 
   goToMedia = (clientId) => {
@@ -27,7 +46,6 @@ class ClientPage extends Component {
   render() {
     const { classes } = this.props;
     const {client_id, team_id} = this.state
-console.log(client_id, team_id);
 
     return (
       <>
@@ -35,10 +53,13 @@ console.log(client_id, team_id);
                 <h3>Items Requested</h3> 
                 <h4>Item and description</h4>
                 <TextField 
+                onChange={this.handleAddItem}
                 variant="outlined" 
                 fullWidth 
                 placeholder='Add Item'/>
-                <Button  variant='contained'>Click To Add</Button>
+                <Button  
+                onClick={this.handleSubmit}
+                variant='contained'>Click To Add</Button>
                 <ShoppingList client_id={client_id} team_id={team_id}/>
 
       <Button variant="outlined" onClick={() => {this.goToMedia(client_id)}}>Media</Button>
