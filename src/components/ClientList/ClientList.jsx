@@ -10,6 +10,25 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withRouter } from 'react-router-dom'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#283748',
+    },
+    secondary: {
+      main: '#6d89b1'
+    },
+    tertiary: {
+      main: '#808281'
+    },
+    quaternary: {
+      main: '#f6f6f6'
+    }
+  }
+})
 
 const styles = theme => ({
   root: {
@@ -28,13 +47,20 @@ class ClientList extends Component {
     const { classes } = this.props;
 
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <TableRow>
           <TableCell key={this.props.id}>{this.props.name}</TableCell>
-          <TableCell><Button onClick={this.handleView}>View Client</Button></TableCell>
+          <TableCell>
+            <Fab 
+              size="small"
+              color="secondary"
+              aria-label="Add"
+              variant="extended"
+              onClick={this.handleView} 
+            >View Client</Fab>
+          </TableCell>
         </TableRow>
-
-      </>
+      </ThemeProvider>
     )
 
   }
