@@ -192,7 +192,7 @@ class EditUser extends Component {
           </Button>
           {/* POPUP AFTER SAVE BUTTON SELECTED */}
           <div>
-            <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">SAVE CHANGES</DialogTitle>
             <DialogContent>
               <DialogContentText>
