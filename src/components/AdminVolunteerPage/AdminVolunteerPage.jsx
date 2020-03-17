@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography, Button } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import { Paper, Grid, Typography, Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const moment = require('moment');
 
@@ -12,6 +17,11 @@ const styles = theme => ({
 });
 
 class AdminVolunteerPage extends Component {
+  state = {
+    open: false
+  }
+
+
   componentDidMount() {
     this.props.dispatch({
       type: 'FETCH_VOLUNTEER_INFO',
@@ -32,6 +42,15 @@ class AdminVolunteerPage extends Component {
     
   }
 
+   // Popup open and close
+   handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     // const { classes } = this.props;
 
@@ -44,12 +63,31 @@ class AdminVolunteerPage extends Component {
         {volunteer.access_level === 2 || volunteer.active_team ?
           <></>
           :
-          <Button variant="contained" onClick={this.makeCaptain}>Make Captain</Button>}
+          <Button variant="contained" onClick={this.handleClickOpen}>Make Captain</Button>}
         {volunteer.active_team ?
           <Button variant="contained" onClick={this.goToTeam}>Go To Team</Button>
           :
           <></>
         }
+        {/* POPUP AFTER MAKE CAPTAIN BUTTON SELECTED */}
+        <div>
+          <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">MAKE CAPTAIN</DialogTitle>
+          <DialogContent>
+              <DialogContentText>
+                Are you sure you want to make this person a team captain?
+              </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClosePopup} color="primary">
+              No
+            </Button>
+            <Button onClick={this.makeCaptain && this.handleClosePopup} color="primary">
+              Yes
+            </Button>
+          </DialogActions>
+          </Dialog>
+        </div>
 
         <p>Username: {volunteer.username}</p>
         <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
