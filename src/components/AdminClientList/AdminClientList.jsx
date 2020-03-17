@@ -37,8 +37,8 @@ class AdminClientList extends Component {
     this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
   }
 
-  handleClientClick = (id) => {
-    this.props.history.push(`/client-page/${id}`)
+  handleClientClick = (id, team_id, name) => {
+    this.props.history.push(`/client-page/${id}/${team_id}/${name}`)
   }
 
   searchBar = (event) => {
@@ -89,7 +89,7 @@ class AdminClientList extends Component {
           <TableBody>
             {filteredClients.map(client => {
               return (
-              <TableRow key={client.id}>
+              <TableRow key={client.id} onClick={() => {this.handleClientClick(client.id, client.team_id, client.name)}}>
                 <TableCell component="th" scope="row">
                   {moment(client.date).format('LL')}
                 </TableCell>
