@@ -58,11 +58,7 @@ router.get('/list-of-images', (req, res) => {
   let listOfImages = []
   pool.query(queryText, [client_id])
     .then(result => {
-      for (row of result.rows) {
-        listOfImages = [...listOfImages, row.link]
-      }
-      res.send(listOfImages)
-
+      res.send(result.rows)
     })
     .catch(err => {
       console.log(err);

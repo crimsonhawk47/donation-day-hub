@@ -60,11 +60,11 @@ class ClientGallery extends Component {
           <Button variant="contained" onClick={this.displayAllFiles}>DisplayAllImages</Button>
         </Grid>
         <Grid container>
-          {this.props.media.map((string, index) => {
+          {this.props.media.map((file, index) => {
             return <img
               className={classes.clientMedia}
               key={index}
-              src={string} />
+              src={file.link} />
           })}
         </Grid>
       </>
