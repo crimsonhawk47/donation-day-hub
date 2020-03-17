@@ -104,7 +104,7 @@ class AdminTeamList extends Component {
                   </TableCell>
                   <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
-                    <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} />
+                    <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
 
                     : <></>}</TableCell>
                 </TableRow>
