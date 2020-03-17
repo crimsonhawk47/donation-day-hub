@@ -104,7 +104,7 @@ console.log(this.state);
             <DialogContentText>
               <h4>Tell Me About Your Story:</h4>
               <List>
-                <ListItem>Have you always been in MPLS? / where are you from?</ListItem>
+                <ListItem>Have you always been in MPLS? / Where are you from?</ListItem>
                 <ListItem>How long have you been without a home? Do you stay in shelters?</ListItem>
                 <ListItem>What types of jobs are you good at?</ListItem>
                 <ListItem>What are some things you want to do when you get back on your feet?</ListItem>
