@@ -48,23 +48,19 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 //User route
-router.get('/list-of-images', (req, res) => {
-  console.log(req.query);
-  const client_id = req.query.client_id
-
-
-  let queryText = `SELECT * FROM "media"
+router.get('/list-of-images', async (req, res) => {
+  try {
+    const client_id = req.query.client_id
+    const queryText = `SELECT * FROM "media"
                   WHERE "client_id" = $1`
-  let listOfImages = []
-  pool.query(queryText, [client_id])
-    .then(result => {
-      res.send(result.rows)
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500)
+    const listOfImages = []
+    const result = await pool.query(queryText, [client_id])
+    res.send(result.rows)
 
-    })
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500)
+  }
 
 })
 
