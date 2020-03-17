@@ -60,11 +60,21 @@ class ClientGallery extends Component {
           <Button variant="contained" onClick={this.displayAllFiles}>DisplayAllImages</Button>
         </Grid>
         <Grid container>
-          {this.props.media.map((string, index) => {
-            return <img
+          {this.props.media.map((file, index) => {
+            if (file.type.split('/')[0] == 'video') {
+              return (
+                  <video width="320" height="240" controls>
+                    <source src={file.link} type={file.type} />
+                      Your browser does not support the video tag.
+                    </video>
+              )
+            }
+            else{
+              return <img
               className={classes.clientMedia}
               key={index}
-              src={string} />
+              src={file.link} />
+            }
           })}
         </Grid>
       </>
