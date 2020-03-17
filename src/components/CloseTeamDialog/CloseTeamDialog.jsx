@@ -18,7 +18,12 @@ class CloseTeamDalog extends Component {
 
   };
 
-  handleClose = () => {
+  handleDisagree = () => {
+    this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG'})
+  };
+
+  handleAgree = () => {
+    this.props.agreeFunction(); 
     this.props.dispatch({type: 'SET_CLOSE_TEAM_DIALOG'})
   };
 
@@ -28,7 +33,7 @@ class CloseTeamDalog extends Component {
     return (
       <Grid container className={classes.root}>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open alert dialog
+          Close
         </Button>
         <Dialog
           open={this.props.reduxStore.dialogReducer && this.props.reduxStore.dialogReducer.closeTeamDialog}
@@ -36,18 +41,17 @@ class CloseTeamDalog extends Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Close the Team?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              This will end the donation day for the group, archive the team, and let everyone join a new team.
           </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleDisagree} color="primary">
               Disagree
           </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
+            <Button onClick={this.handleAgree} color="primary" autoFocus>
               Agree
           </Button>
           </DialogActions>

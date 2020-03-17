@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase'
 import Switch from '@material-ui/core/Switch'
-import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 
 import { withRouter } from 'react-router-dom';
 
