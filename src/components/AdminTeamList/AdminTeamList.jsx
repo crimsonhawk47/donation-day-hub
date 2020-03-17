@@ -9,6 +9,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
+import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
+
 
 import { withRouter } from 'react-router-dom';
 
@@ -52,9 +54,9 @@ class AdminTeamList extends Component {
   }
 
   closeTeam = (teamId) => {
-    this.props.dispatch({type: 'CLOSE_TEAM', payload: teamId})
-    
+    this.props.dispatch({ type: 'CLOSE_TEAM', payload: teamId })
   }
+
 
   // Need a handleTeamClick function here
 
@@ -62,7 +64,7 @@ class AdminTeamList extends Component {
     const { classes } = this.props;
     let teams = this.props.reduxStore.adminTeamList
     let filteredTeams = []
-      
+
     if (teams) {
       filteredTeams = teams.filter(
         (team) => {
@@ -102,13 +104,15 @@ class AdminTeamList extends Component {
                   </TableCell>
                   <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
-                    <Button variant='outlined' onClick={() => {this.closeTeam(team.id)}}>Close</Button>
+                    <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} />
+
                     : <></>}</TableCell>
                 </TableRow>
               )
             })}
           </TableBody>
         </Table>
+
       </Paper>
     );
   }
@@ -125,4 +129,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles) (withRouter(connect(mapStateToProps)(AdminTeamList)))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(AdminTeamList)))
