@@ -187,7 +187,7 @@ class EditUser extends Component {
           className="link-button"
           variant="contained"
           color="primary"
-          onClick={this.handleSaveEdit}>
+          onClick={this.handleClickOpen}>
             Save
           </Button>
           {/* POPUP AFTER SAVE BUTTON SELECTED */}
@@ -203,7 +203,7 @@ class EditUser extends Component {
               <Button onClick={this.handleClosePopup} color="primary">
                 Cancel
               </Button>
-              <Button onClick={this.handleClosePopup} color= "primary">
+              <Button onClick={this.handleSaveEdit} color= "primary">
                 Save
               </Button>
             </DialogActions>
