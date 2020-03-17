@@ -10,6 +10,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+import { withRouter } from 'react-router-dom';
+
+const moment = require('moment');
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -21,24 +25,48 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(date, name) {
-  id += 1;
-  return { id, date, name };
-}
-
-const rows = [
-  createData('2-20-20', 'Gerry'),
-  createData('3-5-20', 'Jimmy'),
-  createData('4-2-20', 'JoeBob'),
-  createData('2-4-20', 'SallyMae'),
-  createData('1-25-20', 'Carrie'),
-];
-
 class AdminClientList extends Component {
+
+  state = {
+    search: '',
+    client: [],
+    backIcon: false
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_CLIENT_LIST' });
+  }
+
+  handleClientClick = (id) => {
+    this.props.history.push(`/client-page/${id}`)
+  }
+
+  searchBar = (event) => {
+    this.setState({
+      ...this.state,
+      search: event.target.value
+    }, () => {
+      console.log(this.state);
+
+    })
+  }
+
+  // Need a handle client click function here
 
   render() {
     const { classes } = this.props;
+
+    let clients = this.props.reduxStore.adminClientList
+    let filteredClients = []
+      
+    if (clients) {
+      filteredClients = clients.filter(
+        (client) => {
+          return client.name.toLowerCase().indexOf(
+            this.state.search.toLowerCase()) !== -1;
+        }
+      );
+    }
 
     return (
       <Paper className={classes.root}>
@@ -49,6 +77,7 @@ class AdminClientList extends Component {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          onChange={(event) => this.searchBar(event)}
         />
         <Table className={classes.table}>
           <TableHead>
@@ -58,14 +87,16 @@ class AdminClientList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.id}>
+            {filteredClients.map(client => {
+              return (
+              <TableRow key={client.id}>
                 <TableCell component="th" scope="row">
-                  {row.date}
+                  {moment(client.date).format('LL')}
                 </TableCell>
-                <TableCell align="left">{row.name}</TableCell>
+                <TableCell align="left">{client.name}</TableCell>
               </TableRow>
-            ))}
+              )
+            })}
           </TableBody>
         </Table>
       </Paper>
@@ -84,4 +115,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(AdminClientList))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(AdminClientList)))

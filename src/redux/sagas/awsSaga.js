@@ -3,13 +3,14 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* uploadToAws(action) {
   try {
-    let filename = action.payload.file.name
+    let file = action.payload.file
+    const client_id = action.payload.client_id
     const config = {
       headers: { 'Content-Type': 'application/json' },
       params: {
-        client_id: action.payload.client_id,
-        Key: filename,
-        ContentType: 'image/jpeg'
+        client_id: client_id,
+        Key: file.name,
+        ContentType: file.type
       },
       withCredentials: true,
     };
@@ -21,6 +22,7 @@ function* uploadToAws(action) {
     let putResponse = yield axios.put(putUrl, action.payload.file)
     if (putResponse.data.code) throw `Put image failed with code ${response.data.code}`
     yield axios.post('/api/client/add-image-name', action.payload, config)
+    yield put({ type: 'GET_IMAGE_NAMES', payload: client_id })
   } catch (error) {
     console.log('UPLOAD_TO_AWS ERROR', error);
   }
@@ -44,6 +46,7 @@ function* getMediaFromNames(action) {
         selectedMedia = [...selectedMedia, res.data]
       });
     }
+
     yield put({ type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia })
 
   } catch (error) {

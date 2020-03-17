@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -17,8 +17,8 @@ import AboutPage from '../AboutPage/AboutPage';
 
 //import UserPage from '../UserPage/UserPage';
 
-
 import InfoPage from '../InfoPage/InfoPage';
+import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
 import UserDashboard from '../UserDashboard/UserDashboard';
@@ -30,13 +30,12 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
-import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -66,7 +65,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserDashboard}
+              component={UserHandler}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -77,12 +76,12 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/admin-team-page"
+              path="/admin-team-page/:id"
               component={AdminTeamPage}
             />
             <ProtectedRoute
               exact
-              path="/admin-volunteer-page"
+              path="/admin-volunteer-page/:id"
               component={AdminVolunteerPage}
             />
             <ProtectedRoute
@@ -92,7 +91,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/team-page"
+              path="/team-page/"
               component={TeamPage}
             />
             <ProtectedRoute
@@ -107,7 +106,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-page"
+              path="/client-page/:id/:teamId/:name"
               component={ClientPage}
             />
             <ProtectedRoute
@@ -119,7 +118,7 @@ class App extends Component {
               exact
               path="/client-gallery/:clientId"
               component={ClientGallery}
-            /> 
+            />
             <ProtectedRoute
               exact
               path="/resources"
@@ -129,8 +128,6 @@ class App extends Component {
               exact
               path="/team-search"
               component={TeamSearch}
-              path="/admin-dashboard"
-              component={AdminDashboard}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
@@ -138,7 +135,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);

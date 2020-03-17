@@ -9,6 +9,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -18,9 +19,9 @@ const styles = theme => ({
 
 class ClientList extends Component {
 
-  handleEdit = () => {
+  handleView = () => {
     console.log('button clicked', this.props.id);
-
+    this.props.history.push(`/client-page/${this.props.id}/${this.props.reduxStore.teamById.team_id}/${this.props.name}`)
   }
 
   render() {
@@ -30,7 +31,7 @@ class ClientList extends Component {
       <>
         <TableRow>
           <TableCell key={this.props.id}>{this.props.name}</TableCell>
-          <TableCell><Button onClick={this.handleEdit}>EDIT</Button></TableCell>
+          <TableCell><Button onClick={this.handleView}>View Client</Button></TableCell>
         </TableRow>
 
       </>
@@ -44,4 +45,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(ClientList))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(ClientList)))

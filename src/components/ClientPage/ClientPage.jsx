@@ -11,18 +11,32 @@ const styles = theme=> ({
   }
 });
 
+
 class ClientPage extends Component {
+
+  state = {
+    client_id: this.props.match.params.id,
+    team_id: this.props.match.params.teamId,
+  }
+
+  componentDidMount() {
+  }
 
   render() {
     const { classes } = this.props;
+    const {client_id, team_id} = this.state
+console.log(client_id, team_id);
 
     return (
+      <>
+
       <Grid container className={classes.root}>
         <Typography >
-          I am a ClientPage Component
+          {this.props.match.params.name}'s Shopping List
                 </Typography>
-                <ShoppingList />
+                <ShoppingList client_id={client_id} team_id={team_id}/>
       </Grid>
+      </>
     )
 
   }

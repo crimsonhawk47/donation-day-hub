@@ -1,12 +1,14 @@
 const express = require('express');
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
+
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+//Admin Route
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const queryText = `SELECT * FROM "client";`
   console.log('in team router.get')
   pool.query(queryText)
@@ -20,6 +22,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 });
 
+//User Route
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
   const newClient = req.body;
@@ -44,12 +47,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-
+//User route
 router.get('/list-of-images', (req, res) => {
   console.log(req.query);
   const client_id = req.query.client_id
 
-  
+
   let queryText = `SELECT * FROM "media"
                   WHERE "client_id" = $1`
   let listOfImages = []
@@ -69,15 +72,12 @@ router.get('/list-of-images', (req, res) => {
 
 })
 
+//User Route
 router.post('/add-image-name', (req, res) => {
-  console.log(`In add image name`);
-
-  console.log(req.body);
-  console.log(req.query);
   
-  const queryText = `INSERT INTO "media" ("client_id", "link")
-                      VALUES ($1, $2)`
-  pool.query(queryText, [Number(req.query.client_id), req.query.Key])
+  const queryText = `INSERT INTO "media" ("client_id", "link", "type", "date")
+                      VALUES ($1, $2, $3, NOW())`
+  pool.query(queryText, [Number(req.query.client_id), req.query.Key, req.query.ContentType])
     .then(result => {
       res.sendStatus(200)
     })
@@ -85,27 +85,67 @@ router.post('/add-image-name', (req, res) => {
       console.log(err);
       res.sendStatus(500)
     })
-    console.log(`Leaving add image name`);
-    
+
+})
+// User route
+router.post('/add', (req,res) => {
+  console.log('is this team id?', req.teamById);
+
+  console.log('we in post client server', req.body);
+  const { name, bio, media_release, location, date, team_id } = req.body
+  console.log('testing', name, bio, media_release, location, date, team_id);
+  
+  const queryText = `
+  INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
+  VALUES ($1, $2, $3, $4, $5, $6)
+  `
+  pool.query(queryText, [name, bio, media_release, location, date, team_id])
+  .then(result => {
+    res.sendStatus(200)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500)
+  })
 })
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+
+router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
   console.log(`in clients by team id`, id);
-  const queryText = 
-  `
+  const queryText =
+    `
   SELECT * FROM "client"
   WHERE "team_id" = $1;
   `;
 
   pool.query(queryText, [id])
-      .then(result => {
-          res.send(result.rows)
-      }).catch(error => {
-          console.log('error in team GET', error)
-          res.sendStatus(500);
-      })
-  
+    .then(result => {
+      res.send(result.rows)
+    }).catch(error => {
+      console.log('error in client get in your team view', error)
+      res.sendStatus(500);
+    })
+
+})
+
+router.get(`/list/:id`, (req, res) => {
+  console.log(`we in server now`, req.params.id);
+  let id = req.params.id
+  const queryText = `
+  SELECT * FROM "item"
+  WHERE "client_id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.send(result.rows)
+    console.log(result.rows);
+    
+  })
+  .catch((error) => {
+    console.log(`error in shopping list get in server`, error);
+    res.sendStatus(500)
+  })
 })
 
 module.exports = router;

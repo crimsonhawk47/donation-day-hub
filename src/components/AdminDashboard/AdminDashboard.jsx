@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -33,18 +32,16 @@ const useStyles = theme => ({
 
 class AdminDashboard extends Component {
     state = {
-        value: ''
+        value: 0
     }
 
     handleChange = (event, newValue) => {
-        this.setState({value: newValue});
+        this.setState({ value: newValue });
     }
+
 
     render() {
         const classes = this.props;
-        // const [value, setValue] = React.useState(0);
-
-         
 
         return (
             <div className={classes.root}>

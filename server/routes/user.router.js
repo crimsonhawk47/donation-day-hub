@@ -10,7 +10,6 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
-  console.log('in user router. req.user:', req.user)
 });
 
 // Handles POST request with new user data
@@ -39,6 +38,24 @@ router.post('/register', (req, res, next) => {
       console.log(err)
     res.sendStatus(500)});
 });
+
+// PUT/UPDATE user from database with matching ID
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log(`in router-side PUT/UPDATE`, req.body);
+  console.log(`req.user.id =`, req.user.id);
+  let queryText = `UPDATE "user"
+  SET "first_name" = $1, "last_name" = $2, "email" = $3, "phone" = $4, "street_address" = $5, "city" = $6, "state" = $7, "zip"= $8
+  WHERE "id" = $9;
+  `;
+  pool.query(queryText, [req.body.firstName, req.body.lastName, req.body.email, req.body.phone, req.body.streetAddress,
+  req.body.city, req.body.state, req.body.zip, req.user.id]).then(result =>{
+    res.sendStatus(200);
+  }).catch(error => {
+    console.log(`Error making PUT/UPDATE query ${queryText}`, error);
+    res.sendStatus(500);
+  })
+
+})
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
