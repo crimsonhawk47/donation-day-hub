@@ -117,7 +117,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/client-gallery"
+              path="/client-gallery/:clientId"
               component={ClientGallery}
             /> 
             <ProtectedRoute
