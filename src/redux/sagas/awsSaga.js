@@ -31,20 +31,20 @@ function* uploadToAws(action) {
 function* getMediaFromNames(action) {
   try {
     let selectedMedia = []
-    for (let imageName of action.payload) {
+    for (let file of action.payload) {
 
       const config = {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          Key: imageName,
+          Key: file.link,
           ContentType: 'image/jpeg'
         },
         withCredentials: true,
       };
 
-      yield axios.get('/api/aws/generate-get-url', config).then(res => {
-        selectedMedia = [...selectedMedia, res.data]
-      });
+      const res = yield axios.get('/api/aws/generate-get-url', config)
+      let fileDetails = {...file, link: res.data}
+      selectedMedia = [...selectedMedia, fileDetails]
     }
 
     yield put({ type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia })

@@ -60,12 +60,6 @@ class ShoppingList extends Component {
     
     return (
       <>
-        <Grid container className={classes.root}>
-          <Typography >
-            I am the ShoppingList Component
-        </Typography>
-
-        </Grid>
         <TableContainer><Table>
           <TableHead>
             <TableRow>
