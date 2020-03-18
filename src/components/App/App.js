@@ -13,11 +13,6 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import AboutPage from '../AboutPage/AboutPage';
-
-//import UserPage from '../UserPage/UserPage';
-
-import InfoPage from '../InfoPage/InfoPage';
 import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
@@ -50,11 +45,6 @@ class App extends Component {
             This is a route anyone can see, no login necessary */}
             <Route
               exact
-              path="/about"
-              component={AboutPage}
-            />
-            <Route
-              exact
               path="/dev/gallery"
               component={ClientGallery}
             />
@@ -69,11 +59,6 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
             <ProtectedRoute
               exact
               path="/admin-team-page/:id"

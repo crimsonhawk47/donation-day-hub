@@ -10,22 +10,22 @@ import Button from '@material-ui/core/Button';
 
 class ShoppingItem extends Component {
 
-    state = {
-      client_id: this.props.client,
-      item: this.props.id
-    }
+  state = {
+    client_id: this.props.client,
+    item: this.props.id
+  }
 
   handleCheck = () => {
     console.log(`we checking boxes for`, this.props.id);
     this.props.dispatch({
-    type: 'TOGGLE_CHECK',
-    payload: this.props.id
+      type: 'TOGGLE_CHECK',
+      payload: this.props.id
     })
   }
 
   handleEdit = () => {
     console.log(`edit clicked for`, this.props.id);
-    
+
   }
 
   handleDelete = () => {
@@ -43,23 +43,23 @@ class ShoppingItem extends Component {
 
 
     return (
-<>
-<TableRow>
-  <TableCell><Checkbox onClick={this.handleCheck}/></TableCell>
-  <TableCell key={this.props.id}>{this.props.item}</TableCell>
-  <TableCell><Button 
-    variant='contained' 
-    color="primary"
-    onClick={this.handleEdit}
-    >Edit</Button></TableCell>
-  <TableCell><Button 
-    variant="contained" 
-    color="secondary"
-    onClick={this.handleDelete}
-    >Delete</Button></TableCell>
+      <>
+        <TableRow>
+          <TableCell><Checkbox onClick={this.handleCheck} /></TableCell>
+          <TableCell key={this.props.id}>{this.props.item}</TableCell>
+          <TableCell><Button
+            variant='contained'
+            color="primary"
+            onClick={this.handleEdit}
+          >Edit</Button></TableCell>
+          <TableCell><Button
+            variant="contained"
+            color="secondary"
+            onClick={this.handleDelete}
+          >Delete</Button></TableCell>
 
-</TableRow>
-</>
+        </TableRow>
+      </>
     )
 
   }
