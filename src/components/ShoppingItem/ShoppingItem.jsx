@@ -10,6 +10,10 @@ import Button from '@material-ui/core/Button';
 
 class ShoppingItem extends Component {
 
+    state = {
+      client_id: this.props.client,
+      item: this.props.id
+    }
 
   handleCheck = () => {
     console.log(`we checking boxes for`, this.props.id);
@@ -22,8 +26,14 @@ class ShoppingItem extends Component {
   }
 
   handleDelete = () => {
-    console.log(`delete clicked for`, this.props.id);
-    
+    console.log(`delete clicked for`, this.state);
+    // this.setState({
+    //   item: this.props.id
+    // })
+    this.props.dispatch({
+      type: 'DELETE_ITEM',
+      payload: this.state
+    })
   }
 
   render() {
@@ -39,7 +49,11 @@ class ShoppingItem extends Component {
     color="primary"
     onClick={this.handleEdit}
     >Edit</Button></TableCell>
-  <TableCell><Button variant="contained" color="secondary">Delete</Button></TableCell>
+  <TableCell><Button 
+    variant="contained" 
+    color="secondary"
+    onClick={this.handleDelete}
+    >Delete</Button></TableCell>
 
 </TableRow>
 </>

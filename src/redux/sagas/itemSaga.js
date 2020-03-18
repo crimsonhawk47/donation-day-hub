@@ -23,11 +23,26 @@ function* addItem(action) {
     }
 }
 
+function* deleteItem(action) {
+    console.log(`we in deleteItem saga`, action.payload);
+
+    try {
+        yield axios.delete(`api/client/item/delete/${action.payload.item}`);
+        console.log(`we in deleteItem saga`, action.payload);
+        yield put({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id })
+    }
+    catch (error) {
+        console.log(`error in item delete saga`, error);
+        
+    }
+}
+
 
 
 function* itemSaga() {
     yield takeLatest(`FETCH_ITEM_LIST`, getItemsById)
     yield takeLatest(`ADD_ITEM`, addItem)
+    yield takeLatest('DELETE_ITEM', deleteItem)
 }
 
 export default itemSaga;

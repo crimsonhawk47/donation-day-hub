@@ -114,6 +114,23 @@ router.post('/item/add', (req, res) => {
   })
 })
 
+router.delete('/item/delete/:id', (req, res) => {
+  console.log(`we in server for delete`, req.params.id);
+  let id = req.params.id
+  const queryText = 
+  `
+  DELETE FROM "item"
+  WHERE "id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+    res.sendStatus(500)
+  })
+})
+
 
 router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
