@@ -27,18 +27,14 @@ const setupSocket = async () => {
         
 
 
-        innerSocket.on('TEST', function (data) {
+        //This will run once the server connects the client
+        innerSocket.on('CLIENT_CONNECTED', function (data) {
             console.log('IN CLIENT SIDE SOCKET TEST');
-
         })
 
         //Sets the outside socket, which we will export, to this innerSocket.
         socket = innerSocket
 
-        //As a test, we will emit a socket message to the server in 5 seconds
-        setTimeout(() => {
-            socket.emit('TEST')
-        }, 5000);
     
     }
 

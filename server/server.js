@@ -63,6 +63,7 @@ const io = socket(server).use(function (socket, next) {
 })
 
 //When a client makes a connection to the server, this anonymous function will run
+//the word "socket" in this context means the client that just connected
 io.on("connection", function (socket) {
   console.log(`New connection with id: ${socket.id}`);
   //Checking if we actually have a session (from the session middleware)
@@ -72,12 +73,16 @@ io.on("connection", function (socket) {
 
   //If the user is authenticated...
   if (userId) {
+    //Say hello to the client
+    socket.emit('CLIENT_CONNECTED')
+
     //...We want to attach listeners to that socket
     //We are putting all our socket events in an external file.
     //We pass a function everything it needs to attach those events
     attachSocketMethods(socket, io)
   }
   else {
+    //If our session didn't exist, we don't want the client to get any info
     console.log(`[SECURITY ISSUE] Socket Connection was attempted before user was authorized`);
     socket.disconnect();
   }
