@@ -25,6 +25,7 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
+import Menu from '../Menu/Menu';
 
 import './App.css';
 
@@ -37,7 +38,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Menu />
+          {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

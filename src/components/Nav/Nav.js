@@ -1,31 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import IntersectionIcon from '../NavIcons/Logo Icon.png'
 import LogOutButton from '../LogOutButton/LogOutButton';
+import Home from '../NavIcons/home1.png';
+import Team from '../NavIcons/collaboration.png';
+import Resources from '../NavIcons/checklist.png';
+import Logout from '../NavIcons/logout.png';
 import './Nav.css';
+import Menu from '../Menu/Menu.jsx';
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Donation Day Hub</h2>
+      {/* <h2 className="nav-title">Donation Day Hub</h2> */}
+      <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
     </Link>
     <div className="nav-right">
+      
       <Link className="nav-link" to="/home">
+        
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
+        {props.user.id ? <img src={Home} alt="home" className="home" /> : 'Login / Register'}
       </Link>
+      
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
           <Link className="nav-link" to="/team-page">
-            Team
+            <img src={Team} alt="team" className="team" />
           </Link>
           <Link className="nav-link" to="/resources">
-            Resources
+            <img src={Resources} alt="resources" className="resources" />
           </Link>
-          <LogOutButton className="nav-link" to="/home"/>
+          <LogOutButton className="nav-link" to="/home" />
         </>
       )}
       {/* Always show this link since the about page is not protected */}
