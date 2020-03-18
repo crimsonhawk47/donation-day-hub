@@ -17,9 +17,6 @@ const theme = createMuiTheme({
     },
     tertiary: {
       main: '#808281'
-    },
-    quaternary: {
-      main: '#f6f6f6'
     }
   }
 })

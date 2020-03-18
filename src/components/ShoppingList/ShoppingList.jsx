@@ -36,10 +36,10 @@ const styles = theme => ({
 class ShoppingList extends Component {
 
   state = {
-  client_id: this.props.client_id,
-  team_id: this.props.team_id,
-  item_name: '',
-  purchased: 'false'
+    client_id: this.props.client_id,
+    team_id: this.props.team_id,
+    item_name: '',
+    purchased: 'false'
   }
 
   componentDidMount() {
@@ -57,7 +57,7 @@ class ShoppingList extends Component {
   render() {
     const { classes } = this.props;
     console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
-    
+
     return (
       <>
         <TableContainer><Table>
@@ -68,7 +68,7 @@ class ShoppingList extends Component {
               </TableCell>
               <TableCell >
                 Item and Item Description
-          </TableCell>
+              </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
