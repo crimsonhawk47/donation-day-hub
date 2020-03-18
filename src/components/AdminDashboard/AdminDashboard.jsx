@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +11,14 @@ import Tab from '@material-ui/core/Tab';
 import AdminVolunteerList from '../AdminVolunteerList/AdminVolunteerList'
 import AdminClientList from '../AdminClientList/AdminClientList'
 import AdminTeamList from '../AdminTeamList/AdminTeamList'
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#283748'
+        }
+    }
+})
 
 function TabContainer(props) {
     return (
@@ -44,18 +53,22 @@ class AdminDashboard extends Component {
         const classes = this.props;
 
         return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Tabs value={this.state.value} onChange={this.handleChange}>
-                        <Tab label="Volunteers" />
-                        <Tab label="Clients" />
-                        <Tab label="Teams" />
-                    </Tabs>
-                </AppBar>
-                {this.state.value === 0 && <TabContainer><AdminVolunteerList /></TabContainer>}
-                {this.state.value === 1 && <TabContainer><AdminClientList /></TabContainer>}
-                {this.state.value === 2 && <TabContainer><AdminTeamList /></TabContainer>}
-            </div>
+            <>
+                <div className={classes.root}>
+                    <ThemeProvider theme={theme}>
+                        <AppBar position="static" color="primary">
+                            <Tabs value={this.state.value} onChange={this.handleChange}>
+                                <Tab label="Volunteers" />
+                                <Tab label="Clients" />
+                                <Tab label="Teams" />
+                            </Tabs>
+                        </AppBar>
+                        {this.state.value === 0 && <TabContainer><AdminVolunteerList /></TabContainer>}
+                        {this.state.value === 1 && <TabContainer><AdminClientList /></TabContainer>}
+                        {this.state.value === 2 && <TabContainer><AdminTeamList /></TabContainer>}
+                    </ThemeProvider>
+                </div>
+            </>
         );
     }
 }

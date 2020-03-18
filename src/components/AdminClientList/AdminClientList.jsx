@@ -51,8 +51,6 @@ class AdminClientList extends Component {
     })
   }
 
-  // Need a handle client click function here
-
   render() {
     const { classes } = this.props;
 

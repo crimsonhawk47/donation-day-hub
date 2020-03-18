@@ -60,12 +60,22 @@ input {
 }
 
 .general-formatting {
-    margin: 3%;
+    margin: 2%;
 }
 
 .team-page {
     text-align: center;
 }
 
+.edit-profile {
+    text-align: center;
+}
 
+.edit-user-cancel {
+    display: inline-block;
+    margin-right: 10px;
+}
 
+.edit-user-save {
+    display: inline-block;
+}
