@@ -41,7 +41,6 @@ class ShoppingItem extends Component {
 
   render() {
 
-
     return (
       <>
         <TableRow>

@@ -86,9 +86,9 @@ class AdminTeamList extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Donation Day</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Close Team?</TableCell>
+              <TableCell><b>Donation Day</b></TableCell>
+              <TableCell align="left"><b>Name</b></TableCell>
+              <TableCell align="left"><b>Close Team?</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
