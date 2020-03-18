@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 const attachSocketMethods = require('./socket/attachSocketMethods')
-const socket = require('socket.io')
+const socketIO = require('socket.io')
 
 
 const passport = require('./strategies/user.strategy');
@@ -57,7 +57,7 @@ const server = app.listen(PORT, () => {
 //Adds auth info to sockets
 //Dane and I set this up for my solo. I'm not totally sure how it works yet
 //But it seems to attach the session to the socket
-const io = socket(server).use(function (socket, next) {
+const io = socketIO(server).use(function (socket, next) {
   // Wrap the express middleware
   sessionMiddleware(socket.request, {}, next);
 })
