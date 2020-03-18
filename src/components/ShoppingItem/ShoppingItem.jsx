@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -8,9 +9,17 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-
 import Fab from '@material-ui/core/Fab';
+import red from '@material-ui/core/colors/red'
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#283748',
+    },
+    secondary: red,
+  }
+})
 
 class ShoppingItem extends Component {
 
@@ -46,7 +55,7 @@ class ShoppingItem extends Component {
   render() {
 
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <TableRow>
           <TableCell><Checkbox onClick={this.handleCheck} /></TableCell>
           <TableCell key={this.props.id}>{this.props.item}</TableCell>
@@ -72,7 +81,7 @@ class ShoppingItem extends Component {
             </TableCell>
 
         </TableRow>
-      </>
+      </ThemeProvider>
     )
 
   }
