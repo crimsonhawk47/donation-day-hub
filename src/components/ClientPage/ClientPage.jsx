@@ -9,7 +9,6 @@ import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
