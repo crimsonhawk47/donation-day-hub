@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App/App.css'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -25,11 +26,6 @@ const theme = createMuiTheme({
     flexGrow: 1,
   }
 })
-
-const styles = theme => ({
-
-});
-
 
 class ClientPage extends Component {
 
@@ -65,31 +61,32 @@ class ClientPage extends Component {
     const { client_id, team_id } = this.state
 
     return (
-      <ThemeProvider theme={theme} classes={classes.root}>
-        <Fab 
-          variant="outlined" 
-          color="primary"
-          onClick={() => { this.goToMedia(client_id) }}>
-            <PhotoCamera />
-        </Fab>
+      <ThemeProvider theme={theme} classes={classes.root} >
+          <div className="camera-icon">
+            <Fab
+              variant="outlined"
+              color="primary"
+              onClick={() => { this.goToMedia(client_id) }}>
+              <PhotoCamera />
+            </Fab>
+          </div>
 
-        <h3>Shopping List</h3>
-        <p><b>Item Description</b></p>
-        <TextField
-          onChange={this.handleAddItem}
-          variant="outlined"
-          fullWidth
-          placeholder='Add Item' />
-        <Fab
-          onClick={this.handleSubmit}
-          variant="extended"
-          color="secondary"
-          size="small"
-        >
-          Click To Add
+          <h3>Shopping List</h3>
+          <h4>Item Description</h4>
+          <TextField
+            onChange={this.handleAddItem}
+            variant="outlined"
+            fullWidth
+            placeholder='Add Item' />
+          <Fab
+            onClick={this.handleSubmit}
+            variant="extended"
+            color="secondary"
+            size="small"
+          >
+            Click To Add
           </Fab>
-        <ShoppingList client_id={client_id} team_id={team_id} />
-
+          <ShoppingList client_id={client_id} team_id={team_id} />
       </ThemeProvider>
     )
   }
@@ -100,4 +97,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(ClientPage))
+export default withStyles()(connect(mapStateToProps)(ClientPage))
