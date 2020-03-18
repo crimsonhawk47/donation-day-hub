@@ -55,7 +55,17 @@ input {
     cursor: pointer;
 }
 
+.camera-icon {
+    text-align: right;
+}
+
+.general-formatting {
+    margin: 3%;
+}
+
 .team-page {
     text-align: center;
 }
+
+
 
