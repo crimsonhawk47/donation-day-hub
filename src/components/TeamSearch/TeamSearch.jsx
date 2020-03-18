@@ -5,7 +5,12 @@ import axios from 'axios';
 import TeamSuggestions from '../TeamSuggestions/TeamSuggestions'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -19,7 +24,8 @@ class TeamSearch extends Component {
   state = {
     search: '',
     team: [],
-    backIcon: false
+    backIcon: false,
+    open: false
   }
 
   componentDidMount() {
@@ -43,6 +49,15 @@ class TeamSearch extends Component {
   handleClick = (id) => {
     this.props.dispatch({ type: 'JOIN_TEAM', payload: {id: id, history: this.props.history} })
   }
+
+  // Popup open and close
+  handleClickOpen = (teamId) => {
+    this.setState({ open: teamId });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     let teams = this.props.reduxStore.teamReducer
@@ -68,8 +83,25 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={() => this.handleClick(team.id)}>Join</button>
-
+                  <button onClick={() => {this.handleClickOpen(team.id)}}>Join</button>
+                  <div>
+                    <Dialog open={this.state.open === team.id} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        Are you sure you want to join this team {team.captain_name}?
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClosePopup} color="primary">
+                        No
+                      </Button>
+                      <Button onClick={() => this.handleClick(team.id)} color="primary">
+                        Yes
+                      </Button>
+                    </DialogActions>
+                    </Dialog>
+                  </div>
                 </div>
               </div>
             )
