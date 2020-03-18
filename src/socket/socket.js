@@ -30,7 +30,7 @@ const setupSocket = async () => {
         innerSocket.on('CLIENT_RECEIVED_MESSAGES', data => {
             console.log(`GOT MESSAGES`);
             console.log(data)
-            store.dispatch({ type: 'SET_MESSAGES', payload: data })
+            store.dispatch({ type: 'SET_MESSAGES', payload: data.rows })
         })
 
         //This will run once the server connects the client

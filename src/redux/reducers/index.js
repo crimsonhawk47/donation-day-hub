@@ -13,6 +13,7 @@ import adminVolunteerInfo from './adminVolunteerInfoReducer'
 import shoppingListReducer from './shoppingListReducer'
 import adminTeamInfo from './adminTeamInfoReducer'
 import dialogReducer from './dialogReducer'
+import messages from './messagesReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   adminTeamInfo,
   shoppingListReducer,
   dialogReducer,
+  messages
 });
 
 export default rootReducer;
