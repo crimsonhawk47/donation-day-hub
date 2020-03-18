@@ -114,6 +114,23 @@ router.post('/item/add', (req, res) => {
   })
 })
 
+router.delete('/item/delete/:id', (req, res) => {
+  console.log(`we in server for delete`, req.params.id);
+  let id = req.params.id
+  const queryText = 
+  `
+  DELETE FROM "item"
+  WHERE "id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+    res.sendStatus(500)
+  })
+})
+
 
 router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
@@ -132,6 +149,25 @@ router.get('/team/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     })
 
+})
+
+router.put('/item/purchased/:id', (req, res) => {
+  console.log(`we in server put for purchased`, req.params);
+  id = req.params.id
+  const queryText = `
+  UPDATE "item"
+  SET "purchased" = NOT "purchased"
+  WHERE "id" = $1
+  `
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    res.sendStatus(500)
+    console.log(`error in put for checked`, error);
+    
+  })
 })
 
 router.get(`/list/:id`, (req, res) => {
