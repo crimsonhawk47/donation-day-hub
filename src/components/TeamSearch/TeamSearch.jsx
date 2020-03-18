@@ -11,15 +11,25 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Fab from '@material-ui/core/Fab';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  }
-});
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#283748',
+    },
+    secondary: {
+      main: '#6d89b1'
+    },
+    tertiary: {
+      main: '#808281'
+    },
+  },
+})
 
 class TeamSearch extends Component {
-
 
   state = {
     search: '',
@@ -47,7 +57,7 @@ class TeamSearch extends Component {
   }
 
   handleClick = (id) => {
-    this.props.dispatch({ type: 'JOIN_TEAM', payload: {id: id, history: this.props.history} })
+    this.props.dispatch({ type: 'JOIN_TEAM', payload: { id: id, history: this.props.history } })
   }
 
   // Popup open and close
@@ -73,9 +83,16 @@ class TeamSearch extends Component {
     }
 
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <div className="SearchBar">
-          <input className="Search" placeholder="Search Bar" onChange={(event) => this.searchBar(event)} />
+          <TextField
+            id="outlined-search"
+            label="Search Team Captain"
+            type="search"
+            margin="normal"
+            variant="outlined"
+            onChange={(event) => this.searchBar(event)}
+          />
         </div>
         <div className="Results">
           {filteredTeams.map(team => {
@@ -83,23 +100,30 @@ class TeamSearch extends Component {
               <div className="SearchTeamShow" key={team.id} >
                 <div className="displayNameSearch">
                   <h3 className="SearchTeamName">{team.captain_name}</h3>
-                  <button onClick={() => {this.handleClickOpen(team.id)}}>Join</button>
+                  <Fab
+                    variant="extended"
+                    size="small"
+                    color="secondary"
+                    onClick={() => { this.handleClickOpen(team.id) }}
+                  >
+                    Join team
+                    </Fab>
                   <div>
                     <Dialog open={this.state.open === team.id} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText>
-                        Are you sure you want to join {team.captain_name}'s team?
+                      <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText>
+                          Are you sure you want to join {team.captain_name}'s team?
                       </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={this.handleClosePopup} color="primary">
-                        No
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={this.handleClosePopup} color="primary">
+                          No
                       </Button>
-                      <Button onClick={() => this.handleClick(team.id)} color="primary">
-                        Yes
+                        <Button onClick={() => this.handleClick(team.id)} color="primary">
+                          Yes
                       </Button>
-                    </DialogActions>
+                      </DialogActions>
                     </Dialog>
                   </div>
                 </div>
@@ -108,7 +132,7 @@ class TeamSearch extends Component {
           })}
 
         </div>
-      </>
+      </ ThemeProvider>
     )
   }
 
