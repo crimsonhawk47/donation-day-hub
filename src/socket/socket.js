@@ -29,7 +29,7 @@ const setupSocket = async () => {
 
         //This will run once the server connects the client
         innerSocket.on('CLIENT_CONNECTED', function (data) {
-            console.log('IN CLIENT SIDE SOCKET TEST');
+            console.log('You are connected to the server SOCKET-IO');
         })
 
         //Sets the outside socket, which we will export, to this innerSocket.
