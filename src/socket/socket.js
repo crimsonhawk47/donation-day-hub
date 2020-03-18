@@ -18,26 +18,35 @@ const setupSocket = async () => {
     //To update our user info, we only want it running when the socket either never existed,
     //or is disconnected on an event like logout. So we either check for undefined or 
     //we make sure the socket is closed and not connected to anything
-    if (!socket || socket.io.readyState ==='closed' && !socket.connected) {
-        
+    if (!socket || socket.io.readyState === 'closed' && !socket.connected) {
+
 
         //Making a socket connection, which will eventually be passed to the socket
         //variable on the outside
         let innerSocket = io();
-        
 
+
+
+        innerSocket.on('CLIENT_RECEIVED_MESSAGES', data => {
+            console.log(`GOT MESSAGES`);
+            console.log(data)
+            store.dispatch({ type: 'SET_MESSAGES', payload: data.rows })
+        })
 
         //This will run once the server connects the client
         innerSocket.on('CLIENT_CONNECTED', function (data) {
             console.log('You are connected to the server SOCKET-IO');
+            innerSocket.emit('GET_MESSAGES')
         })
+
+
 
         //Sets the outside socket, which we will export, to this innerSocket.
         socket = innerSocket
 
-    
+
     }
 
 }
 
-export { setupSocket, socket}
+export { setupSocket, socket }

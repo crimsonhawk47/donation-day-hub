@@ -79,6 +79,7 @@ CREATE TABLE "messages" (
 	"id" SERIAL PRIMARY KEY,
 	"client_id" INT REFERENCES "client",
 	"user_id" INT REFERENCES "user",
+	"team_id" INT REFERENCES "team",
 	"message" TEXT,
 	"date" TIMESTAMP with time zone
 );
@@ -128,3 +129,8 @@ VALUES
  ('pimp hat', '2', '1', 'false'),
  ('white gloves', '2', '1', 'false'),
  ('purple suit', '2', '1', 'false');
+ 
+INSERT INTO "messages" ("client_id", "user_id", "team_id", "message", "date")
+VALUES (1, 1, 1, 'First chat message, should be Gabe', NOW()),
+(1, 3, 1, 'Second chat message, should be Jessica', NOW()),
+(1, 5, 1, 'Second chat message, should be Amber', NOW());
