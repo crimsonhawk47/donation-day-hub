@@ -24,17 +24,8 @@ const theme = createMuiTheme({
     tertiary: {
       main: '#808281'
     },
-    quaternary: {
-      main: '#f6f6f6'
-    }
   }
 })
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 class ClientList extends Component {
 
@@ -44,20 +35,20 @@ class ClientList extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-
     return (
       <ThemeProvider theme={theme}>
         <TableRow>
           <TableCell key={this.props.id}>{this.props.name}</TableCell>
           <TableCell>
-            <Fab 
+            <Fab
               size="small"
               color="secondary"
               aria-label="Add"
               variant="extended"
-              onClick={this.handleView} 
-            >View Client</Fab>
+              onClick={this.handleView}
+            >
+              View Client
+            </Fab>
           </TableCell>
         </TableRow>
       </ThemeProvider>
@@ -71,4 +62,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(withRouter(connect(mapStateToProps)(ClientList)))
+export default withStyles()(withRouter(connect(mapStateToProps)(ClientList)))

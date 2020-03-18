@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+import '../App/App.css'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -50,10 +51,11 @@ class TeamPage extends Component {
 
   render() {
     return (
-      <>
+      <div className="team-page">
         <h1>
           Team {this.props.reduxStore.teamById.captain_name}
         </h1>
+        <br />
         <AddClient />
 
         <TableContainer>
@@ -78,7 +80,7 @@ class TeamPage extends Component {
             </TableBody>
           </Table>
         </TableContainer>
-      </>)
+      </div>)
   }
 }
 
