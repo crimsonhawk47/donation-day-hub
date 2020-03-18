@@ -36,10 +36,10 @@ const styles = theme => ({
 class ShoppingList extends Component {
 
   state = {
-  client_id: this.props.client_id,
-  team_id: this.props.team_id,
-  item_name: '',
-  purchased: 'false'
+    client_id: this.props.client_id,
+    team_id: this.props.team_id,
+    item_name: '',
+    purchased: 'false'
   }
 
   componentDidMount() {
@@ -57,7 +57,7 @@ class ShoppingList extends Component {
   render() {
     const { classes } = this.props;
     console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
-    
+
     return (
       <>
         <TableContainer><Table>
@@ -68,19 +68,19 @@ class ShoppingList extends Component {
               </TableCell>
               <TableCell >
                 Item and Item Description
-          </TableCell>
+              </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            
-                {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
-                {this.props.reduxStore.shoppingListReducer.map((item) => {
-                  return (
-                    <ShoppingItem id={item.id} key={item.id} item={item.name} team={item.team_id} purchased={item.purchased} />
-                  )
-                })}
+
+            {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
+            {this.props.reduxStore.shoppingListReducer.map((item) => {
+              return (
+                <ShoppingItem id={item.id} key={item.id} item={item.name} team={item.team_id} purchased={item.purchased} />
+              )
+            })}
 
           </TableBody>
         </Table>

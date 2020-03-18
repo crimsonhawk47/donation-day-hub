@@ -57,9 +57,6 @@ class AdminTeamList extends Component {
     this.props.dispatch({ type: 'CLOSE_TEAM', payload: teamId })
   }
 
-
-  // Need a handleTeamClick function here
-
   render() {
     const { classes } = this.props;
     let teams = this.props.reduxStore.adminTeamList

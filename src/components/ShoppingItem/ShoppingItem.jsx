@@ -8,17 +8,17 @@ import TableRow from '@material-ui/core/TableRow';
 
 class ShoppingItem extends Component {
 
-  
+
 
   render() {
 
     return (
-<>
-<TableRow>
-  <TableCell></TableCell>
-  <TableCell key={this.props.id}>{this.props.item}</TableCell>
-</TableRow>
-</>
+      <>
+        <TableRow>
+          <TableCell></TableCell>
+          <TableCell key={this.props.id}>{this.props.item}</TableCell>
+        </TableRow>
+      </>
     )
 
   }
