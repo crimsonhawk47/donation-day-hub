@@ -6,6 +6,8 @@ import Fab from '@material-ui/core/Fab';
 import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -25,7 +27,7 @@ const theme = createMuiTheme({
 })
 
 const styles = theme => ({
-  
+
 });
 
 
@@ -44,7 +46,6 @@ class ClientPage extends Component {
       name: event.target.value
     })
     console.log(this.state);
-
   }
 
   handleSubmit = () => {
@@ -65,10 +66,15 @@ class ClientPage extends Component {
 
     return (
       <ThemeProvider theme={theme} classes={classes.root}>
-        <Fab variant="outlined" onClick={() => { this.goToMedia(client_id) }}>MEDIA</Fab>
+        <Fab 
+          variant="outlined" 
+          color="primary"
+          onClick={() => { this.goToMedia(client_id) }}>
+            <PhotoCamera />
+        </Fab>
 
-        <h3>Items Requested</h3>
-        <h4>Item and description</h4>
+        <h3>Shopping List</h3>
+        <p><b>Item Description</b></p>
         <TextField
           onChange={this.handleAddItem}
           variant="outlined"
@@ -79,14 +85,13 @@ class ClientPage extends Component {
           variant="extended"
           color="secondary"
           size="small"
-          >
-            Click To Add
+        >
+          Click To Add
           </Fab>
         <ShoppingList client_id={client_id} team_id={team_id} />
 
       </ThemeProvider>
     )
-
   }
 }
 
