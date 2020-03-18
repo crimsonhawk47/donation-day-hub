@@ -82,7 +82,11 @@ class AdminVolunteerPage extends Component {
             <Button onClick={this.handleClosePopup} color="primary">
               No
             </Button>
-            <Button onClick={this.makeCaptain && this.handleClosePopup} color="primary">
+            <Button onClick={ () => {
+              {this.makeCaptain()};
+              {this.handleClosePopup()};
+            }} color="primary">
+            {/* // {this.makeCaptain} color="primary"> */}
               Yes
             </Button>
           </DialogActions>
