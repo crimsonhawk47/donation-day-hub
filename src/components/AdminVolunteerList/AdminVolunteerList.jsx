@@ -121,13 +121,7 @@ class AdminVolunteerList extends Component {
                       <TableCell align="left">Member</TableCell>
                     :
                     <TableCell align="left">No Team</TableCell>}
-                  {/* Need to play with this for toggle to actually work */}
-                  {/* <Switch
-                    checked={state.checkedB}
-                    onChange={handleChange('checkedB')}
-                    value="checkedB"
-                    color="primary"
-                  /> */}
+                 
               </TableRow>
               )
             })}
