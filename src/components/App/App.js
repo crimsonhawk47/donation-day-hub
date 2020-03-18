@@ -25,6 +25,7 @@ import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
 import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
+import Menu from '../Menu/Menu';
 
 import './App.css';
 
@@ -36,13 +37,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div >
-          <Nav />
-          <div className="general-formatting">
-            <Switch>
-              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-              <Redirect exact from="/" to="/home" />
-              {/* Visiting localhost:3000/about will show the about page.
+        <div>
+          <Menu />
+          {/* <Nav /> */}
+          <Switch>
+            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            <Redirect exact from="/" to="/home" />
+            {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
               <Route
                 exact
