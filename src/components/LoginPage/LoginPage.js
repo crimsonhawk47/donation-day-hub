@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
+import Logo_Centered from '../Logos/Logo_Centered.png';
+import './LoginPage.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -62,7 +64,8 @@ class LoginPage extends Component {
             </h2>
           )}
           <form onSubmit={this.login}>
-            <h1>Login</h1>
+            {/* <h1>Login</h1> */}
+            <img src={Logo_Centered} alt="intersection logo" className="image"/>
             <div>
               <label htmlFor="username">
                 <TextField
