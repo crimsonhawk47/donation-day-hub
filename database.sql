@@ -128,3 +128,9 @@ VALUES
  ('pimp hat', '2', '1', 'false'),
  ('white gloves', '2', '1', 'false'),
  ('purple suit', '2', '1', 'false');
+
+ INSERT INTO "messages" ("client_id", "user_id", "message", "date")
+ VALUES (1, 1, 'First chat message, should be Gabe', NOW())
+ VALUES (1, 3, 'Second chat message, should be Jessica', NOW())
+ VALUES (1, 5, 'Second chat message, should be Amber', NOW());
+
