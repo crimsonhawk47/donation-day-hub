@@ -39,6 +39,7 @@ class App extends Component {
       <Router>
         <div>
           <Menu />
+          <div className="general-formatting">
           {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -120,8 +121,8 @@ class App extends Component {
               <Route render={() => <h1>404</h1>} />
             </Switch>
             <Footer />
+            </div>
           </div>
-        </div>
       </Router >
     )
   }
