@@ -73,13 +73,14 @@ io.on("connection", function (socket) {
 
   //If the user is authenticated...
   if (userId) {
-    //Say hello to the client
-    socket.emit('CLIENT_CONNECTED')
-
     //...We want to attach listeners to that socket
     //We are putting all our socket events in an external file.
     //We pass a function everything it needs to attach those events
     attachSocketMethods(socket, io)
+    
+    //Say hello to the client
+    socket.emit('CLIENT_CONNECTED')
+
   }
   else {
     //If our session didn't exist, we don't want the client to get any info
