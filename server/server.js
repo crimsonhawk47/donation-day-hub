@@ -6,6 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 const attachSocketMethods = require('./socket/attachSocketMethods')
+const serverMethods = require ('./modules/serverMethods')
 const socketIO = require('socket.io')
 
 
@@ -76,8 +77,8 @@ io.on("connection", function (socket) {
     //...We want to attach listeners to that socket
     //We are putting all our socket events in an external file.
     //We pass a function everything it needs to attach those events
-    attachSocketMethods(socket, io)
-    
+    attachSocketMethods(socket, io, serverMethods)
+
     //Say hello to the client
     socket.emit('CLIENT_CONNECTED')
 

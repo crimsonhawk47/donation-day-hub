@@ -1,20 +1,15 @@
 const pool = require('../modules/pool')
 
-const socketGetMessages = (socket, io) => {
+const socketGetMessages = (socket, io, serverMethods) => {
     socket.on('GET_MESSAGES', async (data) => {
         try {
-            console.log(`server test socket triggered`);
             const userId = socket.request.session.passport.user
-
-
-            const getMessagesText = `SELECT "messages".* FROM "user"
-                            JOIN "team" ON "team".id = "user".active_team
-                            JOIN "messages" ON "team".id = "messages".team_id
-                            WHERE "user".id = $1`
-
-            const messages = await pool.query(getMessagesText, [userId])
+            
+            const messages = await serverMethods.updateUsersMessages(userId)
 
             socket.emit('CLIENT_RECEIVED_MESSAGES', messages)
+
+
         } catch (err) {
             console.log(`socketGetMessages Error:`);
             console.log(err);
@@ -23,5 +18,4 @@ const socketGetMessages = (socket, io) => {
 
     })
 }
-
 module.exports = socketGetMessages
