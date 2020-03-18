@@ -151,6 +151,25 @@ router.get('/team/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
+router.put('/item/purchased/:id', (req, res) => {
+  console.log(`we in server put for purchased`, req.params);
+  id = req.params.id
+  const queryText = `
+  UPDATE "item"
+  SET "purchased" = NOT "purchased"
+  WHERE "id" = $1
+  `
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    res.sendStatus(500)
+    console.log(`error in put for checked`, error);
+    
+  })
+})
+
 router.get(`/list/:id`, (req, res) => {
   console.log(`we in server now`, req.params.id);
   let id = req.params.id

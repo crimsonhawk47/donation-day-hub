@@ -37,12 +37,24 @@ function* deleteItem(action) {
     }
 }
 
+function* toggleCheck(action) {
+    console.log(`we in toggle check saga`, action.payload);
+    try {
+        yield axios.put(`api/client/item/purchased/${action.payload}`)
+    }
+    catch(error) {
+        console.log(`error in toggle check saga`, error);
+        
+    }
+}
+
 
 
 function* itemSaga() {
     yield takeLatest(`FETCH_ITEM_LIST`, getItemsById)
     yield takeLatest(`ADD_ITEM`, addItem)
     yield takeLatest('DELETE_ITEM', deleteItem)
+    yield takeLatest(`TOGGLE_CHECK`, toggleCheck)
 }
 
 export default itemSaga;
