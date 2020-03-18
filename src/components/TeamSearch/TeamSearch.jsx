@@ -89,7 +89,7 @@ class TeamSearch extends Component {
                     <DialogTitle id="form-dialog-title">JOIN TEAM</DialogTitle>
                     <DialogContent>
                       <DialogContentText>
-                        Are you sure you want to join this team {team.captain_name}?
+                        Are you sure you want to join {team.captain_name}'s team?
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>

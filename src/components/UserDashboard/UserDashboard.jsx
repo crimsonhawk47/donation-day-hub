@@ -21,11 +21,6 @@ const theme = createMuiTheme({
   },
 })
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 class UserDashboard extends Component {
 
@@ -98,4 +93,4 @@ const mapStateToProps = reduxStore => {
   )
 }
 
-export default withRouter(withStyles(styles)(connect(mapStateToProps)(UserDashboard)))
+export default withRouter(withStyles()(connect(mapStateToProps)(UserDashboard)))
