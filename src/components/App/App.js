@@ -36,88 +36,90 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div >
           <Nav />
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
+          <div className="general-formatting">
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
+              {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            <Route
-              exact
-              path="/dev/gallery"
-              component={ClientGallery}
-            />
-            {/* For protected routes, the view could show one of several things on the same route.
+              <Route
+                exact
+                path="/dev/gallery"
+                component={ClientGallery}
+              />
+              {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={UserHandler}
-            />
-            {/* This works the same as the other protected route, except that if the user is logged in,
+              <ProtectedRoute
+                exact
+                path="/home"
+                component={UserHandler}
+              />
+              {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/admin-team-page/:id"
-              component={AdminTeamPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/admin-volunteer-page/:id"
-              component={AdminVolunteerPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/edit-user"
-              component={EditUser}
-            />
-            <ProtectedRoute
-              exact
-              path="/team-page/"
-              component={TeamPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/team-search"
-              component={TeamSearch}
-            />
-            <ProtectedRoute
-              exact
-              path="/add-client"
-              component={AddClient}
-            />
-            <ProtectedRoute
-              exact
-              path="/client-page/:id/:teamId/:name"
-              component={ClientPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/edit-client"
-              component={EditClient}
-            />
-            <ProtectedRoute
-              exact
-              path="/client-gallery/:clientId"
-              component={ClientGallery}
-            />
-            <ProtectedRoute
-              exact
-              path="/resources"
-              component={Resources}
-            />
-            <ProtectedRoute
-              exact
-              path="/team-search"
-              component={TeamSearch}
-            />
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
-          <Footer />
+              <ProtectedRoute
+                exact
+                path="/admin-team-page/:id"
+                component={AdminTeamPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/admin-volunteer-page/:id"
+                component={AdminVolunteerPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/edit-user"
+                component={EditUser}
+              />
+              <ProtectedRoute
+                exact
+                path="/team-page/"
+                component={TeamPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/team-search"
+                component={TeamSearch}
+              />
+              <ProtectedRoute
+                exact
+                path="/add-client"
+                component={AddClient}
+              />
+              <ProtectedRoute
+                exact
+                path="/client-page/:id/:teamId/:name"
+                component={ClientPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/edit-client"
+                component={EditClient}
+              />
+              <ProtectedRoute
+                exact
+                path="/client-gallery/:clientId"
+                component={ClientGallery}
+              />
+              <ProtectedRoute
+                exact
+                path="/resources"
+                component={Resources}
+              />
+              <ProtectedRoute
+                exact
+                path="/team-search"
+                component={TeamSearch}
+              />
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+            <Footer />
+          </div>
         </div>
       </Router>
     )
