@@ -53,7 +53,7 @@ class ShoppingList extends Component {
     console.log(`we checking shit off`);
 
   }
-
+  
   render() {
     const { classes } = this.props;
     console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
@@ -78,7 +78,14 @@ class ShoppingList extends Component {
                 {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
                 {this.props.reduxStore.shoppingListReducer.map((item) => {
                   return (
-                    <ShoppingItem id={item.id} key={item.id} item={item.name} team={item.team_id} purchased={item.purchased} />
+                    <ShoppingItem 
+                    id={item.id} 
+                    key={item.id} 
+                    item={item.name} 
+                    team={item.team_id} 
+                    purchased={item.purchased} 
+                    client={item.client_id}
+                    />
                   )
                 })}
 
