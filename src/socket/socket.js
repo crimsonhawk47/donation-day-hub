@@ -27,6 +27,11 @@ const setupSocket = async () => {
 
 
 
+        innerSocket.on('SERVER_ERROR', data => {
+            console.log(`Server error`);
+            console.log(data);
+        })
+        
         innerSocket.on('CLIENT_RECEIVED_MESSAGES', data => {
             console.log(`GOT MESSAGES`);
             console.log(data)
