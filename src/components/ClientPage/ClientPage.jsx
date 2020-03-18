@@ -8,6 +8,7 @@ import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import ClientChat from '../ClientChat/ClientChat'
 
 const theme = createMuiTheme({
   palette: {
@@ -86,6 +87,7 @@ class ClientPage extends Component {
             Click To Add
           </Fab>
           <ShoppingList client_id={client_id} team_id={team_id} />
+          <ClientChat clientId={client_id} team_id={team_id} />
       </ThemeProvider>
     )
   }
