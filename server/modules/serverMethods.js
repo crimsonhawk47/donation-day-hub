@@ -11,7 +11,7 @@ const getMessagesByTeamId = async (teamId) => {
     catch (err) { return Promise.reject(err) }
 }
 
-const updateUsersMessages = async (userId) => {
+const getUsersMessages = async (userId) => {
     try {
         const userInfo = await getUserInfo(userId)
         const teamId = userInfo.active_team
@@ -34,6 +34,6 @@ const getUserInfo = async (userId) => {
 
 module.exports = {
     getMessagesByTeamId,
-    updateUsersMessages,
+    getUsersMessages,
     getUserInfo,
 }
