@@ -17,7 +17,7 @@ const setupSocket = async () => {
     //Since this setupSocket function is in a fetch_user saga, which will happen anytime we need
     //To update our user info, we only want it running when the socket either never existed,
     //or is disconnected on an event like logout. So we either check for undefined or 
-    //True on the disconnected property of the socket
+    //we make sure the socket is closed and not connected to anything
     if (!socket || socket.io.readyState ==='closed' && !socket.connected) {
         
 
@@ -34,6 +34,8 @@ const setupSocket = async () => {
 
         //Sets the outside socket, which we will export, to this innerSocket.
         socket = innerSocket
+
+        //As a test, we will emit a socket message to the server in 5 seconds
         setTimeout(() => {
             socket.emit('TEST')
         }, 5000);
