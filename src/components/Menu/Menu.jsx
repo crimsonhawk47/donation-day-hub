@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -15,6 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Button from '@material-ui/core/Button';
+
 // import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import ListItemText from '@material-ui/core/ListItemText';
@@ -93,6 +95,12 @@ class Menu extends React.Component {
     open: false,
   };
 
+  logOut = () => {
+    this.props.dispatch({type: 'LOGOUT'})
+    this.props.history.push('/home')
+    this.handleDrawerClose();
+  }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -100,6 +108,12 @@ class Menu extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+  
+  goToPage = (url) => {
+    this.props.history.push(url)
+    this.handleDrawerClose();
+    
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -157,21 +171,21 @@ class Menu extends React.Component {
                 <ListItemText primary={text} />
               </ListItem>
             ))} */}
-                <Link to="/home">
-                    <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
-                </Link>
-                <Link className="nav-link" to="/home">
+            <Button onClick={() => {this.goToPage(`/home`)}}>
+            <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
+            </Button>
+                <Button className="nav-link" onClick={() => {this.goToPage(`/home`)}}>
                     {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
-                </Link>
+                </Button>
                     {this.props.reduxStore.user.id && (
                     <>
-                <Link className="nav-link" to="/team-page">
+                <Button className="nav-link" onClick={() => {this.goToPage(`/team-page`)}}>
                     Team
-                </Link>
-                <Link className="nav-link" to="/resources">
+                </Button>
+                <Button className="nav-link" onClick={() => {this.goToPage(`/resources`)}}>
                     Resources
-                </Link>
-                <LogOutButton className="nav-link" to="/home" />
+                </Button>
+                <Button className="nav-link" onClick={this.logOut} >Log Out</Button>
                 </>
                 )}
           </List>
@@ -199,4 +213,4 @@ const mapStateToProps = reduxStore => {
     )
   }
 
-export default connect(mapStateToProps) (withStyles(styles, { withTheme: true })(Menu));
+export default withRouter(connect(mapStateToProps) (withStyles(styles, { withTheme: true })(Menu)));
