@@ -40,7 +40,11 @@ function* deleteItem(action) {
 function* toggleCheck(action) {
     console.log(`we in toggle check saga`, action.payload);
     try {
-        yield axios.put(`api/client/item/purchased/${action.payload}`)
+        yield axios.put(`api/client/item/purchased/${action.payload.id}`)
+        console.log(`we in toggle check get`, action.payload.client_id);
+        
+        yield put({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id })
+
     }
     catch(error) {
         console.log(`error in toggle check saga`, error);
