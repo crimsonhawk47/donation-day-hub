@@ -28,8 +28,9 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-  }
+    margin: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2
+  },
 });
 
 class AdminVolunteerPage extends Component {
@@ -68,73 +69,72 @@ class AdminVolunteerPage extends Component {
   };
 
   render() {
-    // const { classes } = this.props;
-
     let volunteer = this.props.reduxStore.adminVolunteerInfo;
-
+    const { classes } = this.props;
 
     return (
       <ThemeProvider theme={theme}>
-        <h1>{volunteer.first_name} {volunteer.last_name}</h1>
-        {volunteer.access_level === 2 || volunteer.active_team ?
-          <></>
-          :
-          <Fab
-            variant="extended"
-            color="secondary"
-            size="small"
-            onClick={this.handleClickOpen}
-          >
-            Make Captain
+        <Paper className={classes.root}>
+          <h1>{volunteer.first_name} {volunteer.last_name}</h1>
+          {volunteer.access_level === 2 || volunteer.active_team ?
+            <></>
+            :
+            <Fab
+              variant="extended"
+              color="secondary"
+              size="small"
+              onClick={this.handleClickOpen}
+            >
+              Make Captain
           </Fab>}
-        {volunteer.active_team ?
-          <Fab
-            variant="extended"
-            color="secondary"
-            size="small"
-            onClick={this.goToTeam}
-          >
-            View Team Members
+          {volunteer.active_team ?
+            <Fab
+              variant="extended"
+              color="secondary"
+              size="small"
+              onClick={this.goToTeam}
+            >
+              View Current Team
           </Fab>
-          :
-          <></>
-        }
-        {/* POPUP AFTER MAKE CAPTAIN BUTTON SELECTED */}
-        <div>
-          <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">MAKE CAPTAIN</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Are you sure you want to make this person a team captain?
+            :
+            <></>
+          }
+          {/* POPUP AFTER MAKE CAPTAIN BUTTON SELECTED */}
+          <div>
+            <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+              <DialogTitle id="form-dialog-title">MAKE CAPTAIN</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Are you sure you want to make this person a team captain?
               </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Fab onClick={this.handleClosePopup} color="primary">
-                No
+              </DialogContent>
+              <DialogActions>
+                <Fab onClick={this.handleClosePopup} color="primary">
+                  No
             </Fab>
-              <Fab onClick={() => {
-                { this.makeCaptain() };
-                { this.handleClosePopup() };
-              }} color="primary">
-                {/* // {this.makeCaptain} color="primary"> */}
+                <Fab onClick={() => {
+                  { this.makeCaptain() };
+                  { this.handleClosePopup() };
+                }} color="primary">
+                  {/* // {this.makeCaptain} color="primary"> */}
               Yes
             </Fab>
-            </DialogActions>
-          </Dialog>
-        </div>
+              </DialogActions>
+            </Dialog>
+          </div>
 
-        <p>Username: {volunteer.username}</p>
-        <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
-        <p>{volunteer.email}</p>
-        <p>{volunteer.phone}</p>
-        <p>
-          {volunteer.street_address}
-          <br />
-          {volunteer.city}, {volunteer.state} {volunteer.zip}
-        </p>
+          <p><b>Username:</b> {volunteer.username}</p>
+          <p><b>Member since:</b> {moment(volunteer.date_registered).format('LL')}</p>
+          <p>{volunteer.email}</p>
+          <p>{volunteer.phone}</p>
+          <p>
+            {volunteer.street_address}
+            <br />
+            {volunteer.city}, {volunteer.state} {volunteer.zip}
+          </p>
+        </Paper>
       </ThemeProvider>
     )
-
   }
 }
 
