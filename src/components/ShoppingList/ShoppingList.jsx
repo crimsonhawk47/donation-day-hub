@@ -53,44 +53,45 @@ class ShoppingList extends Component {
     console.log(`we checking shit off`);
 
   }
-  
+
   render() {
     const { classes } = this.props;
     console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
 
     return (
       <>
-        <TableContainer><Table>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox onChange={this.handleCheck} />
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox onChange={this.handleCheck} />
+                </TableCell>
+                <TableCell >
+                  Item and Item Description
               </TableCell>
-              <TableCell >
-                Item and Item Description
-              </TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            
-                {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
-                {this.props.reduxStore.shoppingListReducer.map((item) => {
-                  return (
-                    <ShoppingItem 
-                    id={item.id} 
-                    key={item.id} 
-                    item={item.name} 
-                    team={item.team_id} 
-                    purchased={item.purchased} 
-                    client={item.client_id}
-                    />
-                  )
-                })}
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
 
-          </TableBody>
-        </Table>
+              {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
+              {this.props.reduxStore.shoppingListReducer.map((item) => {
+                return (
+                  <ShoppingItem
+                    id={item.id}
+                    key={item.id}
+                    item={item.name}
+                    team={item.team_id}
+                    purchased={item.purchased}
+                    client={item.client_id}
+                  />
+                )
+              })}
+
+            </TableBody>
+          </Table>
         </TableContainer>
       </>
     )
