@@ -27,13 +27,14 @@ class ShoppingItem extends Component {
       item: this.props.id,
       open: false,
       setOpen: false,
+      id: this.props.id
     }
 
   handleCheck = () => {
     console.log(`we checking boxes for`, this.props.id);
     this.props.dispatch({
       type: 'TOGGLE_CHECK',
-      payload: this.props.id
+      payload: this.state
     })
   }
 
