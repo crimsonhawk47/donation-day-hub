@@ -23,10 +23,6 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   root: {
-    // paddingTop: '1px',
-    // paddingBottom: '5px',
-    // paddingLeft: theme.spacing.unit * 3,
-    // paddingRight: theme.spacing.unit * 3,
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2
   },
