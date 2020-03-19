@@ -76,41 +76,41 @@ class EditListItem extends Component {
     render() {
         const { classes } = this.props;
 
-        return (
-            <>
-                <Fab
-                    variant='contained'
-                    color="primary"
-                    size="small"
-                    onClick={this.handleClickOpen}
-                >
-                    <EditIcon fontSize="small" />
-                </Fab>
-                <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    aria-labelledby="form-dialog-title"
-                >
-                    <DialogTitle id="form-dialog-title">EDIT ITEM</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            multiline
-                            margin="dense"
-                            id="name"
-                            label="Item"
-                            type="name"
-                            value={this.state.name}
-                            fullWidth
-                            onChange={this.handleInputChangeFor('name')}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={(e) => this.handleClose('cancel', e)} color="primary">
-                            Cancel
+    return (
+<>
+            <Fab
+                variant='contained'
+                color="primary"
+                size="small"
+                onClick={this.handleClickOpen}
+            >
+                <EditIcon fontSize="small" />
+            </Fab>
+            <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+            >
+            <DialogTitle id="form-dialog-title">EDIT ITEM</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Item"
+                        type="name"
+                        value={this.state.name}
+                        fullWidth
+                        multiline
+                        onChange={this.handleInputChangeFor('name')}
+                    />
+                </DialogContent>
+            <DialogActions>
+            <Button onClick={(e) => this.handleClose('cancel', e)} color="primary">
+                Cancel
               </Button>
-                        <Button onClick={(e) => this.handleClose('edit', e)} color="primary">
-                            Save
+            <Button onClick={(e) => this.handleClose('edit', e)} color="primary">
+                Save
               </Button>
                     </DialogActions>
                 </Dialog>
