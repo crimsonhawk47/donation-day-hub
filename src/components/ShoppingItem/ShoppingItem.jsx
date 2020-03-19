@@ -12,7 +12,9 @@ class ShoppingItem extends Component {
 
     state = {
       client_id: this.props.client,
-      item: this.props.id
+      item: this.props.id,
+      open: false,
+      setOpen: false,
     }
 
   handleCheck = () => {

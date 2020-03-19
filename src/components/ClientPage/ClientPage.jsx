@@ -36,7 +36,9 @@ class ClientPage extends Component {
       type: 'ADD_ITEM',
       payload: this.state
     })
-    
+    this.setState({
+      name: ''
+    })
   }
 
   goToMedia = (clientId) => {
