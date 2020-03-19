@@ -45,13 +45,17 @@ class ClientPage extends Component {
   }
 
   handleSubmit = () => {
-    this.props.dispatch({
-      type: 'ADD_ITEM',
-      payload: this.state
-    })
-    this.setState({
-      name: ''
-    })
+    if (this.state.name === ''){
+      alert("Please add and item and description!")
+    } else{
+      this.props.dispatch({
+        type: 'ADD_ITEM',
+        payload: this.state
+      })
+      this.setState({
+        name: ''
+      })
+    }
   }
 
   goToMedia = (clientId) => {
