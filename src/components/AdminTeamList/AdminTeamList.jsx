@@ -94,12 +94,14 @@ class AdminTeamList extends Component {
           <TableBody>
             {filteredTeams.map(team => {
               return (
-                <TableRow key={team.id}
+                <TableRow
+                  key={team.id}
+                  onClick={() => this.handleTeamClick(team.id)}
                 >
                   <TableCell component="th" scope="row">
                     {moment(team.date).format('LL')}
                   </TableCell>
-                  <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
+                  <TableCell align="left" >{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
                     <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
 

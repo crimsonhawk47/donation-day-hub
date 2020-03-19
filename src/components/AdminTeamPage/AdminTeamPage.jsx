@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
+import '../App/App.css'
 
 const moment = require('moment');
 
@@ -24,7 +25,7 @@ class AdminTeamPage extends Component {
     let team = this.props.reduxStore.adminTeamInfo;
 
     return (
-      <div>
+      <div className="admin-team-page">
         <h1>Team Page</h1>
         {/* <h2>{team.captain_name}</h2> */}
         <div>

@@ -79,3 +79,11 @@ input {
 .edit-user-save {
     display: inline-block;
 }
+
+.admin-team-page {
+    text-align: center;
+}
+
+.client-page-add-item-btn {
+    text-align: right;
+}

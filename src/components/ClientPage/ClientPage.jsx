@@ -62,22 +62,23 @@ class ClientPage extends Component {
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
-          <div className="camera-icon">
-            <Fab
-              variant="outlined"
-              color="primary"
-              onClick={() => { this.goToMedia(client_id) }}>
-              <PhotoCamera />
-            </Fab>
-          </div>
-
-          <h3>Shopping List</h3>
-          <h4>Item Description</h4>
-          <TextField
-            onChange={this.handleAddItem}
+        <div className="camera-icon">
+          <Fab
             variant="outlined"
-            fullWidth
-            placeholder='Add Item' />
+            color="primary"
+            onClick={() => { this.goToMedia(client_id) }}>
+            <PhotoCamera />
+          </Fab>
+        </div>
+
+        <h3>Shopping List</h3>
+        <h4>Item Description</h4>
+        <TextField
+          onChange={this.handleAddItem}
+          variant="outlined"
+          fullWidth
+          placeholder='Add Item' />
+        <div className="client-page-add-item-btn">
           <Fab
             onClick={this.handleSubmit}
             variant="extended"
@@ -86,8 +87,9 @@ class ClientPage extends Component {
           >
             Click To Add
           </Fab>
-          <ShoppingList client_id={client_id} team_id={team_id} />
-          <ClientChat clientId={client_id} team_id={team_id} />
+        </div>
+        <ShoppingList client_id={client_id} team_id={team_id} />
+        <ClientChat clientId={client_id} team_id={team_id} />
       </ThemeProvider>
     )
   }
