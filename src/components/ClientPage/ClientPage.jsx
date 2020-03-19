@@ -45,11 +45,17 @@ class ClientPage extends Component {
   }
 
   handleSubmit = () => {
-    this.props.dispatch({
-      type: 'ADD_ITEM',
-      payload: this.state
-    })
-
+    if (this.state.name === ''){
+      alert("Please add and item and description!")
+    } else{
+      this.props.dispatch({
+        type: 'ADD_ITEM',
+        payload: this.state
+      })
+      this.setState({
+        name: ''
+      })
+    }
   }
 
   goToMedia = (clientId) => {
@@ -59,6 +65,7 @@ class ClientPage extends Component {
   render() {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
+console.log(this.props.match.params.name);
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
@@ -70,14 +77,15 @@ class ClientPage extends Component {
             <PhotoCamera />
           </Fab>
         </div>
-
+      <h1>{this.props.match.params.name}</h1>
         <h3>Shopping List</h3>
         <h4>Item Description</h4>
         <TextField
           onChange={this.handleAddItem}
           variant="outlined"
           fullWidth
-          placeholder='Add Item' />
+          placeholder='Add Item' 
+          value={this.state.name}/>
         <div className="client-page-add-item-btn">
           <Fab
             onClick={this.handleSubmit}

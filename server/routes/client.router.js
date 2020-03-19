@@ -170,12 +170,34 @@ router.put('/item/purchased/:id', (req, res) => {
   })
 })
 
+router.put(`/item/edit`, (req, res) => {
+  console.log(`we in item put server`, req.body);
+  const { id, name } = req.body;
+
+  const queryText = `
+  UPDATE "item"
+  SET "name" = $1
+  WHERE "id" = $2;
+  `;
+  pool.query(queryText, [name, id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    res.sendStatus(500);
+    console.log(`error in put for item`, eroror);
+    
+  })
+})
+
 router.get(`/list/:id`, (req, res) => {
   console.log(`we in server now`, req.params.id);
   let id = req.params.id
   const queryText = `
   SELECT * FROM "item"
-  WHERE "client_id" = $1;
+  WHERE "client_id" = $1
+  ORDER BY "name" ASC
+  ;
   `;
   pool.query(queryText, [id])
   .then((result) => {

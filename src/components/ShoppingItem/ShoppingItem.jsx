@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
 import red from '@material-ui/core/colors/red'
+import EditListItem from '../EditListItem/EditListItem'
 
 const theme = createMuiTheme({
   palette: {
@@ -21,10 +22,12 @@ const theme = createMuiTheme({
 
 class ShoppingItem extends Component {
 
-  state = {
-    client_id: this.props.client,
-    item: this.props.id
-  }
+    state = {
+      client_id: this.props.client,
+      item: this.props.id,
+      open: false,
+      setOpen: false,
+    }
 
   handleCheck = () => {
     console.log(`we checking boxes for`, this.props.id);
@@ -32,11 +35,6 @@ class ShoppingItem extends Component {
       type: 'TOGGLE_CHECK',
       payload: this.props.id
     })
-  }
-
-  handleEdit = () => {
-    console.log(`edit clicked for`, this.props.id);
-
   }
 
   handleDelete = () => {
@@ -55,17 +53,18 @@ class ShoppingItem extends Component {
     return (
       <ThemeProvider theme={theme}>
         <TableRow>
-          <TableCell><Checkbox onClick={this.handleCheck} /></TableCell>
+          <TableCell><Checkbox onChange={this.handleCheck} checked={this.props.purchased}/></TableCell>
           <TableCell key={this.props.id}>{this.props.item}</TableCell>
           <TableCell>
-            <Fab
+            {/* <Fab
               variant='contained'
               color="primary"
               size="small"
               onClick={this.handleEdit}
             >
               <EditIcon fontSize="small" />
-            </Fab>
+            </Fab> */}
+            <EditListItem id={this.props.id} name={this.props.item} client_id={this.state.client_id}/>
           </TableCell>
           <TableCell>
             <Fab

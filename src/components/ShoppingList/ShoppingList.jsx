@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, createMuiTheme } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -30,8 +30,20 @@ import ShoppingItem from '../ShoppingItem/ShoppingItem'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    // color: green[400],
+    // '&$checked' : {
+    //   color:green[600],
+    // }
   }
 });
+
+const theme = createMuiTheme({
+  palette: {
+    tertiary:{
+      main: 'green[400]'
+    }
+  }
+})
 
 class ShoppingList extends Component {
 
@@ -50,7 +62,7 @@ class ShoppingList extends Component {
   }
 
   handleCheck = () => {
-    console.log(`we checking shit off`);
+    console.log(`we checking stuff off`);
 
   }
   
@@ -60,14 +72,18 @@ class ShoppingList extends Component {
 
     return (
       <>
+      <h1></h1>
         <TableContainer><Table>
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                <Checkbox onChange={this.handleCheck} />
+                {/* <Checkbox 
+                onChange={this.handleCheck} 
+                color="tertiary"
+                /> */}
               </TableCell>
               <TableCell >
-                Item and Item Description
+                {/* Item and Item Description */}
               </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>

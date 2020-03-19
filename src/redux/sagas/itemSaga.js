@@ -48,6 +48,18 @@ function* toggleCheck(action) {
     }
 }
 
+function* editItem (action) {
+    console.log(`we in edit saga`, action.payload);
+    try {
+        yield axios.put(`api/client/item/edit`, action.payload);
+        yield put ({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id})
+    }
+    catch(error) {
+        console.log(`error in edit put`, error);
+        
+    }
+}
+
 
 
 function* itemSaga() {
@@ -55,6 +67,7 @@ function* itemSaga() {
     yield takeLatest(`ADD_ITEM`, addItem)
     yield takeLatest('DELETE_ITEM', deleteItem)
     yield takeLatest(`TOGGLE_CHECK`, toggleCheck)
+    yield takeLatest(`EDIT_ITEM`, editItem)
 }
 
 export default itemSaga;
