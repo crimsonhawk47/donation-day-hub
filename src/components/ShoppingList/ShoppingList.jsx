@@ -30,6 +30,10 @@ import ShoppingItem from '../ShoppingItem/ShoppingItem'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    // color: green[400],
+    // '&$checked' : {
+    //   color:green[600],
+    // }
   }
 });
 
@@ -64,7 +68,10 @@ class ShoppingList extends Component {
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                <Checkbox onChange={this.handleCheck} />
+                <Checkbox 
+                onChange={this.handleCheck} 
+                color="green"
+                />
               </TableCell>
               <TableCell >
                 Item and Item Description

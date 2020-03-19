@@ -49,7 +49,9 @@ class ClientPage extends Component {
       type: 'ADD_ITEM',
       payload: this.state
     })
-
+    this.setState({
+      name: ''
+    })
   }
 
   goToMedia = (clientId) => {
@@ -77,7 +79,8 @@ class ClientPage extends Component {
           onChange={this.handleAddItem}
           variant="outlined"
           fullWidth
-          placeholder='Add Item' />
+          placeholder='Add Item' 
+          value={this.state.name}/>
         <div className="client-page-add-item-btn">
           <Fab
             onClick={this.handleSubmit}
