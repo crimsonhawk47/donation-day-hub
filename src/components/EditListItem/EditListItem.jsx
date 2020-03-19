@@ -13,10 +13,10 @@ import EditIcon from '@material-ui/icons/Edit';
 
 
 
-const styles = theme=> ({
-  root: {
-    flexGrow: 1,
-  }
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    }
 });
 
 class EditListItem extends Component {
@@ -40,8 +40,8 @@ class EditListItem extends Component {
         console.log(this.state);
 
         if (id === 'edit') {
-            console.log(`in id:`, );
-            
+            console.log(`in id:`);
+
             this.props.dispatch({
                 type: "EDIT_ITEM",
                 payload: {
@@ -52,7 +52,7 @@ class EditListItem extends Component {
             })
             this.setState({
                 open: false,
-           })
+            })
         } else {
             this.setState({
                 open: false,
@@ -69,59 +69,60 @@ class EditListItem extends Component {
 
     handleEdit = () => {
         console.log(`we editing again`, this.state);
-        
+
     }
 
 
-  render() {
-    const { classes } = this.props;
+    render() {
+        const { classes } = this.props;
 
-    return (
-<>
-            <Fab
-                variant='contained'
-                color="primary"
-                size="small"
-                onClick={this.handleClickOpen}
-            >
-                <EditIcon fontSize="small" />
-            </Fab>
-            <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title"
-            >
-            <DialogTitle id="form-dialog-title">EDIT ITEM</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Item"
-                        type="name"
-                        value={this.state.name}
-                        fullWidth
-                        onChange={this.handleInputChangeFor('name')}
-                    />
-                </DialogContent>
-            <DialogActions>
-            <Button onClick={(e) => this.handleClose('cancel', e)} color="primary">
-                Cancel
+        return (
+            <>
+                <Fab
+                    variant='contained'
+                    color="primary"
+                    size="small"
+                    onClick={this.handleClickOpen}
+                >
+                    <EditIcon fontSize="small" />
+                </Fab>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">EDIT ITEM</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            multiline
+                            margin="dense"
+                            id="name"
+                            label="Item"
+                            type="name"
+                            value={this.state.name}
+                            fullWidth
+                            onChange={this.handleInputChangeFor('name')}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={(e) => this.handleClose('cancel', e)} color="primary">
+                            Cancel
               </Button>
-            <Button onClick={(e) => this.handleClose('edit', e)} color="primary">
-                Confirm
+                        <Button onClick={(e) => this.handleClose('edit', e)} color="primary">
+                            Save
               </Button>
-        </DialogActions>
-        </Dialog>
-</>
-    )
+                    </DialogActions>
+                </Dialog>
+            </>
+        )
 
-  }
+    }
 }
 
 const mapStateToProps = reduxStore => {
-  return (
-    { reduxStore }
-  )
+    return (
+        { reduxStore }
+    )
 }
 export default withStyles(styles)(connect(mapStateToProps)(EditListItem))
