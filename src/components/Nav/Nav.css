@@ -11,21 +11,20 @@
   background-color: #00acb0;
 } */
 
-.nav-link {
+/* .nav-link {
   float: left;
-  color: #f2f2f2;
-  background-color: #808281;
+  color: black;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
-  font-family: Nexa Light;
+  font-family: Nexa Light; */
   /* these last two make the logout button in
   the nav bar look like another link */
-  border:none;
+  /* border:none;
   cursor: pointer;
   outline:0;
-}
+} */
 
 
 .nav-right {
@@ -56,14 +55,12 @@
 
 .nav-link {
   float: left;
+  color: black;
   font-family: Nexa Light;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px; 
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border: none;
   cursor: pointer;
   outline: 0;
@@ -73,3 +70,24 @@
 .nav-link:hover {
 background-color: #6d89b1;
 }
+
+.home {
+  height: 30px;
+  width: auto;
+}
+
+.team {
+  height: 30px;
+  width: auto;
+}
+
+.resources {
+  height: 30px;
+  width: auto;
+}
+
+.intersectionIcon {
+  height: 250px;
+  width: auto;
+  padding: 20px
+} 

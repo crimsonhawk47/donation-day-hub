@@ -51,8 +51,6 @@ class AdminClientList extends Component {
     })
   }
 
-  // Need a handle client click function here
-
   render() {
     const { classes } = this.props;
 
@@ -82,8 +80,8 @@ class AdminClientList extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell align="left">Name</TableCell>
+              <TableCell><b>Date</b></TableCell>
+              <TableCell align="left"><b>Name</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

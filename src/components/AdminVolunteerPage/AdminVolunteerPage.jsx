@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography, Button } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import { Paper, Grid, Typography, Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Fab from '@material-ui/core/Fab';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const moment = require('moment');
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#283748',
+    },
+    secondary: {
+      main: '#6d89b1'
+    },
+    tertiary: {
+      main: '#808281'
+    },
+  },
+})
 
 const styles = theme => ({
   root: {
@@ -12,6 +33,11 @@ const styles = theme => ({
 });
 
 class AdminVolunteerPage extends Component {
+  state = {
+    open: false
+  }
+
+
   componentDidMount() {
     this.props.dispatch({
       type: 'FETCH_VOLUNTEER_INFO',
@@ -29,8 +55,17 @@ class AdminVolunteerPage extends Component {
   goToTeam = () => {
     const currentVolunteerId = this.props.reduxStore.adminVolunteerInfo.active_team
     this.props.history.push(`/admin-team-page/${currentVolunteerId}`)
-    
+
   }
+
+  // Popup open and close
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     // const { classes } = this.props;
@@ -39,17 +74,54 @@ class AdminVolunteerPage extends Component {
 
 
     return (
-      <div>
+      <ThemeProvider theme={theme}>
         <h1>{volunteer.first_name} {volunteer.last_name}</h1>
         {volunteer.access_level === 2 || volunteer.active_team ?
           <></>
           :
-          <Button variant="contained" onClick={this.makeCaptain}>Make Captain</Button>}
+          <Fab
+            variant="extended"
+            color="secondary"
+            size="small"
+            onClick={this.handleClickOpen}
+          >
+            Make Captain
+          </Fab>}
         {volunteer.active_team ?
-          <Button variant="contained" onClick={this.goToTeam}>Go To Team</Button>
+          <Fab
+            variant="extended"
+            color="secondary"
+            size="small"
+            onClick={this.goToTeam}
+          >
+            View Team Members
+          </Fab>
           :
           <></>
         }
+        {/* POPUP AFTER MAKE CAPTAIN BUTTON SELECTED */}
+        <div>
+          <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">MAKE CAPTAIN</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to make this person a team captain?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Fab onClick={this.handleClosePopup} color="primary">
+                No
+            </Fab>
+              <Fab onClick={() => {
+                { this.makeCaptain() };
+                { this.handleClosePopup() };
+              }} color="primary">
+                {/* // {this.makeCaptain} color="primary"> */}
+              Yes
+            </Fab>
+            </DialogActions>
+          </Dialog>
+        </div>
 
         <p>Username: {volunteer.username}</p>
         <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
@@ -60,9 +132,7 @@ class AdminVolunteerPage extends Component {
           <br />
           {volunteer.city}, {volunteer.state} {volunteer.zip}
         </p>
-
-
-      </div>
+      </ThemeProvider>
     )
 
   }
