@@ -196,7 +196,7 @@ router.get(`/list/:id`, (req, res) => {
   const queryText = `
   SELECT * FROM "item"
   WHERE "client_id" = $1
-  ORDER BY "item" ASC
+  ORDER BY "name" ASC
   ;
   `;
   pool.query(queryText, [id])

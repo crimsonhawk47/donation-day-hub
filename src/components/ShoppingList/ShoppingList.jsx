@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, createMuiTheme } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -37,6 +37,14 @@ const styles = theme => ({
   }
 });
 
+const theme = createMuiTheme({
+  palette: {
+    tertiary:{
+      main: 'green[400]'
+    }
+  }
+})
+
 class ShoppingList extends Component {
 
   state = {
@@ -54,7 +62,7 @@ class ShoppingList extends Component {
   }
 
   handleCheck = () => {
-    console.log(`we checking shit off`);
+    console.log(`we checking stuff off`);
 
   }
   
@@ -70,7 +78,7 @@ class ShoppingList extends Component {
               <TableCell padding="checkbox">
                 <Checkbox 
                 onChange={this.handleCheck} 
-                color="green"
+                color="tertiary"
                 />
               </TableCell>
               <TableCell >
