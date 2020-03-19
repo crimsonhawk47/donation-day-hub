@@ -24,8 +24,9 @@ class EditListItem extends Component {
         open: false,
         setOpen: false,
         name: '',
-        item_id: this.props.id,
+        id: this.props.id,
         name: this.props.name,
+        client_id: this.props.client_id,
     }
 
     handleClickOpen = () => {
@@ -36,20 +37,17 @@ class EditListItem extends Component {
     };
 
     handleClose = (id) => {
-        console.log(id);
+        console.log(this.state);
 
-        if (id === 'add') {
-            // console.log(Date());
-            // this.props.dispatch({
-            //     type: "ADD_CLIENT",
-            //     payload: {
-            //         name: this.state.name,
-            //         bio: this.state.bio,
-            //         location: this.state.location,
-            //         date: moment(Date()).format('LL'),
-            //         team_id: this.state.team_id
-            //     }
-            // })
+        if (id === 'edit') {
+            this.props.dispatch({
+                type: "EDIT_ITEM",
+                payload: {
+                    name: this.state.name,
+                    id: this.state.id,
+                    client_id: this.state.client_id
+                }
+            })
             this.setState({
                 open: false,
                 name: '',

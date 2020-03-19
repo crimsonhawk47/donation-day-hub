@@ -64,7 +64,7 @@ class ShoppingItem extends Component {
             >
               <EditIcon fontSize="small" />
             </Fab> */}
-            <EditListItem id={this.props.id} name={this.props.item}/>
+            <EditListItem id={this.props.id} name={this.props.item} client_id={this.state.client_id}/>
           </TableCell>
           <TableCell>
             <Fab
