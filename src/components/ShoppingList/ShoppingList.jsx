@@ -72,6 +72,7 @@ class ShoppingList extends Component {
 
     return (
       <>
+      <h1></h1>
         <TableContainer><Table>
           <TableHead>
             <TableRow>
