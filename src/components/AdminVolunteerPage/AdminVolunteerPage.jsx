@@ -94,7 +94,7 @@ class AdminVolunteerPage extends Component {
               size="small"
               onClick={this.goToTeam}
             >
-              View Team Members
+              View Current Team
           </Fab>
             :
             <></>
@@ -123,8 +123,8 @@ class AdminVolunteerPage extends Component {
             </Dialog>
           </div>
 
-          <p>Username: {volunteer.username}</p>
-          <p>Member since: {moment(volunteer.date_registered).format('LL')}</p>
+          <p><b>Username:</b> {volunteer.username}</p>
+          <p><b>Member since:</b> {moment(volunteer.date_registered).format('LL')}</p>
           <p>{volunteer.email}</p>
           <p>{volunteer.phone}</p>
           <p>
