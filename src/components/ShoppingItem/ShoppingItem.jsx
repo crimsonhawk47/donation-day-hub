@@ -53,7 +53,7 @@ class ShoppingItem extends Component {
     return (
       <ThemeProvider theme={theme}>
         <TableRow>
-          <TableCell><Checkbox onClick={this.handleCheck} /></TableCell>
+          <TableCell><Checkbox onChange={this.handleCheck} checked={this.props.purchased}/></TableCell>
           <TableCell key={this.props.id}>{this.props.item}</TableCell>
           <TableCell>
             {/* <Fab

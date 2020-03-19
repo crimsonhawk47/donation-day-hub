@@ -23,10 +23,10 @@ class EditListItem extends Component {
     state = {
         open: false,
         setOpen: false,
-        name: '',
         id: this.props.id,
         name: this.props.name,
         client_id: this.props.client_id,
+        new_name: ''
     }
 
     handleClickOpen = () => {
@@ -40,6 +40,8 @@ class EditListItem extends Component {
         console.log(this.state);
 
         if (id === 'edit') {
+            console.log(`in id:`, );
+            
             this.props.dispatch({
                 type: "EDIT_ITEM",
                 payload: {
@@ -50,11 +52,11 @@ class EditListItem extends Component {
             })
             this.setState({
                 open: false,
-                name: '',
-            })
+           })
         } else {
             this.setState({
-                open: false
+                open: false,
+                name: this.props.name
             })
         }
     };
