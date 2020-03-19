@@ -77,13 +77,13 @@ class ShoppingList extends Component {
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                <Checkbox 
+                {/* <Checkbox 
                 onChange={this.handleCheck} 
                 color="tertiary"
-                />
+                /> */}
               </TableCell>
               <TableCell >
-                Item and Item Description
+                {/* Item and Item Description */}
               </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
