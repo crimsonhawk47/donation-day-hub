@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
 import red from '@material-ui/core/colors/red'
+import EditListItem from '../EditListItem/EditListItem'
 
 const theme = createMuiTheme({
   palette: {
@@ -36,11 +37,6 @@ class ShoppingItem extends Component {
     })
   }
 
-  handleEdit = () => {
-    console.log(`edit clicked for`, this.props.id);
-
-  }
-
   handleDelete = () => {
     console.log(`delete clicked for`, this.state);
     // this.setState({
@@ -60,14 +56,15 @@ class ShoppingItem extends Component {
           <TableCell><Checkbox onClick={this.handleCheck} /></TableCell>
           <TableCell key={this.props.id}>{this.props.item}</TableCell>
           <TableCell>
-            <Fab
+            {/* <Fab
               variant='contained'
               color="primary"
               size="small"
               onClick={this.handleEdit}
             >
               <EditIcon fontSize="small" />
-            </Fab>
+            </Fab> */}
+            <EditListItem id={this.props.id} name={this.props.item}/>
           </TableCell>
           <TableCell>
             <Fab
