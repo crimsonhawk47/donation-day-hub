@@ -97,7 +97,6 @@ class Menu extends React.Component {
 
   logOut = () => {
     this.props.dispatch({type: 'LOGOUT'})
-    this.props.history.push('/home')
     this.handleDrawerClose();
   }
 
@@ -171,23 +170,21 @@ class Menu extends React.Component {
                 <ListItemText primary={text} />
               </ListItem>
             ))} */}
-            <Button onClick={() => {this.goToPage(`/home`)}}>
-            <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
+            <Button onClick={() => { this.goToPage(`/home`) }}>
+              <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
             </Button>
-                <Button className="nav-link" onClick={() => {this.goToPage(`/home`)}}>
-                    {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
-                </Button>
-                    {this.props.reduxStore.user.id && (
-                    <>
-                <Button className="nav-link" onClick={() => {this.goToPage(`/team-page`)}}>
+            <Button className="nav-link" onClick={() => { this.goToPage(`/home`) }}>
+              {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
+            </Button>
+            {this.props.reduxStore.user.id && (
+              <>
+                {this.props.reduxStore.user.access_level !== 3 ?
+                  <Button className="nav-link" onClick={() => { this.goToPage(`/team-page`) }}>
                     Team
-                </Button>
-                <Button className="nav-link" onClick={() => {this.goToPage(`/resources`)}}>
-                    Resources
-                </Button>
+            </Button> : <></>}
                 <Button className="nav-link" onClick={this.logOut} >Log Out</Button>
-                </>
-                )}
+              </>
+            )}
           </List>
         </Drawer>
         <main
