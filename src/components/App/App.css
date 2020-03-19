@@ -83,3 +83,7 @@ input {
 .admin-team-page {
     text-align: center;
 }
+
+.client-page-add-item-btn {
+    text-align: right;
+}
