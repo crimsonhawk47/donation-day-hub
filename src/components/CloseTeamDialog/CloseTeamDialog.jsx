@@ -27,16 +27,19 @@ const styles = theme => ({
 
 class CloseTeamDalog extends Component {
 
-  handleClickOpen = () => {
+  handleClickOpen = (event) => {
+    event.stopPropagation()
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: this.props.teamId })
 
   };
 
-  handleDisagree = () => {
+  handleDisagree = (event) => {
+    event.stopPropagation()
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: false })
   };
 
-  handleAgree = () => {
+  handleAgree = (event) => {
+    event.stopPropagation()
     this.props.agreeFunction();
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: false })
   };
