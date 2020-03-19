@@ -9,6 +9,7 @@ import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClientChat from '../ClientChat/ClientChat'
+import EditIcon from '@material-ui/icons/Edit';
 
 const theme = createMuiTheme({
   palette: {
@@ -77,7 +78,7 @@ console.log(this.props.match.params.name);
             <PhotoCamera />
           </Fab>
         </div>
-      <h1>{this.props.match.params.name}</h1>
+      <h1>{this.props.match.params.name} <EditIcon /></h1>
         <h3>Shopping List</h3>
         <h4>Item Description</h4>
         <TextField
