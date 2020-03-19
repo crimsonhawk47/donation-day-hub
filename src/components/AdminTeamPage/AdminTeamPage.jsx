@@ -42,11 +42,13 @@ class AdminTeamPage extends Component {
       <ThemeProvider theme={theme}>
         <Paper className={classes.root}>
           <div className="admin-team-page">
-            <h1>Team Page</h1>
+            <h1>Team Members</h1>
             {/* <h2>{team.captain_name}</h2> */}
             <div>
               {team.map(team => (
                 <div>
+            {/* <h2>{team.captain_name}</h2> */}
+
                   <p>{team.first_name} {team.last_name}</p>
                 </div>
               ))}
