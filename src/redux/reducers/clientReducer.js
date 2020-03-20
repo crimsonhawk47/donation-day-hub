@@ -9,9 +9,19 @@ const selectedClientMedia = (state = [], action) => {
   }
 };
 
+const clientInfo = (state = '', action) => {
+  switch (action.type) {
+    case 'SET_CLIENT':
+      return action.payload
+    default:
+      return state;
+  }
+};
+
 
 
 
 export default combineReducers({
+  comment,
   selectedClientMedia
 });

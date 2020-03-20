@@ -36,12 +36,22 @@ class ClientPage extends Component {
     purchased: false,
   }
 
+  componentDidMount(){
+    console.log(this.state.comment);
+    
+    
+  }
+
   handleAddItem = (event) => {
     console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
     console.log(this.state);
+  }
+
+  handleComment = (event) => {
+    this.setState({comment: event.target.value})
   }
 
   handleSubmit = () => {
@@ -65,7 +75,6 @@ class ClientPage extends Component {
   render() {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
-console.log(this.props.match.params.name);
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
@@ -97,7 +106,17 @@ console.log(this.props.match.params.name);
           </Fab>
         </div>
         <ShoppingList client_id={client_id} team_id={team_id} />
-        <ClientChat clientId={client_id} team_id={team_id} />
+        
+        <Grid container className='comment'>
+        <TextField
+          onChange={this.handleComment}
+          variant="outlined"
+          fullWidth
+          multiline
+          placeholder='comments' 
+          value={this.state.comment}/>
+        </Grid>
+        {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
     )
   }
