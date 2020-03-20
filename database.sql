@@ -21,6 +21,17 @@
 
 --  You should be able to run the whole table when making changes. If DROP TABLE commands yell
 --  At you about tables not existing, simply highlight everything below
+
+-- -- USER is a reserved keyword with Postgres
+-- -- You must use double quotes in every query that user is in:
+-- -- ex. SELECT * FROM "user";
+-- -- Otherwise you will have errors!
+
+
+-- Create a database with the name "intersection" then create the following tables
+
+--  You should be able to run the whole table when making changes. If DROP TABLE commands yell
+--  At you about tables not existing, simply highlight everything below
 DROP TABLE "media";
 DROP TABLE "team_user";
 DROP TABLE "item";
@@ -125,9 +136,9 @@ VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1),
 
 
 INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
-VALUES (1, 'image.png', 'img', NULL, NOW(), 3), 
-(1, 'download.jpeg', 'img', NULL, NOW(), 3), 
-(1, 'Untitled.png', 'img', NULL, NOW(), 3);
+VALUES (2, 'image.png', 'img', NULL, NOW(), 3), 
+(2, 'download.jpeg', 'img', NULL, NOW(), 3), 
+(2, 'Untitled.png', 'img', NULL, NOW(), 3);
 	
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
