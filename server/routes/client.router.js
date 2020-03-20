@@ -22,6 +22,8 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 });
 
+
+
 //User Route
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
@@ -210,5 +212,34 @@ router.get(`/list/:id`, (req, res) => {
     res.sendStatus(500)
   })
 })
+
+router.get('/comment/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT comment FROM "client" WHERE "client".id = $1`
+  const clientId = req.params.id
+  pool.query(queryText, [clientId])
+    .then(result => {
+      console.log(result.rows)
+      res.send(result.rows[0])
+    }).catch(error => {
+      console.log('error in client GET', error)
+      res.sendStatus(500);
+    })
+
+});
+
+router.put('/comment/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `UPDATE "client" SET "comment" = $1  WHERE "client".id = $2`
+  const clientId = req.params.id
+  console.log(req.body);
+  
+  pool.query(queryText, [req.body.comment, clientId])
+    .then(result => {
+      res.sendStatus(200)
+    }).catch(error => {
+      console.log('error in client GET', error)
+      res.sendStatus(500);
+    })
+
+});
 
 module.exports = router;
