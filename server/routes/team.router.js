@@ -8,7 +8,7 @@ const router = express.Router();
 
 //Route for Admins
 router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-    const queryText = 'SELECT * FROM "team";'
+    const queryText = 'SELECT * FROM "team" ORDER BY "is_archived" ASC, "date" DESC;'
     console.log('in team router.get')
     pool.query(queryText)
         .then(result => {
