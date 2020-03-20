@@ -87,13 +87,13 @@ CREATE TABLE "messages" (
 -- Dummy Data
 
 INSERT INTO "user" ("username", "password", "first_name", "last_name", "email", "phone", "street_address", "city", "state", "zip", "access_level", "date_registered", "active_team")
-VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 'Gabriel', 'Hawk', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 1),
-('Meghan', '$2a$10$cghoHshxw31jgKsRAYt02OUmthPdlMdaFIRosVaCXaZGLYWcc.v.C', 'Meghan', 'Gunderson', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 2),
-('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 2, NOW(), 1),
-('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 2, NOW(), 2),
-('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 1),
-('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Andrea', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 3, NOW(), 0),
-('Akimbo', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Akimbo', 'Volkmann', 'derpsmith@gmail.com', '999-999-9999', '1000 real address st', 'derpwood', 'MN', '55415', 1, NOW(), 0);
+VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 'Gabriel', 'Hawk', 'ghawk@gmail.com', '474-751-1642', '5642 Main St', 'Redwood', 'MN', '55415', 1, NOW(), 1),
+('Meghan', '$2a$10$cghoHshxw31jgKsRAYt02OUmthPdlMdaFIRosVaCXaZGLYWcc.v.C', 'Meghan', 'Gunderson', 'mgunderson@gmail.com', '474-973-4260', '3246 Broadway Ave', 'Minneapolis', 'MN', '55415', 1, NOW(), 2),
+('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'jheggem@gmail.com', '785-424-9078', '7890 63rd St N', 'Bloomington', 'MN', '55457', 2, NOW(), 1),
+('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'txiiong@gmail.com', '890-257-5631', '560 Lake St', 'Edina', 'MN', '55424', 2, NOW(), 2),
+('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'avolkmann@gmail.com', '423-746-8952', '2683 Cherrywood Ln', 'Austin', 'TX', '55672', 1, NOW(), 1),
+('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Andrea', 'Bert', 'abert@gmail.com', '907-363-1568', '6340 Stonebroke Rd', 'Appleton', 'WI', '55678', 3, NOW(), 0),
+('Billy', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Billy', 'Johnson', 'bjohnson@gmail.com', '774-236-5076', '230 Oakwood Blvd', 'Roseville', 'MN', '55498', 1, NOW(), 0);
 
 INSERT INTO "team" ("captain_name", "is_archived", "date")
 VALUES ('Jessica', FALSE, NOW()),
@@ -107,7 +107,7 @@ VALUES (1, 3),
 (1, 1);
 
 INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
-VALUES ('Batman', 'He is Batman', NULL, 'Gotham', NOW(), 1);
+VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1);
 
 INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
 VALUES (1, 'image.png', 'img', NULL, NOW(), 3), 
@@ -117,18 +117,15 @@ VALUES (1, 'image.png', 'img', NULL, NOW(), 3),
  INSERT INTO "client"
 	("name", "bio", "media_release", "location", "date", "team_id")
 VALUES
-	('The Other Amber', 'got it from Texas', 'true', 'mean streets of Texas', '02-02-2020', '1'),
-	('The Other Gabriel', 'aka akimbojesus', 'true', 'streets of Minnesota', '02-02-2020', '1'),
-	('The Other Meghan', 'got it from the gutter', 'true', 'streets of Downtown Minneapolis', '02-02-2020', '1'),
-	('The Other Jessica', 'got it from the skreets', 'true', 'streets of Eden Prairie?', '02-02-2020', '1');
+	('Georgie', 'Single Mother. Lost job last year. Evicted 6 months ago.', 'true', 'Minneapolis', '02-02-2020', '1');
 	
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
 VALUES
- ('pimp cane', '2', '1', 'false'),
- ('pimp hat', '2', '1', 'false'),
- ('white gloves', '2', '1', 'false'),
- ('purple suit', '2', '1', 'false');
+ ('Kid size winter coat', '2', '1', 'true'),
+ ('School backpack', '2', '1', 'true'),
+ ('Tent', '2', '1', 'true'),
+ ('2 sleeping bags', '2', '1', 'true');
  
 INSERT INTO "messages" ("client_id", "user_id", "team_id", "message", "date")
 VALUES (1, 1, 1, 'First chat message, should be Gabe', NOW()),
