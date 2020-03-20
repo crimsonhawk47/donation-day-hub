@@ -34,6 +34,15 @@ class ClientPage extends Component {
     client_id: this.props.match.params.id,
     team_id: this.props.match.params.teamId,
     purchased: false,
+    comment: this.props.reduxStore.clientsByTeamId
+  }
+
+  componentDidMount(){
+    this.props.dispatch({type: 'GET_COMMENT', payload: Number(this.props.match.params.id)})
+  }
+
+  componentWillUnmount(){
+    this.props.dispatch({type: 'SET_COMMENT', payload: ''})
   }
 
   handleAddItem = (event) => {
@@ -42,6 +51,20 @@ class ClientPage extends Component {
       name: event.target.value
     })
     console.log(this.state);
+  }
+
+  handleComment = (event) => {
+    this.props.dispatch({
+      type: 'SET_COMMENT',
+      payload: event.target.value
+    })
+  }
+
+  submitComment = () => {
+    this.props.dispatch({
+      type: 'UPDATE_COMMENT',
+      payload: {id: this.props.match.params.id, comment: this.props.reduxStore.client.comment}
+    })
   }
 
   handleSubmit = () => {
@@ -65,7 +88,7 @@ class ClientPage extends Component {
   render() {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
-console.log(this.props.match.params.name);
+    const comment = this.props.reduxStore.client.comment
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
@@ -97,7 +120,18 @@ console.log(this.props.match.params.name);
           </Fab>
         </div>
         <ShoppingList client_id={client_id} team_id={team_id} />
-        <ClientChat clientId={client_id} team_id={team_id} />
+        
+        <Grid container className='comment'>
+        <TextField
+          onChange={this.handleComment}
+          variant="outlined"
+          fullWidth
+          multiline
+          placeholder='comments' 
+          value={comment}/>
+          <Button onClick={this.submitComment}>Submit Comment</Button>
+        </Grid>
+        {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
     )
   }
