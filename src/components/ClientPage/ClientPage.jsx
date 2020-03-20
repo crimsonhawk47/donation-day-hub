@@ -9,7 +9,7 @@ import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClientChat from '../ClientChat/ClientChat'
-import EditIcon from '@material-ui/icons/Edit';
+import EditClient from '../EditClient/EditClient'
 
 const theme = createMuiTheme({
   palette: {
@@ -35,6 +35,14 @@ class ClientPage extends Component {
     client_id: this.props.match.params.id,
     team_id: this.props.match.params.teamId,
     purchased: false,
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_SINGLE_CLIENT',
+      payload: this.state.client_id
+    })
+
   }
 
   handleAddItem = (event) => {
@@ -66,7 +74,6 @@ class ClientPage extends Component {
   render() {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
-console.log(this.props.match.params.name);
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
@@ -78,7 +85,7 @@ console.log(this.props.match.params.name);
             <PhotoCamera />
           </Fab>
         </div>
-      <h1>{this.props.match.params.name} <EditIcon /></h1>
+        <h1>{this.props.match.params.name} <EditClient id={this.props.match.params.id} /></h1>
         <h3>Shopping List</h3>
         <h4>Item Description</h4>
         <TextField

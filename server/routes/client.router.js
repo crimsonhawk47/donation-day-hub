@@ -190,6 +190,25 @@ router.put(`/item/edit`, (req, res) => {
   })
 })
 
+router.get(`/:id`, (req,res) => {
+  console.log(`we in single client get now`, req.params.id);
+  const id = req.params.id
+  const queryText = `
+  SELECT * FROM "client"
+  WHERE "id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.send(result.rows[0])
+    console.log(`single client from get`, result.rows);
+  })
+  .catch((error) => {
+    res.sendStatus(500);
+    console.log(`error in single client get`, error);
+    
+  })
+})
+
 router.get(`/list/:id`, (req, res) => {
   console.log(`we in server now`, req.params.id);
   let id = req.params.id
@@ -208,6 +227,29 @@ router.get(`/list/:id`, (req, res) => {
   .catch((error) => {
     console.log(`error in shopping list get in server`, error);
     res.sendStatus(500)
+  })
+})
+
+router.put(`/update/:id`, (req, res) => {
+  console.log(`update client params:`, req.params);
+  console.log(`update client body`, req.body);
+  const id = req.params.id
+  const { name, bio, location, } = req.body
+  const queryText = `
+  UPDATE "client"
+   SET "name" = $1,
+   "bio" = $2,
+   "location" = $3
+  WHERE "id" = $4;
+  `
+  pool.query(queryText, [name, bio, location, id])
+  .then((result) => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    res.sendStatus(500);
+    console.log(`error in single client update`, err);
+    
   })
 })
 

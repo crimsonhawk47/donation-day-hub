@@ -9,9 +9,18 @@ const selectedClientMedia = (state = [], action) => {
   }
 };
 
+  const selectSingleClient = (state = {}, action) => {
+    switch (action.type) {
+      case 'SET_SINGLE_CLIENT':
+        return action.payload
+        default:
+          return state;
+    }
+  }
 
 
 
 export default combineReducers({
-  selectedClientMedia
+  selectedClientMedia,
+  selectSingleClient,
 });
