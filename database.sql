@@ -122,10 +122,10 @@ VALUES
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
 VALUES
- ('Kid size winter coat', '2', '1', 'false'),
- ('School backpack', '2', '1', 'false'),
- ('Tent', '2', '1', 'false'),
- ('2 sleeping bags', '2', '1', 'false');
+ ('Kid size winter coat', '2', '1', 'true'),
+ ('School backpack', '2', '1', 'true'),
+ ('Tent', '2', '1', 'true'),
+ ('2 sleeping bags', '2', '1', 'true');
  
 INSERT INTO "messages" ("client_id", "user_id", "team_id", "message", "date")
 VALUES (1, 1, 1, 'First chat message, should be Gabe', NOW()),
