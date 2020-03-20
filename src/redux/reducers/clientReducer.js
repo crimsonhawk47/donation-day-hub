@@ -9,9 +9,9 @@ const selectedClientMedia = (state = [], action) => {
   }
 };
 
-const clientInfo = (state = '', action) => {
+const comment = (state = '', action) => {
   switch (action.type) {
-    case 'SET_CLIENT':
+    case 'SET_COMMENT':
       return action.payload
     default:
       return state;
