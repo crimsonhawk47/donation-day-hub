@@ -72,7 +72,7 @@ class TeamPage extends Component {
                 <TableCell>
                   {this.props.reduxStore.clientsByTeamId.map((clients) => {
                     return (
-                      <ClientList onChange={this.handleClientFetch} id={clients.id} name={clients.name} />
+                      <ClientList onChange={this.handleClientFetch} id={clients.id} name={clients.name} bio={clients.bio} location={clients.location}/>
                     )
                   })}
                 </TableCell>

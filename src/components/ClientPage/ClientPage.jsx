@@ -9,6 +9,11 @@ import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClientChat from '../ClientChat/ClientChat'
+import EditClient from '../EditClient/EditClient'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,6 +48,15 @@ class ClientPage extends Component {
 
   componentWillUnmount(){
     this.props.dispatch({type: 'SET_COMMENT', payload: ''})
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_SINGLE_CLIENT',
+      payload: this.state.client_id
+    })
+    console.log(this.props.reduxStore.client.selectSingleClient);
+
   }
 
   handleAddItem = (event) => {
@@ -100,7 +114,21 @@ class ClientPage extends Component {
             <PhotoCamera />
           </Fab>
         </div>
-      <h1>{this.props.match.params.name}</h1>
+        <h1>{this.props.reduxStore.client.selectSingleClient.name} <EditClient id={this.props.match.params.id} /></h1>
+        <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography >Bio</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+              {this.props.reduxStore.client.selectSingleClient.bio}
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
         <h3>Shopping List</h3>
         <h4>Item Description</h4>
         <TextField
