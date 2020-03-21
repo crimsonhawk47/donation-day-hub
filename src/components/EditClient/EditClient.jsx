@@ -18,7 +18,7 @@ const styles = theme=> ({
 });
 
 class EditClient extends Component {
-rs
+
 
   componentDidMount() {
       this.props.dispatch({
@@ -68,7 +68,7 @@ rs
       })
       this.setState({
         open: false,
-      })
+      })      
     } else {
       this.setState({
         open: false

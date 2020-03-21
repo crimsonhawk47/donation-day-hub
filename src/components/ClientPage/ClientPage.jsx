@@ -46,6 +46,7 @@ class ClientPage extends Component {
       type: 'FETCH_SINGLE_CLIENT',
       payload: this.state.client_id
     })
+    console.log(this.props.reduxStore.client.selectSingleClient);
 
   }
 
@@ -90,7 +91,7 @@ console.log(this.props.match.params);
             <PhotoCamera />
           </Fab>
         </div>
-        <h1>{this.props.match.params.name} <EditClient id={this.props.match.params.id} /></h1>
+        <h1>{this.props.reduxStore.client.selectSingleClient.name} <EditClient id={this.props.match.params.id} /></h1>
         <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}

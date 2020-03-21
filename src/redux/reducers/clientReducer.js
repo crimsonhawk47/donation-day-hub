@@ -10,6 +10,8 @@ const selectedClientMedia = (state = [], action) => {
 };
 
   const selectSingleClient = (state = {}, action) => {
+    console.log(action.payload);
+    
     switch (action.type) {
       case 'SET_SINGLE_CLIENT':
         return action.payload

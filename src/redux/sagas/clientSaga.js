@@ -55,9 +55,9 @@ function* getSingleClient(action) {
 }
 
 function* updateClient(action) {
-  console.log(`we in update client saga`, action.payload);
+  console.log(`we in update client saga`, action.payload.client_id);
   const response = yield axios.put(`/api/client/update/${action.payload.client_id}`, action.payload)
-  yield put({ type: `SET_SINGLE_CLIENT`, payload: action.payload.client_id})
+  yield put({ type: `FETCH_SINGLE_CLIENT`, payload: action.payload.client_id})
 }
 
 function* clientSaga() {
