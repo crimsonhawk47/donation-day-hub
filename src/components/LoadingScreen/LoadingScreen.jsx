@@ -1,35 +1,43 @@
-import React, { Component } from 'react';
+import React from "react";
+import { css } from "@emotion/core";
+import SyncLoader from "react-spinners/SyncLoader";
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
-
-
-const styles = theme=> ({
-  root: {
-    flexGrow: 1,
+ 
+// Can be a string as well. Need to ensure each key-value pair ends with ;
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+ 
+class LoadingScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    };
   }
-});
-
-class LoadingScreen extends Component {
-
+ 
   render() {
-    const { classes } = this.props;
-
     return (
-      <Grid container className={classes.root}>
-        <Typography >
-          I am a LoadingScreen Component
-                </Typography>
-                
-      </Grid>
-    )
-
+      <div className="sweet-loading">
+        <SyncLoader
+          css={override}
+          size={10}
+          color={"#123abc"}
+          loading={this.props.loading}
+        />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = reduxStore => {
-  return (
-    { reduxStore }
-  )
-}
-export default withStyles(styles)(connect(mapStateToProps)(LoadingScreen))
+    return (
+      { loading: reduxStore.loading }
+    )
+  }
+
+export default connect(mapStateToProps)(LoadingScreen)
