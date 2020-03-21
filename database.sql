@@ -9,6 +9,29 @@
 
 --  You should be able to run the whole table when making changes. If DROP TABLE commands yell
 --  At you about tables not existing, simply highlight everything below
+
+
+-- -- USER is a reserved keyword with Postgres
+-- -- You must use double quotes in every query that user is in:
+-- -- ex. SELECT * FROM "user";
+-- -- Otherwise you will have errors!
+
+
+-- Create a database with the name "intersection" then create the following tables
+
+--  You should be able to run the whole table when making changes. If DROP TABLE commands yell
+--  At you about tables not existing, simply highlight everything below
+
+-- -- USER is a reserved keyword with Postgres
+-- -- You must use double quotes in every query that user is in:
+-- -- ex. SELECT * FROM "user";
+-- -- Otherwise you will have errors!
+
+
+-- Create a database with the name "intersection" then create the following tables
+
+--  You should be able to run the whole table when making changes. If DROP TABLE commands yell
+--  At you about tables not existing, simply highlight everything below
 DROP TABLE "media";
 DROP TABLE "team_user";
 DROP TABLE "item";
@@ -48,7 +71,8 @@ CREATE TABLE "client" (
 	"media_release" TEXT,
 	"location" VARCHAR(255),
 	"date" TIMESTAMP with time zone,
-	"team_id" INT REFERENCES "team"
+	"team_id" INT REFERENCES "team",
+	"comment" VARCHAR(2000)
 );
 
 CREATE TABLE "team_user" (
@@ -107,17 +131,14 @@ VALUES (1, 3),
 (1, 1);
 
 INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
-VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1);
+VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1),
+	('Georgie', 'Single Mother. Lost job last year. Evicted 6 months ago.', NULL, 'Minneapolis', NOW(), 1);
+
 
 INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
-VALUES (1, 'image.png', 'img', NULL, NOW(), 3), 
-(1, 'download.jpeg', 'img', NULL, NOW(), 3), 
-(1, 'Untitled.png', 'img', NULL, NOW(), 3);
-
- INSERT INTO "client"
-	("name", "bio", "media_release", "location", "date", "team_id")
-VALUES
-	('Georgie', 'Single Mother. Lost job last year. Evicted 6 months ago.', 'true', 'Minneapolis', '02-02-2020', '1');
+VALUES (2, 'image.png', 'img', NULL, NOW(), 3), 
+(2, 'download.jpeg', 'img', NULL, NOW(), 3), 
+(2, 'Untitled.png', 'img', NULL, NOW(), 3);
 	
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")

@@ -19,10 +19,21 @@ const selectedClientMedia = (state = [], action) => {
           return state;
     }
   }
+const comment = (state = '', action) => {
+  switch (action.type) {
+    case 'SET_COMMENT':
+      return action.payload
+    default:
+      return state;
+  }
+};
+
 
 
 
 export default combineReducers({
   selectedClientMedia,
   selectSingleClient,
+  comment,
+  selectedClientMedia
 });
