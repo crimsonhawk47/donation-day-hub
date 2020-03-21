@@ -16,18 +16,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Button from '@material-ui/core/Button';
-
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import IntersectionIcon from '../NavIcons/Logo Icon.png'
 import LogOutButton from '../LogOutButton/LogOutButton';
-// import Home from '../NavIcons/home1.png';
-// import Team from '../NavIcons/collaboration.png';
-// import Resources from '../NavIcons/checklist.png';
 
 import CardMedia from '@material-ui/core/CardMedia';
 
@@ -96,7 +88,7 @@ class Menu extends React.Component {
   };
 
   logOut = () => {
-    this.props.dispatch({type: 'LOGOUT'})
+    this.props.dispatch({ type: 'LOGOUT' })
     this.handleDrawerClose();
   }
 
@@ -107,94 +99,95 @@ class Menu extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-  
+
   goToPage = (url) => {
     this.props.history.push(url)
     this.handleDrawerClose();
-    
+
   }
 
   render() {
     const { classes, theme } = this.props;
     const { open } = this.state;
-    
 
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar disableGutters={!open}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              Donation Day Hub
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={classNames(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          >
+            <Toolbar disableGutters={!open}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classNames(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit" noWrap>
+                Donation Day Hub
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
-          <CardMedia 
-            className={classes.media}
-            image={IntersectionIcon}
-            title="Logo"
-          />
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={this.handleDrawerClose}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </div>
+            <CardMedia
+              className={classes.media}
+              image={IntersectionIcon}
+              title="Logo"
+            />
 
-          
-          <List>
-            {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
+
+            <List>
+              {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))} */}
-            <Button onClick={() => { this.goToPage(`/home`) }}>
-              <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
-            </Button>
-            <Button className="nav-link" onClick={() => { this.goToPage(`/home`) }}>
-              {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
-            </Button>
-            {this.props.reduxStore.user.id && (
-              <>
-                {this.props.reduxStore.user.access_level !== 3 ?
-                  <Button className="nav-link" onClick={() => { this.goToPage(`/team-page`) }}>
-                    Team
+              <Button onClick={() => { this.goToPage(`/home`) }}>
+                <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
+              </Button>
+              <Button className="nav-link" onClick={() => { this.goToPage(`/home`) }}>
+                {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
+              </Button>
+              {this.props.reduxStore.user.id && (
+                <>
+                  {this.props.reduxStore.user.access_level !== 3 ?
+                    <Button className="nav-link" onClick={() => { this.goToPage(`/team-page`) }}>
+                      Team
             </Button> : <></>}
-                <Button className="nav-link" onClick={this.logOut} >Log Out</Button>
-              </>
-            )}
-          </List>
-        </Drawer>
-        <main
-          className={classNames(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-        </main>
-      </div>
+                  <Button className="nav-link" onClick={this.logOut} >Log Out</Button>
+                </>
+              )}
+            </List>
+          </Drawer>
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open,
+            })}
+          >
+            <div className={classes.drawerHeader} />
+          </main>
+        </div>
+      </ThemeProvider>
     );
   }
 }
@@ -205,9 +198,9 @@ Menu.propTypes = {
 };
 
 const mapStateToProps = reduxStore => {
-    return (
-      { reduxStore }
-    )
-  }
+  return (
+    { reduxStore }
+  )
+}
 
-export default withRouter(connect(mapStateToProps) (withStyles(styles, { withTheme: true })(Menu)));
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Menu)));

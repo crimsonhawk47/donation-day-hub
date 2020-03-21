@@ -16,16 +16,15 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
-import UserDashboard from '../UserDashboard/UserDashboard';
 import EditUser from '../EditUser/EditUser';
 import TeamPage from '../TeamPage/TeamPage';
 import TeamSearch from '../TeamSearch/TeamSearch';
 import AddClient from '../AddClient/AddClient';
 import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
-import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
 import Menu from '../Menu/Menu';
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 import './App.css';
 
@@ -59,6 +58,11 @@ class App extends Component {
                 exact
                 path="/home"
                 component={UserHandler}
+              />
+              <ProtectedRoute
+                exact
+                path="/dev/loading"
+                component={LoadingScreen}
               />
               {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -106,11 +110,6 @@ class App extends Component {
                 exact
                 path="/client-gallery/:clientId"
                 component={ClientGallery}
-              />
-              <ProtectedRoute
-                exact
-                path="/resources"
-                component={Resources}
               />
               <ProtectedRoute
                 exact

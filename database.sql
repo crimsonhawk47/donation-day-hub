@@ -1,27 +1,3 @@
-
--- -- USER is a reserved keyword with Postgres
--- -- You must use double quotes in every query that user is in:
--- -- ex. SELECT * FROM "user";
--- -- Otherwise you will have errors!
-
-
--- Create a database with the name "intersection" then create the following tables
-
---  You should be able to run the whole table when making changes. If DROP TABLE commands yell
---  At you about tables not existing, simply highlight everything below
-
-
--- -- USER is a reserved keyword with Postgres
--- -- You must use double quotes in every query that user is in:
--- -- ex. SELECT * FROM "user";
--- -- Otherwise you will have errors!
-
-
--- Create a database with the name "intersection" then create the following tables
-
---  You should be able to run the whole table when making changes. If DROP TABLE commands yell
---  At you about tables not existing, simply highlight everything below
-
 -- -- USER is a reserved keyword with Postgres
 -- -- You must use double quotes in every query that user is in:
 -- -- ex. SELECT * FROM "user";
@@ -120,8 +96,8 @@ VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 
 ('Billy', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Billy', 'Johnson', 'bjohnson@gmail.com', '774-236-5076', '230 Oakwood Blvd', 'Roseville', 'MN', '55498', 1, NOW(), 0);
 
 INSERT INTO "team" ("captain_name", "is_archived", "date")
-VALUES ('Jessica', FALSE, NOW()),
-('Tou', FALSE, NOW());
+VALUES ('Jessica Heggem', FALSE, NOW()),
+('Tou Xiong', FALSE, NOW());
 
 INSERT INTO "team_user" ("team_id", "user_id")
 VALUES (1, 3),
