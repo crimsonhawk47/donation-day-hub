@@ -16,14 +16,12 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserHandler from '../UserHandler/UserHandler'
 import AdminTeamPage from '../AdminTeamPage/AdminTeamPage';
 import AdminVolunteerPage from '../AdminVolunteerPage/AdminVolunteerPage';
-import UserDashboard from '../UserDashboard/UserDashboard';
 import EditUser from '../EditUser/EditUser';
 import TeamPage from '../TeamPage/TeamPage';
 import TeamSearch from '../TeamSearch/TeamSearch';
 import AddClient from '../AddClient/AddClient';
 import EditClient from '../EditClient/EditClient';
 import ClientGallery from '../ClientGallery/ClientGallery';
-import Resources from '../Resources/Resources';
 import ClientPage from '../ClientPage/ClientPage';
 import Menu from '../Menu/Menu';
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
@@ -112,11 +110,6 @@ class App extends Component {
                 exact
                 path="/client-gallery/:clientId"
                 component={ClientGallery}
-              />
-              <ProtectedRoute
-                exact
-                path="/resources"
-                component={Resources}
               />
               <ProtectedRoute
                 exact
