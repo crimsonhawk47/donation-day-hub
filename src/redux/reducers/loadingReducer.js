@@ -6,6 +6,9 @@ const loading = (state = false, action) => {
     else if(action.type === 'SET_LOADING_FALSE'){
         return false
     }
+    else if (action.type === 'TOGGLE_LOADING'){
+        return !state
+    }
     return state
   }
   
