@@ -74,18 +74,20 @@ class UserDashboard extends Component {
               <></>
             }
 
-            <a href="https://www.google.com/maps/d/viewer?mid=1YNvABle8y-WI0FApN89Lv9vb9uvhxXfe&ll=44.97750434462346%2C-93.27893059999997&z=14">
+            <a
+              target="_blank"
+              href="https://www.google.com/maps/d/viewer?mid=1YNvABle8y-WI0FApN89Lv9vb9uvhxXfe&ll=44.97750434462346%2C-93.27893059999997&z=14">
               Donation Day Map
           </a>
 
           </div>
           {/* RENDER USER PHONE, EMAIL, AND ADDRESS */}
           <div>
-            <p>{this.props.reduxStore.user.phone}</p> 
+            <p>{this.props.reduxStore.user.phone}</p>
             <p>{this.props.reduxStore.user.email}</p>
-            <p>{this.props.reduxStore.user.street_address} 
-            <br />
-            {this.props.reduxStore.user.city}, {this.props.reduxStore.user.state} {this.props.reduxStore.user.zip}</p>
+            <p>{this.props.reduxStore.user.street_address}
+              <br />
+              {this.props.reduxStore.user.city}, {this.props.reduxStore.user.state} {this.props.reduxStore.user.zip}</p>
           </div>
           <br />
           <Fab
