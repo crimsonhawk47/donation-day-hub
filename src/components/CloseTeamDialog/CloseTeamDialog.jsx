@@ -19,11 +19,6 @@ const theme = createMuiTheme({
   },
 })
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 class CloseTeamDalog extends Component {
 
@@ -96,4 +91,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(CloseTeamDalog))
+export default withStyles()(connect(mapStateToProps)(CloseTeamDalog))
