@@ -27,18 +27,6 @@ const styles = theme => ({
   },
 });
 
-// Need to change these to class component functions for SWITCH to work here
-
-// function Switches() {
-//   const [state, setState] = React.useState({
-//     checkedA: true,
-//     checkedB: true,
-//   });
-
-// const handleChange = name => event => {
-//   this.setState({ ...state, [name]: event.target.checked });
-// };
-
 class AdminVolunteerList extends Component {
 
   state = {

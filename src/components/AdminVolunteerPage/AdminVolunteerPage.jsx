@@ -38,7 +38,6 @@ class AdminVolunteerPage extends Component {
     open: false
   }
 
-
   componentDidMount() {
     this.props.dispatch({
       type: 'FETCH_VOLUNTEER_INFO',
@@ -109,16 +108,15 @@ class AdminVolunteerPage extends Component {
               </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Fab onClick={this.handleClosePopup} color="primary">
+                <Button onClick={this.handleClosePopup} color="primary">
                   No
-            </Fab>
-                <Fab onClick={() => {
+                </Button>
+                <Button onClick={() => {
                   { this.makeCaptain() };
                   { this.handleClosePopup() };
                 }} color="primary">
-                  {/* // {this.makeCaptain} color="primary"> */}
-              Yes
-            </Fab>
+                  Yes
+                </Button>
               </DialogActions>
             </Dialog>
           </div>
