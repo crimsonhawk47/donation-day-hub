@@ -23,7 +23,10 @@ function* uploadToAws(action) {
     if (putResponse.data.code) throw `Put image failed with code ${response.data.code}`
     yield axios.post('/api/client/add-image-name', action.payload, config)
     yield put({ type: 'GET_IMAGE_NAMES', payload: client_id })
+    yield put({type: 'SET_LOADING_FALSE'})
   } catch (error) {
+    yield put({type: 'SET_LOADING_FALSE'})
+    alert('Error Uploading Image')
     console.log('UPLOAD_TO_AWS ERROR', error);
   }
 }

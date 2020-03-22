@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography, Input, Button } from '@material-ui/core'
 import Fab from '@material-ui/core/Fab';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 const theme = createMuiTheme({
   palette: {
@@ -46,6 +47,7 @@ class ClientGallery extends Component {
   }
 
   uploadFile = () => {
+    this.props.dispatch({type: 'SET_LOADING_TRUE'})
     this.props.dispatch({
       type: 'UPLOAD_TO_AWS',
       payload: { file: this.state.selectedFile, client_id: this.state.clientId }
@@ -57,14 +59,17 @@ class ClientGallery extends Component {
   }
 
   render() {
-    console.log(this.state.clientId);
-    console.log(this.props.match);
-
 
     const { classes } = this.props;
+    const loading = this.props.loading
+    
+
 
     return (
       <ThemeProvider theme={theme}>
+      {loading ? <LoadingScreen /> : 
+      <>
+
         <h1>Client Gallery</h1>
         <p>1. Click "Choose File" to select receipts, images of clients, and videos to upload.
           <br />
@@ -80,6 +85,7 @@ class ClientGallery extends Component {
             <Fab variant="extended" color="secondary" size="small" onClick={this.uploadFile}>Upload</Fab>
           </Grid>
         </div>
+        
 
         <Grid container>
           {this.props.media.map((file, index) => {
@@ -98,6 +104,8 @@ class ClientGallery extends Component {
             }
           })}
         </Grid>
+        </>
+  }
       </ThemeProvider>
     )
 
@@ -106,7 +114,8 @@ class ClientGallery extends Component {
 
 const mapStateToProps = reduxStore => {
   return (
-    { media: reduxStore.client.selectedClientMedia }
+    { media: reduxStore.client.selectedClientMedia,
+      loading: reduxStore.loading }
   )
 }
 export default withStyles(styles)(connect(mapStateToProps)(ClientGallery))
