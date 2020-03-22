@@ -114,7 +114,10 @@ class ClientPage extends Component {
             <PhotoCamera />
           </Fab>
         </div>
-        <h1>{this.props.reduxStore.client.selectSingleClient.name} <EditClient id={this.props.match.params.id} /></h1>
+        <h1>
+          {this.props.reduxStore.client.selectSingleClient.name}
+          <EditClient id={this.props.match.params.id} />
+        </h1>
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
@@ -129,8 +132,8 @@ class ClientPage extends Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <h2>Shopping List</h2>
         {/* <h4>Item Description</h4> */}
         <TextField
@@ -150,8 +153,8 @@ class ClientPage extends Component {
           </Fab>
         </div>
         <ShoppingList client_id={client_id} team_id={team_id} />
-        <br/>
-        <br/>
+        <br />
+        <br />
         <h2>Comments</h2>
         <p>Enter comments/questions about shopping list items here:</p>
         <Grid container className='comment'>
@@ -162,12 +165,12 @@ class ClientPage extends Component {
             multiline
             placeholder='Comments'
             value={comment} />
-          <Fab
-            variant="extended"
-            color="secondary"
-            size="small"
-            onClick={this.submitComment}>
-            Submit Comment
+            <Fab
+              variant="extended"
+              color="secondary"
+              size="small"
+              onClick={this.submitComment}>
+              Submit Comment
             </Fab>
         </Grid>
         {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
