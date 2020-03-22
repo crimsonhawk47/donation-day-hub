@@ -8,8 +8,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
-import red from '@material-ui/core/colors/red'
-import EditListItem from '../EditListItem/EditListItem'
+import red from '@material-ui/core/colors/red';
+import EditListItem from '../EditListItem/EditListItem';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const theme = createMuiTheme({
   palette: {
