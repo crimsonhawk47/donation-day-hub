@@ -15,6 +15,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+
 
 
 const theme = createMuiTheme({
@@ -55,6 +57,15 @@ class ShoppingItem extends Component {
     })
   }
 
+   // Popup open and close
+   handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ open: false });
+  };
+
   render() {
 
     return (
@@ -78,11 +89,32 @@ class ShoppingItem extends Component {
               variant="contained"
               color="secondary"
               size="small"
-              onClick={this.handleDelete}
+              onClick={this.handleClickOpen}
             >
               <DeleteIcon fontSize="small" />
             </Fab>
             </TableCell>
+            <div>
+            <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">DELETE ITEM</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to delete this item?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClosePopup} color="primary">
+                No
+              </Button>
+              <Button onClick={() => {
+                { this.handleDelete() };
+                { this.handleClosePopup() };
+              }} color="primary">
+                Yes
+              </Button>
+            </DialogActions>
+            </Dialog>
+            </div>
 
         </TableRow>
       </ThemeProvider>
