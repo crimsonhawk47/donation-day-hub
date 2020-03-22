@@ -53,6 +53,13 @@ class AdminVolunteerPage extends Component {
     })
   }
 
+  makeAdmin = () => {
+    this.props.dispatch({
+      type: 'MAKE_CAPTAIN',
+      payload: this.props.reduxStore.adminVolunteerInfo
+    })
+  }
+
   goToTeam = () => {
     const currentVolunteerId = this.props.reduxStore.adminVolunteerInfo.active_team
     this.props.history.push(`/admin-team-page/${currentVolunteerId}`)
@@ -132,6 +139,10 @@ class AdminVolunteerPage extends Component {
             <br />
             {volunteer.city}, {volunteer.state} {volunteer.zip}
           </p>
+          <Grid container justify='flex-end'>
+            <button onClick={this.makeAdmin}>Make Admin</button>
+          </Grid>
+
         </Paper>
       </ThemeProvider>
     )
