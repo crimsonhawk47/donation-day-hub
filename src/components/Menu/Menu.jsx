@@ -126,7 +126,6 @@ class Menu extends React.Component {
           <div className="app-bar">
           <AppBar
             position="fixed"
-            color="primary"
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
             })}
