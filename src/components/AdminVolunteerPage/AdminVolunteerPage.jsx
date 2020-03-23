@@ -54,8 +54,9 @@ class AdminVolunteerPage extends Component {
 
   makeAdmin = () => {
     this.props.dispatch({
-      type: 'MAKE_CAPTAIN',
-      payload: this.props.reduxStore.adminVolunteerInfo
+      type: 'ADMIN_MAKE_ADMIN',
+      payload: this.props.reduxStore.adminVolunteerInfo.id,
+      history: this.props.history
     })
   }
 
