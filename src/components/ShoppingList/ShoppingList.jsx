@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, createMuiTheme } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -30,16 +30,28 @@ import ShoppingItem from '../ShoppingItem/ShoppingItem'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    // color: green[400],
+    // '&$checked' : {
+    //   color:green[600],
+    // }
   }
 });
+
+const theme = createMuiTheme({
+  palette: {
+    tertiary:{
+      main: 'green[400]'
+    }
+  }
+})
 
 class ShoppingList extends Component {
 
   state = {
-  client_id: this.props.client_id,
-  team_id: this.props.team_id,
-  item_name: '',
-  purchased: 'false'
+    client_id: this.props.client_id,
+    team_id: this.props.team_id,
+    item_name: '',
+    purchased: 'false'
   }
 
   componentDidMount() {
@@ -50,40 +62,50 @@ class ShoppingList extends Component {
   }
 
   handleCheck = () => {
-    console.log(`we checking shit off`);
+    console.log(`we checking stuff off`);
 
   }
 
   render() {
     const { classes } = this.props;
     console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
-    
+
     return (
       <>
         <TableContainer><Table>
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                <Checkbox onChange={this.handleCheck} />
+                {/* <Checkbox 
+                onChange={this.handleCheck} 
+                color="tertiary"
+                /> */}
               </TableCell>
               <TableCell >
-                Item and Item Description
-          </TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            
-                {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
-                {this.props.reduxStore.shoppingListReducer.map((item) => {
-                  return (
-                    <ShoppingItem id={item.id} key={item.id} item={item.name} team={item.team_id} purchased={item.purchased} />
-                  )
-                })}
+                {/* Item and Item Description */}
+              </TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
 
-          </TableBody>
-        </Table>
+              {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
+              {this.props.reduxStore.shoppingListReducer.map((item) => {
+                return (
+                  <ShoppingItem
+                    id={item.id}
+                    key={item.id}
+                    item={item.name}
+                    team={item.team_id}
+                    purchased={item.purchased}
+                    client={item.client_id}
+                  />
+                )
+              })}
+
+            </TableBody>
+          </Table>
         </TableContainer>
       </>
     )

@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
+import '../App/App.css'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import ClientChat from '../ClientChat/ClientChat'
+import EditClient from '../EditClient/EditClient'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-
-const styles = theme=> ({
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#283748',
+    },
+    secondary: {
+      main: '#6d89b1'
+    },
+    tertiary: {
+      main: '#808281'
+    },
+  },
   root: {
     flexGrow: 1,
   }
-});
-
+})
 
 class ClientPage extends Component {
 
@@ -20,23 +39,60 @@ class ClientPage extends Component {
     client_id: this.props.match.params.id,
     team_id: this.props.match.params.teamId,
     purchased: false,
+    comment: this.props.reduxStore.clientsByTeamId
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_COMMENT', payload: Number(this.props.match.params.id) })
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({ type: 'SET_COMMENT', payload: '' })
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_SINGLE_CLIENT',
+      payload: this.state.client_id
+    })
+    console.log(this.props.reduxStore.client.selectSingleClient);
+
   }
 
   handleAddItem = (event) => {
     console.log(event.target.value);
     this.setState({
-    name: event.target.value
+      name: event.target.value
     })
     console.log(this.state);
-    
+  }
+
+  handleComment = (event) => {
+    this.props.dispatch({
+      type: 'SET_COMMENT',
+      payload: event.target.value
+    })
+  }
+
+  submitComment = () => {
+    this.props.dispatch({
+      type: 'UPDATE_COMMENT',
+      payload: { id: this.props.match.params.id, comment: this.props.reduxStore.client.comment }
+    })
   }
 
   handleSubmit = () => {
-    this.props.dispatch({
-      type: 'ADD_ITEM',
-      payload: this.state
-    })
-    
+    if (this.state.name === '') {
+      alert("Please add and item and description!")
+    } else {
+      this.props.dispatch({
+        type: 'ADD_ITEM',
+        payload: this.state
+      })
+      this.setState({
+        name: ''
+      })
+    }
   }
 
   goToMedia = (clientId) => {
@@ -45,27 +101,81 @@ class ClientPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const {client_id, team_id} = this.state
+    const { client_id, team_id } = this.state
+    const comment = this.props.reduxStore.client.comment
 
     return (
-      <>
-
-                <h3>Items Requested</h3> 
-                <h4>Item and description</h4>
-                <TextField 
-                onChange={this.handleAddItem}
-                variant="outlined" 
-                fullWidth 
-                placeholder='Add Item'/>
-                <Button  
-                onClick={this.handleSubmit}
-                variant='contained'>Click To Add</Button>
-                <ShoppingList client_id={client_id} team_id={team_id}/>
-
-      <Button variant="outlined" onClick={() => {this.goToMedia(client_id)}}>Media</Button>
-      </>
+      <ThemeProvider theme={theme} classes={classes.root} >
+        <div className="camera-icon">
+          <Fab
+            variant="outlined"
+            color="primary"
+            onClick={() => { this.goToMedia(client_id) }}>
+            <PhotoCamera />
+          </Fab>
+        </div>
+        <h1>
+          {this.props.reduxStore.client.selectSingleClient.name}
+          <EditClient id={this.props.match.params.id} />
+        </h1>
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography >Bio</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              {this.props.reduxStore.client.selectSingleClient.bio}
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <br />
+        <br />
+        <h2>Shopping List</h2>
+        {/* <h4>Item Description</h4> */}
+        <TextField
+          onChange={this.handleAddItem}
+          variant="outlined"
+          fullWidth
+          placeholder='Item Description'
+          value={this.state.name} />
+        <div className="client-page-add-item-btn">
+          <Fab
+            onClick={this.handleSubmit}
+            variant="extended"
+            color="secondary"
+            size="small"
+          >
+            Add Item
+          </Fab>
+        </div>
+        <ShoppingList client_id={client_id} team_id={team_id} />
+        <br />
+        <br />
+        <h2>Comments</h2>
+        <p>Enter comments/questions about shopping list items here:</p>
+        <Grid container className='comment'>
+          <TextField
+            onChange={this.handleComment}
+            variant="outlined"
+            fullWidth
+            multiline
+            placeholder='Comments'
+            value={comment} />
+            <Fab
+              variant="extended"
+              color="secondary"
+              size="small"
+              onClick={this.submitComment}>
+              Submit Comment
+            </Fab>
+        </Grid>
+        {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
+      </ThemeProvider>
     )
-
   }
 }
 
@@ -74,4 +184,4 @@ const mapStateToProps = reduxStore => {
     { reduxStore }
   )
 }
-export default withStyles(styles)(connect(mapStateToProps)(ClientPage))
+export default withStyles()(connect(mapStateToProps)(ClientPage))

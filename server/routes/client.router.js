@@ -22,6 +22,8 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 });
 
+
+
 //User Route
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('in client post router');
@@ -114,6 +116,23 @@ router.post('/item/add', (req, res) => {
   })
 })
 
+router.delete('/item/delete/:id', (req, res) => {
+  console.log(`we in server for delete`, req.params.id);
+  let id = req.params.id
+  const queryText = 
+  `
+  DELETE FROM "item"
+  WHERE "id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+    res.sendStatus(500)
+  })
+})
+
 
 router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
@@ -134,12 +153,72 @@ router.get('/team/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
+router.put('/item/purchased/:id', (req, res) => {
+  console.log(`we in server put for purchased`, req.params);
+  id = req.params.id
+  const queryText = `
+  UPDATE "item"
+  SET "purchased" = NOT "purchased"
+  WHERE "id" = $1
+  `
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    res.sendStatus(500)
+    console.log(`error in put for checked`, error);
+    
+  })
+})
+
+router.put(`/item/edit`, (req, res) => {
+  console.log(`we in item put server`, req.body);
+  const { id, name } = req.body;
+
+  const queryText = `
+  UPDATE "item"
+  SET "name" = $1
+  WHERE "id" = $2;
+  `;
+  pool.query(queryText, [name, id])
+  .then((result) => {
+    res.sendStatus(200)
+  })
+  .catch((error) => {
+    res.sendStatus(500);
+    console.log(`error in put for item`, eroror);
+    
+  })
+})
+
+router.get(`/:id`, (req,res) => {
+  console.log(`we in single client get now`, req.params.id);
+  const id = req.params.id
+  const queryText = `
+  SELECT * FROM "client"
+  WHERE "id" = $1;
+  `;
+  pool.query(queryText, [id])
+  .then((result) => {
+    res.send(result.rows[0])
+    console.log(`single client from get`, result.rows);
+  })
+  .catch((error) => {
+    res.sendStatus(500);
+    console.log(`error in single client get`, error);
+    
+  })
+})
+
 router.get(`/list/:id`, (req, res) => {
   console.log(`we in server now`, req.params.id);
   let id = req.params.id
   const queryText = `
   SELECT * FROM "item"
-  WHERE "client_id" = $1;
+  WHERE "client_id" = $1
+  ORDER BY "name" ASC
+  ;
   `;
   pool.query(queryText, [id])
   .then((result) => {
@@ -151,6 +230,70 @@ router.get(`/list/:id`, (req, res) => {
     console.log(`error in shopping list get in server`, error);
     res.sendStatus(500)
   })
+})
+
+router.put(`/update/:id`, (req, res) => {
+  console.log(`update client params:`, req.params);
+  console.log(`update client body`, req.body);
+  const id = req.params.id
+  const { name, bio, location, } = req.body
+  const queryText = `
+  UPDATE "client"
+   SET "name" = $1,
+   "bio" = $2,
+   "location" = $3
+  WHERE "id" = $4;
+  `
+  pool.query(queryText, [name, bio, location, id])
+  .then((result) => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    res.sendStatus(500);
+    console.log(`error in single client update`, err);
+    
+  })
+})
+router.get('/comment/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT comment FROM "client" WHERE "client".id = $1`
+  const clientId = req.params.id
+  pool.query(queryText, [clientId])
+    .then(result => {
+      console.log(result.rows)
+      res.send(result.rows[0])
+    }).catch(error => {
+      console.log('error in client GET', error)
+      res.sendStatus(500);
+    })
+
+});
+
+router.put('/comment/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `UPDATE "client" SET "comment" = $1  WHERE "client".id = $2`
+  const clientId = req.params.id
+  console.log(req.body);
+  
+  pool.query(queryText, [req.body.comment, clientId])
+    .then(result => {
+      res.sendStatus(200)
+    }).catch(error => {
+      console.log('error in client GET', error)
+      res.sendStatus(500);
+    })
+
+});
+
+//Gives somebody admin access
+router.put('/make-admin/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
+  try {
+    const userId = req.params.id
+    const queryText = `UPDATE "user" SET "access_level" = 3 WHERE "user".id = $1`
+    const response = await pool.query(queryText, [userId])
+    res.sendStatus(200)
+  } catch (err) {
+    console.log(`server make admin error: ${err}`);
+    res.sendStatus(500)
+  }
 })
 
 module.exports = router;

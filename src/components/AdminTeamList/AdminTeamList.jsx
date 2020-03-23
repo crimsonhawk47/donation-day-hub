@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 
-
 import { withRouter } from 'react-router-dom';
 
 const moment = require('moment');
@@ -57,9 +56,6 @@ class AdminTeamList extends Component {
     this.props.dispatch({ type: 'CLOSE_TEAM', payload: teamId })
   }
 
-
-  // Need a handleTeamClick function here
-
   render() {
     const { classes } = this.props;
     let teams = this.props.reduxStore.adminTeamList
@@ -89,24 +85,27 @@ class AdminTeamList extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Donation Day</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Close Team?</TableCell>
+              <TableCell><b>Donation Day</b></TableCell>
+              <TableCell align="left"><b>Name</b></TableCell>
+              <TableCell align="left"><b>Close Team?</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredTeams.map(team => {
               return (
-                <TableRow key={team.id}
+                <TableRow
+                  key={team.id}
+                  onClick={() => this.handleTeamClick(team.id)}
                 >
                   <TableCell component="th" scope="row">
                     {moment(team.date).format('LL')}
                   </TableCell>
-                  <TableCell align="left" onClick={() => this.handleTeamClick(team.id)}>{team.captain_name}</TableCell>
+                  <TableCell align="left" >{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
-                    <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} />
-
-                    : <></>}</TableCell>
+                    <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
+                    : 
+                    <></>}
+                  </TableCell>
                 </TableRow>
               )
             })}

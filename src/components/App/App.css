@@ -11,10 +11,6 @@ body {
 .log-in-form {
     width: auto;
     text-align: center;
-    /* height: 250px; */
-    /* margin: 20px auto; */
-    /* padding: 25px; */
-    /* border-radius: 2px; */
 }
 
 .register-form {
@@ -53,4 +49,41 @@ input {
     outline:0;
     border-bottom:1px solid #444; 
     cursor: pointer;
+}
+
+.camera-icon {
+    text-align: right;
+}
+
+.general-formatting {
+    margin: 2%;
+}
+
+.team-page {
+    text-align: center;
+}
+
+.edit-profile {
+    text-align: center;
+}
+
+.edit-user-cancel {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.edit-user-save {
+    display: inline-block;
+}
+
+.admin-team-page {
+    text-align: center;
+}
+
+.client-page-add-item-btn {
+    text-align: right;
+}
+
+.upload-btn {
+    text-align: right;
 }

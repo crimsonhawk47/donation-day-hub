@@ -27,18 +27,6 @@ const styles = theme => ({
   },
 });
 
-// Need to change these to class component functions for SWITCH to work here
-
-// function Switches() {
-//   const [state, setState] = React.useState({
-//     checkedA: true,
-//     checkedB: true,
-//   });
-
-// const handleChange = name => event => {
-//   this.setState({ ...state, [name]: event.target.checked });
-// };
-
 class AdminVolunteerList extends Component {
 
   state = {
@@ -98,9 +86,9 @@ class AdminVolunteerList extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Team Status</TableCell>
+              <TableCell><b>Date</b></TableCell>
+              <TableCell align="left"><b>Name</b></TableCell>
+              <TableCell align="left"><b>Team Status</b></TableCell>
             </TableRow>
           </TableHead>
           
@@ -121,13 +109,7 @@ class AdminVolunteerList extends Component {
                       <TableCell align="left">Member</TableCell>
                     :
                     <TableCell align="left">No Team</TableCell>}
-                  {/* Need to play with this for toggle to actually work */}
-                  {/* <Switch
-                    checked={state.checkedB}
-                    onChange={handleChange('checkedB')}
-                    value="checkedB"
-                    color="primary"
-                  /> */}
+                 
               </TableRow>
               )
             })}

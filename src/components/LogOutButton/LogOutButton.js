@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Logout from '../NavIcons/logout.png';
+import './LogOutButton.css';
 
 const LogOutButton = props => (
   <button
@@ -8,8 +10,10 @@ const LogOutButton = props => (
     // is passed to it from it's parents through React props
     className={props.className}
     onClick={() => props.dispatch({ type: 'LOGOUT' })}
+    
   >
-    Log Out
+    Logout
+    {/* <img src={Logout} alt="logout" className="logout" /> */}
   </button>
 );
 

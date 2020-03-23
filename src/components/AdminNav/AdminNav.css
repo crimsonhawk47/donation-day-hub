@@ -1,0 +1,46 @@
+
+  .nav-right {
+    float: right;
+  }
+  
+  .nav{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #808281;
+    overflow: hidden;
+    font-family: Nexa Light;
+    font-weight: 500;
+    font-size: 16px;
+    color: #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav-title {
+    font-size: 24px;
+    font-weight: 700;
+    display: inline-block;
+    color: #f6f6f6;
+    padding-left: 10px;
+  }
+  
+  .nav-link {
+    float: left;
+    font-family: Nexa Light;
+    text-align: center;
+    padding: 24px 10px;
+    text-decoration: none;
+    font-size: 15px; 
+  
+    /* these last two make the logout button in
+    the nav bar look like another link */
+    border: none;
+    cursor: pointer;
+    outline: 0;
+    transition: all 0.3s ease 0s;
+  }
+  
+  .nav-link:hover {
+  background-color: #6d89b1;
+  }
