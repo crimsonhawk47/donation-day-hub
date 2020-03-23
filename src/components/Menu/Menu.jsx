@@ -20,7 +20,6 @@ import Button from '@material-ui/core/Button';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import IntersectionIcon from '../NavIcons/Logo Icon.png'
 import LogOutButton from '../LogOutButton/LogOutButton';
-
 import CardMedia from '@material-ui/core/CardMedia';
 
 const drawerWidth = 150;
