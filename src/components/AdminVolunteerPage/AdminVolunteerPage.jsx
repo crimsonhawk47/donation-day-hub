@@ -139,7 +139,7 @@ class AdminVolunteerPage extends Component {
             {volunteer.city}, {volunteer.state} {volunteer.zip}
           </p>
           <Grid container justify='flex-end'>
-            <button onClick={this.makeAdmin}>Make Admin</button>
+            <Button size='small' variant='outlined' onClick={this.makeAdmin}>Make Admin</Button>
           </Grid>
 
         </Paper>
