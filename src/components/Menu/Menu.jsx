@@ -119,7 +119,7 @@ class Menu extends React.Component {
     const { open } = this.state;
 
     return (
-      <ThemeProvider color={color}>
+      <ThemeProvider theme={color}>
         <div className={classes.root}>
           <CssBaseline />
           <div className="app-bar">
