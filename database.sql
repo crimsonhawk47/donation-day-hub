@@ -92,8 +92,8 @@ VALUES ('Gabe', '$2a$10$FMWf/Zx934b0QbqoiCSuoO0PJ5M273f/10pffwxo8GpvQN6Usx0gm', 
 ('Jessica', '$2a$10$.xLq2xwq9MS9EYRFI/h0vOkyFL277eTASomppCYonYXVcASBMZqPC', 'Jessica', 'Heggem', 'jheggem@gmail.com', '785-424-9078', '7890 63rd St N', 'Bloomington', 'MN', '55457', 2, NOW(), 1),
 ('Tou', '$2a$10$x4GLDwPSqx3dLw8qHzlHzeFX4nxTN4GN7i5z5phjpPe3jdPe4iB.G', 'Tou', 'Xiong', 'txiiong@gmail.com', '890-257-5631', '560 Lake St', 'Edina', 'MN', '55424', 2, NOW(), 2),
 ('Amber', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Amber', 'Volkmann', 'avolkmann@gmail.com', '423-746-8952', '2683 Cherrywood Ln', 'Austin', 'TX', '55672', 1, NOW(), 1),
-('Andrea', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Andrea', 'Bert', 'abert@gmail.com', '907-363-1568', '6340 Stonebroke Rd', 'Appleton', 'WI', '55678', 3, NOW(), 0),
-('Billy', '$2a$10$sfTE8trmDX6RH3Whr3KTdeyWqx4JT2cS5RFyGc0tW9JhYkG5e.NwG', 'Billy', 'Johnson', 'bjohnson@gmail.com', '774-236-5076', '230 Oakwood Blvd', 'Roseville', 'MN', '55498', 1, NOW(), 0);
+('Andrea', '$2a$10$SZzb5ITs2wV4tE1Ei1vK5ectds/YdzFNK9PIddBaocazPkaakJnuu', 'Andrea', 'Bert', 'abert@gmail.com', '907-363-1568', '6340 Stonebroke Rd', 'Appleton', 'WI', '55678', 3, NOW(), 0),
+('Billy', '$2a$10$SZzb5ITs2wV4tE1Ei1vK5ectds/YdzFNK9PIddBaocazPkaakJnuu', 'Billy', 'Johnson', 'bjohnson@gmail.com', '774-236-5076', '230 Oakwood Blvd', 'Roseville', 'MN', '55498', 1, NOW(), 0);
 
 INSERT INTO "team" ("captain_name", "is_archived", "date")
 VALUES ('Jessica Heggem', FALSE, NOW()),

@@ -3,14 +3,15 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 
 function* adminMakeAdminSaga() {
-  yield takeEvery('ADMIN_MAKE_ADMIN', makeCaptain)
+  yield takeEvery('ADMIN_MAKE_ADMIN', makeAdmin)
 }
 
-function* makeCaptain(action) {
+function* makeAdmin(action) {
   try {
-    console.log('BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-    
-    console.log('BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+    yield axios.put(`/api/volunteer/make-admin/${action.payload}`)
+    yield put({type: 'FETCH_VOLUNTEER_LIST'})
+    action.history.push('/home')
+
     
 
   } catch (error) {

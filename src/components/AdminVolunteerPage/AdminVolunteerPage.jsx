@@ -54,8 +54,9 @@ class AdminVolunteerPage extends Component {
 
   makeAdmin = () => {
     this.props.dispatch({
-      type: 'MAKE_CAPTAIN',
-      payload: this.props.reduxStore.adminVolunteerInfo
+      type: 'ADMIN_MAKE_ADMIN',
+      payload: this.props.reduxStore.adminVolunteerInfo.id,
+      history: this.props.history
     })
   }
 
@@ -138,7 +139,7 @@ class AdminVolunteerPage extends Component {
             {volunteer.city}, {volunteer.state} {volunteer.zip}
           </p>
           <Grid container justify='flex-end'>
-            <button onClick={this.makeAdmin}>Make Admin</button>
+            <Button size='small' variant='outlined' onClick={this.makeAdmin}>Make Admin</Button>
           </Grid>
 
         </Paper>

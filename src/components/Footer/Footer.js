@@ -10,6 +10,8 @@ const demoLeonardFill = async () => {
   await axios.put('/api/client/comment/3', {comment: 'What color of Winter Boots does Leonard want?'})
   await axios.put(`/api/client/item/purchased/6`)
   await axios.put(`/api/client/item/purchased/7`)
+  await axios.put(`/api/client/item/purchased/5`)
+
 
   
 }
