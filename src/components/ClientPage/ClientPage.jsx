@@ -42,12 +42,12 @@ class ClientPage extends Component {
     comment: this.props.reduxStore.clientsByTeamId
   }
 
-  componentDidMount(){
-    this.props.dispatch({type: 'GET_COMMENT', payload: Number(this.props.match.params.id)})
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_COMMENT', payload: Number(this.props.match.params.id) })
   }
 
-  componentWillUnmount(){
-    this.props.dispatch({type: 'SET_COMMENT', payload: ''})
+  componentWillUnmount() {
+    this.props.dispatch({ type: 'SET_COMMENT', payload: '' })
   }
 
   componentDidMount() {
@@ -77,14 +77,14 @@ class ClientPage extends Component {
   submitComment = () => {
     this.props.dispatch({
       type: 'UPDATE_COMMENT',
-      payload: {id: this.props.match.params.id, comment: this.props.reduxStore.client.comment}
+      payload: { id: this.props.match.params.id, comment: this.props.reduxStore.client.comment }
     })
   }
 
   handleSubmit = () => {
-    if (this.state.name === ''){
+    if (this.state.name === '') {
       alert("Please add and item and description!")
-    } else{
+    } else {
       this.props.dispatch({
         type: 'ADD_ITEM',
         payload: this.state
@@ -114,29 +114,34 @@ class ClientPage extends Component {
             <PhotoCamera />
           </Fab>
         </div>
-        <h1>{this.props.reduxStore.client.selectSingleClient.name} <EditClient id={this.props.match.params.id} /></h1>
+        <h1>
+          {this.props.reduxStore.client.selectSingleClient.name}
+          <EditClient id={this.props.match.params.id} />
+        </h1>
         <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography >Bio</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography >Bio</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
               {this.props.reduxStore.client.selectSingleClient.bio}
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-        <h3>Shopping List</h3>
-        <h4>Item Description</h4>
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <br />
+        <br />
+        <h2>Shopping List</h2>
+        {/* <h4>Item Description</h4> */}
         <TextField
           onChange={this.handleAddItem}
           variant="outlined"
           fullWidth
-          placeholder='Add Item' 
-          value={this.state.name}/>
+          placeholder='Item Description'
+          value={this.state.name} />
         <div className="client-page-add-item-btn">
           <Fab
             onClick={this.handleSubmit}
@@ -144,20 +149,29 @@ class ClientPage extends Component {
             color="secondary"
             size="small"
           >
-            Click To Add
+            Add Item
           </Fab>
         </div>
         <ShoppingList client_id={client_id} team_id={team_id} />
-        
+        <br />
+        <br />
+        <h2>Comments</h2>
+        <p>Enter comments/questions about shopping list items here:</p>
         <Grid container className='comment'>
-        <TextField
-          onChange={this.handleComment}
-          variant="outlined"
-          fullWidth
-          multiline
-          placeholder='comments' 
-          value={comment}/>
-          <Button onClick={this.submitComment}>Submit Comment</Button>
+          <TextField
+            onChange={this.handleComment}
+            variant="outlined"
+            fullWidth
+            multiline
+            placeholder='Comments'
+            value={comment} />
+            <Fab
+              variant="extended"
+              color="secondary"
+              size="small"
+              onClick={this.submitComment}>
+              Submit Comment
+            </Fab>
         </Grid>
         {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
