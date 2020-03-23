@@ -56,7 +56,7 @@ class AdminDashboard extends Component {
             <>
                 <div className={classes.root}>
                     <ThemeProvider theme={theme}>
-                        <AppBar position="static" color="primary">
+                        <AppBar position="static" >
                             <Tabs value={this.state.value} onChange={this.handleChange}>
                                 <Tab label="Volunteers" />
                                 <Tab label="Clients" />
