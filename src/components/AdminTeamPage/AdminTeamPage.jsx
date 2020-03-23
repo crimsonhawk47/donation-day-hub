@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 import AdminClientListForTeam from '../AdminClientListForTeam/AdminClientListForTeam'
 import '../App/App.css'
 
@@ -47,6 +48,12 @@ class AdminTeamPage extends Component {
 
     return (
       <ThemeProvider theme={theme}>
+        {/* {team && !team.is_archived ?
+          <Grid justify='center' container>
+            <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
+          </Grid>
+          :
+          <></>} */}
         <Paper className={classes.root}>
           {team ?
             <div className="admin-team-page">
@@ -62,7 +69,7 @@ class AdminTeamPage extends Component {
               </div>
 
             </div>
-            :<></>
+            : <></>
           }
         </Paper>
         <AdminClientListForTeam />

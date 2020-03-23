@@ -284,16 +284,6 @@ router.put('/comment/:id', rejectUnauthenticated, (req, res) => {
 });
 
 //Gives somebody admin access
-router.put('/make-admin/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
-  try {
-    const userId = req.params.id
-    const queryText = `UPDATE "user" SET "access_level" = 3 WHERE "user".id = $1`
-    const response = await pool.query(queryText, [userId])
-    res.sendStatus(200)
-  } catch (err) {
-    console.log(`server make admin error: ${err}`);
-    res.sendStatus(500)
-  }
-})
+
 
 module.exports = router;

@@ -64,4 +64,18 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
 
 })
 
+router.put('/make-admin/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
+    try {
+        console.log(`IN MAKE ADMIN ROUTER`);
+        
+      const userId = req.params.id
+      const queryText = `UPDATE "user" SET "access_level" = 3 WHERE "user".id = $1`
+      const response = await pool.query(queryText, [userId])
+      res.sendStatus(200)
+    } catch (err) {
+      console.log(`server make admin error: ${err}`);
+      res.sendStatus(500)
+    }
+  })
+
 module.exports = router;
