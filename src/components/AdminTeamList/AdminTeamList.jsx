@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 
-
 import { withRouter } from 'react-router-dom';
 
 const moment = require('moment');
@@ -104,8 +103,9 @@ class AdminTeamList extends Component {
                   <TableCell align="left" >{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
                     <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
-
-                    : <></>}</TableCell>
+                    : 
+                    <></>}
+                  </TableCell>
                 </TableRow>
               )
             })}

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Menu/Menu.css'
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,13 +18,20 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Button from '@material-ui/core/Button';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
 import IntersectionIcon from '../NavIcons/Logo Icon.png'
 import LogOutButton from '../LogOutButton/LogOutButton';
 
 import CardMedia from '@material-ui/core/CardMedia';
 
-const drawerWidth = 240;
+const drawerWidth = 150;
+
+const color = createMuiTheme({
+  palette: {
+      primary: {
+          main: '#283748'
+      }
+  }
+})
 
 const styles = theme => ({
   root: {
@@ -80,6 +88,7 @@ const styles = theme => ({
     }),
     marginLeft: 0,
   },
+  
 });
 
 class Menu extends React.Component {
@@ -111,16 +120,18 @@ class Menu extends React.Component {
     const { open } = this.state;
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider color={color}>
         <div className={classes.root}>
           <CssBaseline />
+          <div className="app-bar">
           <AppBar
             position="fixed"
+            color="primary"
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
             })}
           >
-            <Toolbar disableGutters={!open}>
+            <Toolbar color="primary" disableGutters={!open}>
               <IconButton
                 color="inherit"
                 aria-label="Open drawer"
@@ -134,6 +145,7 @@ class Menu extends React.Component {
             </Typography>
             </Toolbar>
           </AppBar>
+          </div>
           <Drawer
             className={classes.drawer}
             variant="persistent"
@@ -165,16 +177,22 @@ class Menu extends React.Component {
               <Button onClick={() => { this.goToPage(`/home`) }}>
                 <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
               </Button>
+              <br />
+              <br/>
               <Button className="nav-link" onClick={() => { this.goToPage(`/home`) }}>
                 {this.props.reduxStore.user.id ? 'Home' : 'Login / Register'}
               </Button>
+              <br />
+              <br/>
               {this.props.reduxStore.user.id && (
                 <>
                   {this.props.reduxStore.user.access_level !== 3 ?
-                    <Button className="nav-link" onClick={() => { this.goToPage(`/team-page`) }}>
+                    <Button align="right" className="nav-link" onClick={() => { this.goToPage(`/team-page`) }}>
                       Team
-            </Button> : <></>}
-                  <Button className="nav-link" onClick={this.logOut} >Log Out</Button>
+                    </Button> : <></>}
+                  <br/>
+                  <br/>
+                  <Button align="center" className="nav-link" onClick={this.logOut} >Log Out</Button>
                 </>
               )}
             </List>
