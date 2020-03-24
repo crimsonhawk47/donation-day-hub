@@ -119,7 +119,7 @@ VALUES (2, 'image.png', 'img', NULL, NOW(), 3),
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
 VALUES
- ('Kid size winter coat', '2', '1', 'true'),
+ ('Kid size winter coat', '2', '1', 'false'),
  ('School backpack', '2', '1', 'true'),
  ('Tent', '2', '1', 'true'),
  ('2 sleeping bags', '2', '1', 'true');
