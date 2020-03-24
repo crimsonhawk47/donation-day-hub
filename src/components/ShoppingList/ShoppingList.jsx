@@ -73,21 +73,16 @@ class ShoppingList extends Component {
     return (
       <>
         <TableContainer><Table>
-          <TableHead>
+          {/* <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                {/* <Checkbox 
-                onChange={this.handleCheck} 
-                color="tertiary"
-                /> */}
               </TableCell>
               <TableCell >
-                {/* Item and Item Description */}
               </TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
             <TableBody>
 
               {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}
