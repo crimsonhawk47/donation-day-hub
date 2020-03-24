@@ -80,10 +80,7 @@ input {
     text-align: center;
 }
 
-.client-page-add-item-btn {
-    text-align: right;
-}
-
 .upload-btn {
     text-align: right;
+    margin-bottom: 15px;
 }

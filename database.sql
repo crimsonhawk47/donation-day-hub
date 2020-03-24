@@ -106,9 +106,9 @@ VALUES (1, 3),
 (2, 2), 
 (1, 1);
 
-INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id")
-VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1),
-	('Georgie', 'Single Mother. Lost job last year. Evicted 6 months ago.', NULL, 'Minneapolis', NOW(), 1);
+INSERT INTO "client" ("name", "bio", "media_release", "location", "date", "team_id", "comment")
+VALUES ('Caleb', 'Has been homeless for 2 years', NULL, 'St. Paul', NOW(), 1, NULL),
+	('Georgie', 'Single Mother. Lost job last year. Evicted 6 months ago.', NULL, 'Minneapolis', NOW(), 1, 'What color for the jacket?');
 
 
 INSERT INTO "media" ("client_id", "link", "type", "metadata", "date", "user_id")
@@ -119,7 +119,7 @@ VALUES (2, 'image.png', 'img', NULL, NOW(), 3),
 	
 INSERT INTO "item" ("name", "client_id", "team_id", "purchased")
 VALUES
- ('Kid size winter coat', '2', '1', 'true'),
+ ('Kid size winter coat', '2', '1', 'false'),
  ('School backpack', '2', '1', 'true'),
  ('Tent', '2', '1', 'true'),
  ('2 sleeping bags', '2', '1', 'true');
