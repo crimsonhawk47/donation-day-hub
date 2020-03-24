@@ -7,7 +7,7 @@ import axios from 'axios'
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is, so it doesn't need 'connect()'
 const demoLeonardFill = async () => {
-  await axios.put('/api/client/comment/3', {comment: 'What color of Winter Boots does Leonard want?'})
+  await axios.put('/api/client/comment/3', {comment: 'What color of Winter Boots does Leonard want? \n \n Red, or green if they dont have red!'})
   await axios.put(`/api/client/item/purchased/6`)
   await axios.put(`/api/client/item/purchased/7`)
   await axios.put(`/api/client/item/purchased/5`)
