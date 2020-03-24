@@ -29,7 +29,7 @@ const theme = createMuiTheme({
   },
   root: {
     flexGrow: 1,
-  }
+  },
 })
 
 class ClientPage extends Component {
@@ -144,9 +144,7 @@ class ClientPage extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <br />
-        <Grid container justify='center'>
           <h3>Shopping List</h3>
-        </Grid>
         {/* <h4>Item Description</h4> */}
         <Grid container>
           <Grid item xs={9}>
@@ -172,10 +170,12 @@ class ClientPage extends Component {
 
         </Grid>
         <ShoppingList client_id={client_id} team_id={team_id} />
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <h2>Comments</h2>
         <p>Enter comments/questions about shopping list items here:</p>
+        <Box marginBottom={2}>
+
         <Grid container className='comment'>
           <TextField
             onChange={this.handleComment}
@@ -184,14 +184,17 @@ class ClientPage extends Component {
             multiline
             placeholder='Comments'
             value={comment} />
-          <Fab
+          
+        </Grid>
+        </Box>
+
+        <Fab
             variant="extended"
             color="secondary"
             size="small"
             onClick={this.submitComment}>
             Submit Comment
             </Fab>
-        </Grid>
         {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
     )
