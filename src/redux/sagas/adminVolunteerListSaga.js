@@ -9,7 +9,6 @@ function* adminVolunteerListSaga() {
 function* getAdminVolunteerList() {
     try {
         const response = yield axios.get('/api/volunteer');
-        console.log(response.data)
         yield put({ type: 'SET_VOLUNTEER_LIST', payload: response.data });
 
     } catch (error) {

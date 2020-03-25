@@ -53,7 +53,7 @@ function* getMediaFromNames(action) {
     yield put({ type: 'SET_SELECTED_CLIENT_MEDIA', payload: selectedMedia })
 
   } catch (error) {
-    console.log(error);
+    console.log('Get Media From Names error: ', error);
   }
 
 }

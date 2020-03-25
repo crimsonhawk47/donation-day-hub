@@ -9,7 +9,6 @@ function* adminClientListSaga() {
 function* getAdminClientList(){
     try {
         const response = yield axios.get('/api/client');
-        console.log(response.data)
         yield put({ type: 'SET_CLIENT_LIST', payload: response.data });
     
       } catch (error) {

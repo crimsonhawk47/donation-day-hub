@@ -32,7 +32,6 @@ function* fetchUser() {
 
 // PUT/UPDATE request
 function* updateUser(action) {
-  console.log(`in UPDATE_USER PUT`, action.payload);
   try {
     let response = yield axios.put(`/api/user/`, action.payload);
     yield put ({ type: 'FETCH_USER'});
