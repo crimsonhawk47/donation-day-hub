@@ -55,13 +55,6 @@ class AddClient extends Component {
     })
   };
 
-  presLeonardSetup = () => {
-    this.setState({
-      bio: 
-      `Leonard is a Vietnam Veteran. Worked as a mechanic in the Army and at multiple garages throughout the Twin Cities. He has been homeless for the last 3 years. Originally from North Dakota, but moved to the Twin Cities for job opportunities. Laid off from garage 3 years ago and hasn't been able to find work since. Tries to stay in shelters as much as possible, but they are full a lot of the time.`
-    })
-  }
-
   handleClose = (id) => {
 
     if (id === 'add') {
@@ -139,7 +132,7 @@ class AddClient extends Component {
                   <ListItem>How long have you been without a home? Do you stay in shelters?</ListItem>
                   <ListItem>What types of jobs are you good at?</ListItem>
                   <ListItem>What are some things you want to do when you get back on your feet?</ListItem>
-                  <ListItem onClick={this.presLeonardSetup}>What’s something you’d like people to know about you or people experiencing homelessness?</ListItem>
+                  <ListItem>What’s something you’d like people to know about you or people experiencing homelessness?</ListItem>
                 </List>
               </DialogContentText>
               <TextField
