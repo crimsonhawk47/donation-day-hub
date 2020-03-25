@@ -49,7 +49,6 @@ class EditUser extends Component {
   // Update local state as user inputs data
   editProfile = (event, propertyValue) => {
     //build a new object in state
-    //console.log('editing profile', this.state);
     this.setState({
       ...this.state,
       [propertyValue]: event.target.value,
@@ -61,7 +60,6 @@ class EditUser extends Component {
   //dispatches edit to redux
   //needs to save info and return to user dashboard
   handleSaveEdit = () => {
-    console.log('clicked Save button');
     // start the PUT route for edits
     this.props.dispatch({
       type: 'UPDATE_USER',
@@ -73,7 +71,6 @@ class EditUser extends Component {
 
   // Cancel changes and return to user dashboard
   handleCancel = () => {
-    //console.log('clicked cancel button');
     this.props.history.push('/home')
   };
 

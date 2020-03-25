@@ -45,7 +45,6 @@ class AdminVolunteerList extends Component {
       ...this.state,
       search: event.target.value
     }, () => {
-      console.log(this.state);
 
     })
   }

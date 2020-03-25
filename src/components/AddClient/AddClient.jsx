@@ -63,10 +63,8 @@ class AddClient extends Component {
   }
 
   handleClose = (id) => {
-    console.log(id);
 
     if (id === 'add') {
-      console.log(Date());
       this.props.dispatch({
         type: "ADD_CLIENT",
         payload: {
@@ -97,7 +95,6 @@ class AddClient extends Component {
   }
 
   render() {
-    console.log(this.state);
 
     return (
       <ThemeProvider theme={theme}>

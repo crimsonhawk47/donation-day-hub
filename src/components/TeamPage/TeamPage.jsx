@@ -37,7 +37,7 @@ class TeamPage extends Component {
   };
 
   handleClientFetch = () => {
-    console.log(`testing`);
+    (`testing`);
 
   }
 

@@ -39,7 +39,6 @@ class ShoppingItem extends Component {
     }
 
   handleCheck = () => {
-    console.log(`we checking boxes for`, this.props.id);
     this.props.dispatch({
       type: 'TOGGLE_CHECK',
       payload: this.state
@@ -47,7 +46,6 @@ class ShoppingItem extends Component {
   }
 
   handleDelete = () => {
-    console.log(`delete clicked for`, this.state);
     // this.setState({
     //   item: this.props.id
     // })

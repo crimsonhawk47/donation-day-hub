@@ -55,16 +55,13 @@ class ClientPage extends Component {
       type: 'FETCH_SINGLE_CLIENT',
       payload: this.state.client_id
     })
-    console.log(this.props.reduxStore.client.selectSingleClient);
 
   }
 
   handleAddItem = (event) => {
-    console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
-    console.log(this.state);
   }
 
   handleComment = (event) => {
