@@ -66,12 +66,21 @@ class AdminVolunteerPage extends Component {
 
   }
 
-  // Popup open and close
+  // Make Captain Popup open and close
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClosePopup = () => {
+    this.setState({ open: false });
+  };
+
+  // Make Admin Popup open and close
+  handleClickOpenAdmin = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePopupAdmin = () => {
     this.setState({ open: false });
   };
 
@@ -113,7 +122,7 @@ class AdminVolunteerPage extends Component {
               <DialogContent>
                 <DialogContentText>
                   Are you sure you want to make this person a team captain?
-              </DialogContentText>
+                </DialogContentText>
               </DialogContent>
               <DialogActions>
                 <Button onClick={this.handleClosePopup} color="primary">
@@ -139,9 +148,30 @@ class AdminVolunteerPage extends Component {
             {volunteer.city}, {volunteer.state} {volunteer.zip}
           </p>
           <Grid container justify='flex-end'>
-            <Button size='small' variant='outlined' onClick={this.makeAdmin}>Make Admin</Button>
+            <Button size='small' variant='outlined' onClick={this.handleClickOpenAdmin}>Make Admin</Button>
           </Grid>
-
+          {/* POPUP AFTER MAKE ADMIN BUTTON SELECTED */}
+          <div>
+          <Dialog open={this.state.open} onClose={this.handleClosePopupAdmin} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">MAKE ADMIN</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to make this person an administrator?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClosePopupAdmin} color="primary">
+                No
+              </Button>
+              <Button onClick={() => {
+                  { this.makeAdmin() };
+                  { this.handleClosePopupAdmin() };
+                }} color="primary">
+                  Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+          </div>
         </Paper>
       </ThemeProvider>
     )
