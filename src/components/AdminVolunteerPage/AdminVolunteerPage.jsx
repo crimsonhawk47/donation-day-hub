@@ -35,7 +35,8 @@ const styles = theme => ({
 
 class AdminVolunteerPage extends Component {
   state = {
-    open: false
+    openCaptain: false,
+    openAdmin: false
   }
 
   componentDidMount() {
@@ -46,6 +47,7 @@ class AdminVolunteerPage extends Component {
   }
 
   makeCaptain = () => {
+    console.log('clicked make captain button');
     this.props.dispatch({
       type: 'ADMIN_MAKE_CAPTAIN',
       payload: this.props.reduxStore.adminVolunteerInfo
@@ -68,20 +70,20 @@ class AdminVolunteerPage extends Component {
 
   // Make Captain Popup open and close
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ openCaptain: true });
   };
 
   handleClosePopup = () => {
-    this.setState({ open: false });
+    this.setState({ openCaptain: false });
   };
 
   // Make Admin Popup open and close
   handleClickOpenAdmin = () => {
-    this.setState({ open: true });
+    this.setState({ openAdmin: true });
   };
 
   handleClosePopupAdmin = () => {
-    this.setState({ open: false });
+    this.setState({ openAdmin: false });
   };
 
   render() {
@@ -117,7 +119,7 @@ class AdminVolunteerPage extends Component {
           }
           {/* POPUP AFTER MAKE CAPTAIN BUTTON SELECTED */}
           <div>
-            <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
+            <Dialog open={this.state.openCaptain} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
               <DialogTitle id="form-dialog-title">MAKE CAPTAIN</DialogTitle>
               <DialogContent>
                 <DialogContentText>
@@ -151,8 +153,8 @@ class AdminVolunteerPage extends Component {
             <Button size='small' variant='outlined' onClick={this.handleClickOpenAdmin}>Make Admin</Button>
           </Grid>
           {/* POPUP AFTER MAKE ADMIN BUTTON SELECTED */}
-          <div>
-          <Dialog open={this.state.open} onClose={this.handleClosePopupAdmin} aria-labelledby="form-dialog-title">
+           <div>
+          <Dialog open={this.state.openAdmin} onClose={this.handleClosePopupAdmin} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">MAKE ADMIN</DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -171,7 +173,7 @@ class AdminVolunteerPage extends Component {
               </Button>
             </DialogActions>
           </Dialog>
-          </div>
+          </div> 
         </Paper>
       </ThemeProvider>
     )
