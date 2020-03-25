@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-    const queryText = 'SELECT * FROM "user";'
+    const queryText = 'SELECT * FROM "user" ORDER BY "access_level" DESC, "last_name";'
     console.log('in volunteer router.get')
     pool.query(queryText)
         .then(result => {
