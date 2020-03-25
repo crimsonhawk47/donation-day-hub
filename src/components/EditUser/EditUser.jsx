@@ -217,7 +217,7 @@ class EditUser extends Component {
                 <DialogContent>
                   <DialogContentText>
                     Are you sure you want to save these changes?
-              </DialogContentText>
+                  </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={this.handleClosePopup} color="primary">
