@@ -37,10 +37,8 @@ class EditListItem extends Component {
     };
 
     handleClose = (id) => {
-        console.log(this.state);
 
         if (id === 'edit') {
-            console.log(`in id:`);
 
             this.props.dispatch({
                 type: "EDIT_ITEM",
@@ -68,7 +66,6 @@ class EditListItem extends Component {
     }
 
     handleEdit = () => {
-        console.log(`we editing again`, this.state);
 
     }
 

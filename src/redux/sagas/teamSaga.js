@@ -2,11 +2,8 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* getTeam(action) {
-  console.log('we in saga', action.payload);
-
   try {
     const response = yield axios.get(`/api/teamById/`)
-    console.log(response);
 
     yield put({ type: `SET_TEAM_BY_ID`, payload: response.data })
     const teamId = response.data.team_id
@@ -14,7 +11,7 @@ function* getTeam(action) {
       yield put({type: 'FETCH_CLIENTS_BY_TEAM', payload: teamId})
     // }
   } catch (error) {
-    console.log(error);
+    console.log('Get Team Failed: ', error);
   }
 }
 
@@ -22,7 +19,6 @@ function* fetchSearchTeams() {
   try {
 
     const response = yield axios.get('/api/team/search');
-    console.log(response.data)
     yield put({ type: 'SET_TEAMS', payload: response.data });
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -43,7 +39,7 @@ function* joinTeam(action) {
     yield put({type: 'FETCH_USER'})
     history.push('/team-page')
   }catch(err){
-    console.log(err);
+    console.log('Join Team Failed: ', err);
     
   }
 }

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* getItemsById(action) {
-    console.log(`we in itemSaga`, action.payload);
     try{
         const response = yield axios.get(`/api/client/list/${action.payload}`)
         yield put ({ type: `SET_CLIENT_SHOPPING_LIST`, payload: response.data })
@@ -24,11 +23,9 @@ function* addItem(action) {
 }
 
 function* deleteItem(action) {
-    console.log(`we in deleteItem saga`, action.payload);
 
     try {
         yield axios.delete(`api/client/item/delete/${action.payload.item}`);
-        console.log(`we in deleteItem saga`, action.payload);
         yield put({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id })
     }
     catch (error) {
@@ -38,10 +35,8 @@ function* deleteItem(action) {
 }
 
 function* toggleCheck(action) {
-    console.log(`we in toggle check saga`, action.payload);
     try {
         yield axios.put(`api/client/item/purchased/${action.payload.id}`)
-        console.log(`we in toggle check get`, action.payload.client_id);
         
         yield put({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id })
 
@@ -53,7 +48,6 @@ function* toggleCheck(action) {
 }
 
 function* editItem (action) {
-    console.log(`we in edit saga`, action.payload);
     try {
         yield axios.put(`api/client/item/edit`, action.payload);
         yield put ({ type: `FETCH_ITEM_LIST`, payload: action.payload.client_id})

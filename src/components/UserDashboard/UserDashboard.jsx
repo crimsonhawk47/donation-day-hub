@@ -35,17 +35,14 @@ class UserDashboard extends Component {
   }
 
   handleEditProfile = () => {
-    console.log('clicked Edit Profile button');
     this.props.history.push('/edit-user')
   }
 
   handleJoinTeam = () => {
-    console.log('clicked Join Team button');
     this.props.history.push('/team-search')
   }
 
   handleTeamPage = () => {
-    console.log('clicked Team Page button');
     this.props.history.push('/team-page')
   }
 

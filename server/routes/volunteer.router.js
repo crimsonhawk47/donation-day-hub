@@ -3,8 +3,9 @@ const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentica
 const pool = require('../modules/pool');
 const router = express.Router();
 
+//Admin - Gets all users for them to list out
 router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-    const queryText = 'SELECT * FROM "user";'
+    const queryText = 'SELECT * FROM "user" ORDER BY "access_level" DESC, "last_name";'
     console.log('in volunteer router.get')
     pool.query(queryText)
         .then(result => {
@@ -15,6 +16,7 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
             res.sendStatus(500);
         })
 });
+
 
 // admin dashboard : targets individual volunteer/user from clicking 1 person on volunteer list
 router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
@@ -64,6 +66,7 @@ router.post('/make-captain', rejectUnauthenticated, rejectNonAdmin, async (req, 
 
 })
 
+//Admin - Makes somebody an admin
 router.put('/make-admin/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
     try {
         console.log(`IN MAKE ADMIN ROUTER`);

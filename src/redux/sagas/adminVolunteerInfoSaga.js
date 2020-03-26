@@ -8,7 +8,6 @@ function* adminVolunteerInfoSaga() {
 function* fetchAdminVolunteerInfo(action) {
     try {
         let response = yield axios.get(`/api/volunteer/${action.payload}`);
-        console.log(response.data);
         yield put({ type: 'SET_VOLUNTEER_INFO', payload: response.data[0] });
     }
     catch (error) {

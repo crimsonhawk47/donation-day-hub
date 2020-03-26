@@ -6,7 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-//Route for Admins
+//Admin - Get a list of all teams
 router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     const queryText = 'SELECT * FROM "team" ORDER BY "is_archived" ASC, "date" DESC;'
     console.log('in team router.get')
@@ -20,7 +20,8 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
         })
 });
 
-router.get('/team-info/:id', (req, res) => {
+//Admin - Get info on a specific team
+router.get('/team-info/:id', rejectUnauthenticated, (req, res) => {
 
 
     const queryText = `SELECT "user".* FROM "user"
@@ -43,10 +44,9 @@ router.get('/team-info/:id', (req, res) => {
     
 })
 
-//Route for Users
+//Volunteer - Gives list of teams for a user who hasn't joined a team yet. 
 router.get('/search', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "team" WHERE "is_archived" = FALSE ORDER BY "captain_name" ASC;'
-    console.log('in team router.get/search')
     pool.query(queryText)
         .then(result => {
             res.send(result.rows)
@@ -61,8 +61,6 @@ router.post('/join-team', rejectUnauthenticated, async (req, res) => {
     try {
         const teamId = req.body.data
         const userId = req.user.id
-        console.log(userId);
-
 
         //Link the user and team in the junction table
         let queryText = `INSERT INTO "team_user" ("team_id", "user_id")

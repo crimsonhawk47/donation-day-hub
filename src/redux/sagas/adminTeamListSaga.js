@@ -9,7 +9,6 @@ function* adminTeamListSaga() {
 function* getAdminTeamList(){
     try {
         const response = yield axios.get('/api/team');
-        console.log(response.data)
         yield put({ type: 'SET_TEAM_LIST', payload: response.data });
     
       } catch (error) {

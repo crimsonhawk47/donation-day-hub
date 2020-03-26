@@ -55,16 +55,13 @@ class ClientPage extends Component {
       type: 'FETCH_SINGLE_CLIENT',
       payload: this.state.client_id
     })
-    console.log(this.props.reduxStore.client.selectSingleClient);
 
   }
 
   handleAddItem = (event) => {
-    console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
-    console.log(this.state);
   }
 
   handleComment = (event) => {
@@ -103,6 +100,8 @@ class ClientPage extends Component {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
     const comment = this.props.reduxStore.client.comment
+    const user = this.props.reduxStore.user
+    const admin = user.access_level === 3
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
@@ -113,9 +112,11 @@ class ClientPage extends Component {
                 {this.props.reduxStore.client.selectSingleClient.name}
               </h1>
             </Grid>
-            <Grid item>
-              <EditClient id={this.props.match.params.id} />
-            </Grid>
+            {admin ? <></> :
+              <Grid item>
+                <EditClient id={this.props.match.params.id} />
+              </Grid>
+            }
           </Grid>
           <Grid item xs={1} container justify='flex-end'>
             <Fab
@@ -144,20 +145,21 @@ class ClientPage extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <br />
-          <h3>Shopping List</h3>
+        <h3>Shopping List</h3>
         {/* <h4>Item Description</h4> */}
-        <Grid container>
-          <Grid item xs={9}>
-            <Box marginRight={3}>
-            <TextField
-              onChange={this.handleAddItem}
-              variant="outlined"
-              fullWidth
-              placeholder='Item Description'
-              value={this.state.name} />
+        {admin ? <></> :
+          <Grid container>
+            <Grid item xs={9}>
+              <Box marginRight={3}>
+                <TextField
+                  onChange={this.handleAddItem}
+                  variant="outlined"
+                  fullWidth
+                  placeholder='Item Description'
+                  value={this.state.name} />
               </Box>
-          </Grid>
-          <Grid item xs={3} container alignItems='center'>
+            </Grid>
+            <Grid item xs={3} container alignItems='center'>
               <Fab
                 onClick={this.handleSubmit}
                 variant="extended"
@@ -166,9 +168,9 @@ class ClientPage extends Component {
               >
                 Add Item
           </Fab>
+            </Grid>
           </Grid>
-
-        </Grid>
+        }
         <ShoppingList client_id={client_id} team_id={team_id} />
         {/* <br />
         <br /> */}
@@ -176,25 +178,26 @@ class ClientPage extends Component {
         <p>Enter comments/questions about shopping list items here:</p>
         <Box marginBottom={2}>
 
-        <Grid container className='comment'>
-          <TextField
-            onChange={this.handleComment}
-            variant="outlined"
-            fullWidth
-            multiline
-            placeholder='Comments'
-            value={comment} />
-          
-        </Grid>
-        </Box>
+          <Grid container className='comment'>
+            <TextField
+              onChange={this.handleComment}
+              variant="outlined"
+              fullWidth
+              multiline
+              placeholder='Comments'
+              value={comment} />
 
-        <Fab
+          </Grid>
+        </Box>
+        {admin ? <></> :
+          <Fab
             variant="extended"
             color="secondary"
             size="small"
             onClick={this.submitComment}>
             Submit Comment
             </Fab>
+        }
         {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
     )

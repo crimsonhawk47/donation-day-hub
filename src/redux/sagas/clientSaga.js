@@ -15,23 +15,21 @@ function* getImageNames(action) {
     yield put({ type: 'GET_MEDIA_FROM_NAMES', payload: response.data })
   }
   catch (error) {
-    console.log(error);
+    console.log('Get Image Names error: ', error);
   }
 }
 
 function* getClientsById(action) {
 
-  console.log(`we in client's by id saga`, action.payload);
   try {
     const response = yield axios.get(`/api/client/team/${action.payload}`)
     yield put({ type: `SET_CLIENT_BY_TEAM`, payload: response.data })
   } catch (error) {
-    console.log(error);
+    console.log('Get Clients by Id error: ', error);
   }
 }
 
 function* postClient(action) {
-  console.log(`we in post client saga`, action.payload);
   try {
     yield axios.post(`/api/client/add`, action.payload)
     yield put({ type: `FETCH_CLIENTS_BY_TEAM`, payload: action.payload.team_id })
@@ -43,7 +41,6 @@ function* postClient(action) {
 }
 
 function* getSingleClient(action) {
-  console.log(`we in get single client saga`, action.payload);
   try {
     const response = yield axios.get(`/api/client/${action.payload}`);
     yield put({ type: `SET_SINGLE_CLIENT`, payload: response.data })
@@ -55,7 +52,6 @@ function* getSingleClient(action) {
 }
 
 function* updateClient(action) {
-  console.log(`we in update client saga`, action.payload.client_id);
   const response = yield axios.put(`/api/client/update/${action.payload.client_id}`, action.payload)
   yield put({ type: `FETCH_SINGLE_CLIENT`, payload: action.payload.client_id})
 }
@@ -71,12 +67,11 @@ function* getComment(action){
 
 function* updateComment(action){
   try {
-    console.log(action.payload);
     
     yield axios.put(`/api/client/comment/${action.payload.id}`, {comment: action.payload.comment})
     yield put({type: 'GET_COMMENT', payload: action.payload.id})
   } catch (err) {
-    console.log(err)
+    console.log('Update Comment error: ', err)
   }
 }
 

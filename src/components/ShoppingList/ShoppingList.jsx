@@ -62,13 +62,11 @@ class ShoppingList extends Component {
   }
 
   handleCheck = () => {
-    console.log(`we checking stuff off`);
 
   }
 
   render() {
     const { classes } = this.props;
-    console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
 
     return (
       <>
