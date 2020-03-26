@@ -6,7 +6,7 @@ _Duration: 2 Week Sprint_
 
 We’ve designed a mobile application - the Donation Day Hub -  that allows this communication to happen in one centralized place, instead of through multiple text messages amongst the group of volunteers, as well as a massive influx of photos airdropped to Andrea.
 
-To see the fully function site, please visit: [DONATION DAY HUB](https://touyeexiong.com)
+To see the fully function site, please visit: [DONATION DAY HUB](http://touyeexiong.com/)
 
 ## Screen Shot
 
