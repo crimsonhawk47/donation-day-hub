@@ -55,7 +55,7 @@ function* logoutUser(action) {
     // the client-side code know the user is logged out
     yield put({ type: 'UNSET_USER' });
 
-    socket.disconnect();
+    socket && socket.disconnect();
 
   } catch (error) {
     console.log('Error with user logout:', error);

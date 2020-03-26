@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 const attachSocketMethods = require('./socket/attachSocketMethods')
-const serverMethods = require ('./modules/serverMethods')
+const serverMethods = require('./modules/serverMethods')
 const socketIO = require('socket.io')
 
 
@@ -55,37 +55,43 @@ const server = app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
-//Adds auth info to sockets
-//Dane and I set this up for my solo. I'm not totally sure how it works yet
-//But it seems to attach the session to the socket
-const io = socketIO(server).use(function (socket, next) {
-  // Wrap the express middleware
-  sessionMiddleware(socket.request, {}, next);
-})
+const enableSockets = false;
 
-//When a client makes a connection to the server, this anonymous function will run
-//the word "socket" in this context means the client that just connected
-io.on("connection", function (socket) {
-  console.log(`New connection with id: ${socket.id}`);
-  //Checking if we actually have a session (from the session middleware)
-  let userId = socket.request.session
-    && socket.request.session.passport
-    && socket.request.session.passport.user;
+if (enableSockets) {
 
-  //If the user is authenticated...
-  if (userId) {
-    //...We want to attach listeners to that socket
-    //We are putting all our socket events in an external file.
-    //We pass a function everything it needs to attach those events
-    attachSocketMethods(socket, io, serverMethods)
+  //Adds auth info to sockets
+  //Dane and I set this up for my solo. I'm not totally sure how it works yet
+  //But it seems to attach the session to the socket
+  const io = socketIO(server).use(function (socket, next) {
+    // Wrap the express middleware
+    sessionMiddleware(socket.request, {}, next);
+  })
 
-    //Say hello to the client
-    socket.emit('CLIENT_CONNECTED')
+  //When a client makes a connection to the server, this anonymous function will run
+  //the word "socket" in this context means the client that just connected
+  io.on("connection", function (socket) {
+    console.log(`New connection with id: ${socket.id}`);
+    //Checking if we actually have a session (from the session middleware)
+    let userId = socket.request.session
+      && socket.request.session.passport
+      && socket.request.session.passport.user;
 
-  }
-  else {
-    //If our session didn't exist, we don't want the client to get any info
-    console.log(`[SECURITY ISSUE] Socket Connection was attempted before user was authorized`);
-    socket.disconnect();
-  }
-});
+    //If the user is authenticated...
+    if (userId) {
+      //...We want to attach listeners to that socket
+      //We are putting all our socket events in an external file.
+      //We pass a function everything it needs to attach those events
+      attachSocketMethods(socket, io, serverMethods)
+
+      //Say hello to the client
+      socket.emit('CLIENT_CONNECTED')
+
+    }
+    else {
+      //If our session didn't exist, we don't want the client to get any info
+      console.log(`[SECURITY ISSUE] Socket Connection was attempted before user was authorized`);
+      socket.disconnect();
+    }
+  });
+
+}
