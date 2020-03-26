@@ -38,7 +38,8 @@ class AdminTeamList extends Component {
     this.props.dispatch({ type: 'FETCH_TEAM_LIST' });
   }
 
-  handleTeamClick = (id) => {
+  handleTeamClick = (event, id) => {
+    event.stopPropagation();
     this.props.history.push(`/admin-team-page/${id}`)
   }
 
@@ -94,12 +95,11 @@ class AdminTeamList extends Component {
               return (
                 <TableRow
                   key={team.id}
-                  onClick={() => this.handleTeamClick(team.id)}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" onClick={(event) => this.handleTeamClick(event, team.id)}>
                     {moment(team.date).format('LL')}
                   </TableCell>
-                  <TableCell align="left" >{team.captain_name}</TableCell>
+                  <TableCell align="left" onClick={(event) => this.handleTeamClick(event, team.id)}>{team.captain_name}</TableCell>
                   <TableCell align="left">{!team.is_archived ?
                     <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
                     : 

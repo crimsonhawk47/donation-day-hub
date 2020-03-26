@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { Grid, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
+import { Grid, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, ClickAwayListener } from '@material-ui/core'
 import Fab from '@material-ui/core/Fab';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -23,22 +23,26 @@ const theme = createMuiTheme({
 class CloseTeamDalog extends Component {
 
   handleClickOpen = (event) => {
-    event.stopPropagation()
+    // event.stopPropagation()
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: this.props.teamId })
 
   };
 
   handleDisagree = (event) => {
-    event.stopPropagation()
+    // event.stopPropagation()
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: false })
   };
 
   handleAgree = (event) => {
-    event.stopPropagation()
+    // event.stopPropagation()
     this.props.agreeFunction();
     this.props.dispatch({ type: 'SET_CLOSE_TEAM_DIALOG', payload: false })
   };
 
+  handleClickAway = () => {
+    this.handleDisagree()
+    
+  }
   render() {
     const { classes } = this.props;
 
@@ -59,6 +63,7 @@ class CloseTeamDalog extends Component {
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title">{"Close the Team?"}</DialogTitle>
+
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 Are you sure you want to close the donation day for the team?
@@ -71,9 +76,13 @@ class CloseTeamDalog extends Component {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
+         <ClickAwayListener onClickAway={this.handleClickAway}>
+
               <Button onClick={this.handleDisagree} color="primary">
                 Cancel
           </Button>
+          </ClickAwayListener>
+
               <Button onClick={this.handleAgree} color="primary" autoFocus>
                 Close Team
           </Button>
