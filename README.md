@@ -84,7 +84,7 @@ Database
 ## Acknowledgement
 Thanks to Prime Digital Academy who equipped and helped us to make this application a reality. 
 
-Thank you Andrea Bert for giving our team the opportunity to work with such a wonderful and empowering organization. 
+Thank you Andrea Bert from The Intersection for giving our team the opportunity to work with such a wonderful and empowering organization. 
 
 A big thank you for the wonderful team that worked on the application together:
 - [Amber Volkmann](https://github.com/AmberVolkmann)
