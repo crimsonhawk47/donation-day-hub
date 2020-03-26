@@ -6,10 +6,18 @@ import store from '../index'
 
 let socket = undefined;
 
+const enableSockets = false;
+
 //We need socket to not try to connect until we have the cookie. The server will reject usa
 //Without twhe cookie. We also need this socket in other files, and we need it to not
 //setup multiple times. 
 const setupSocket = async () => {
+
+    if (!enableSockets) { return {} }
+    console.log('BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+    console.log('YOU SHOULD NOT HAVE GOTTEN THIS FAR')
+    console.log('BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+    
 
 
 
@@ -31,7 +39,7 @@ const setupSocket = async () => {
             console.log(`Server error`);
             console.log(data);
         })
-        
+
         innerSocket.on('CLIENT_RECEIVED_MESSAGES', data => {
             console.log(`GOT MESSAGES`);
             console.log(data)

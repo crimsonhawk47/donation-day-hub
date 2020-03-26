@@ -62,32 +62,25 @@ class ShoppingList extends Component {
   }
 
   handleCheck = () => {
-    console.log(`we checking stuff off`);
 
   }
 
   render() {
     const { classes } = this.props;
-    console.log(`we in shopping list`, this.props.client_id, this.props.team_id);
 
     return (
       <>
         <TableContainer><Table>
-          <TableHead>
+          {/* <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                {/* <Checkbox 
-                onChange={this.handleCheck} 
-                color="tertiary"
-                /> */}
               </TableCell>
               <TableCell >
-                {/* Item and Item Description */}
               </TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
             <TableBody>
 
               {/* {JSON.stringify(this.props.reduxStore.shoppingListReducer)} */}

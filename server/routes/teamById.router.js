@@ -6,6 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+//Volunteer - Gets some of their team info for use later (as well as some of their own user info)
 router.get('/', rejectUnauthenticated, (req, res) => {
     let id = req.user.id;
     

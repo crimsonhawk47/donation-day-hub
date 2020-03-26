@@ -8,7 +8,6 @@ class UserHandler extends Component {
 
   render() {
     const access_level = this.props.access_level
-    console.log('ACCESS LEVEL = ', access_level)
     if (access_level < 3) {
       return <UserDashboard />
     }

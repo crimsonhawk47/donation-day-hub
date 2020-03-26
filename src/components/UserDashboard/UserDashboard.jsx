@@ -35,17 +35,14 @@ class UserDashboard extends Component {
   }
 
   handleEditProfile = () => {
-    console.log('clicked Edit Profile button');
     this.props.history.push('/edit-user')
   }
 
   handleJoinTeam = () => {
-    console.log('clicked Join Team button');
     this.props.history.push('/team-search')
   }
 
   handleTeamPage = () => {
-    console.log('clicked Team Page button');
     this.props.history.push('/team-page')
   }
 
@@ -73,7 +70,7 @@ class UserDashboard extends Component {
               :
               <></>
             }
-
+            <br />
             <a
               target="_blank"
               href="https://www.google.com/maps/d/viewer?mid=1YNvABle8y-WI0FApN89Lv9vb9uvhxXfe&ll=44.97750434462346%2C-93.27893059999997&z=14">

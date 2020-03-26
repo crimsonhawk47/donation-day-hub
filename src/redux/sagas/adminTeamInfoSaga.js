@@ -8,10 +8,8 @@ function* adminTeamInfoSaga() {
 
 function* fetchTeamInfo(action) {
   try {
-    console.log(action.payload);
 
     let response = yield axios.get(`/api/team/team-info/${action.payload}`)
-    console.log(response.data)
     yield put({ type: `SET_TEAM_INFO`, payload: response.data })
 
 

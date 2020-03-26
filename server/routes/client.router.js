@@ -50,11 +50,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 //User route
-router.get('/list-of-images', async (req, res) => {
+router.get('/list-of-images', rejectUnauthenticated, async (req, res) => {
   try {
     const client_id = req.query.client_id
     const queryText = `SELECT * FROM "media"
-                  WHERE "client_id" = $1`
+                      WHERE "client_id" = $1`
     const listOfImages = []
     const result = await pool.query(queryText, [client_id])
     res.send(result.rows)
@@ -67,7 +67,7 @@ router.get('/list-of-images', async (req, res) => {
 })
 
 //User Route
-router.post('/add-image-name', (req, res) => {
+router.post('/add-image-name', rejectUnauthenticated, (req, res) => {
   
   const queryText = `INSERT INTO "media" ("client_id", "link", "type", "date")
                       VALUES ($1, $2, $3, NOW())`
@@ -82,7 +82,7 @@ router.post('/add-image-name', (req, res) => {
 
 })
 // User route
-router.post('/add', (req,res) => {
+router.post('/add', rejectUnauthenticated, (req,res) => {
   const { name, bio, media_release, location, date, team_id } = req.body
   
   const queryText = `
@@ -99,7 +99,7 @@ router.post('/add', (req,res) => {
   })
 })
 
-router.post('/item/add', (req, res) => {
+router.post('/item/add', rejectUnauthenticated, (req, res) => {
   const {name, client_id, team_id, purchased} = req.body;
 
   const queryText = `
@@ -116,8 +116,7 @@ router.post('/item/add', (req, res) => {
   })
 })
 
-router.delete('/item/delete/:id', (req, res) => {
-  console.log(`we in server for delete`, req.params.id);
+router.delete('/item/delete/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id
   const queryText = 
   `
@@ -153,7 +152,7 @@ router.get('/team/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
-router.put('/item/purchased/:id', (req, res) => {
+router.put('/item/purchased/:id', rejectUnauthenticated, (req, res) => {
   console.log(`we in server put for purchased`, req.params);
   id = req.params.id
   const queryText = `
@@ -172,7 +171,7 @@ router.put('/item/purchased/:id', (req, res) => {
   })
 })
 
-router.put(`/item/edit`, (req, res) => {
+router.put(`/item/edit`, rejectUnauthenticated, (req, res) => {
   console.log(`we in item put server`, req.body);
   const { id, name } = req.body;
 
@@ -192,7 +191,7 @@ router.put(`/item/edit`, (req, res) => {
   })
 })
 
-router.get(`/:id`, (req,res) => {
+router.get(`/:id`, rejectUnauthenticated, (req,res) => {
   console.log(`we in single client get now`, req.params.id);
   const id = req.params.id
   const queryText = `
@@ -211,7 +210,7 @@ router.get(`/:id`, (req,res) => {
   })
 })
 
-router.get(`/list/:id`, (req, res) => {
+router.get(`/list/:id`, rejectUnauthenticated, (req, res) => {
   console.log(`we in server now`, req.params.id);
   let id = req.params.id
   const queryText = `
@@ -232,7 +231,7 @@ router.get(`/list/:id`, (req, res) => {
   })
 })
 
-router.put(`/update/:id`, (req, res) => {
+router.put(`/update/:id`, rejectUnauthenticated, (req, res) => {
   console.log(`update client params:`, req.params);
   console.log(`update client body`, req.body);
   const id = req.params.id
@@ -284,16 +283,6 @@ router.put('/comment/:id', rejectUnauthenticated, (req, res) => {
 });
 
 //Gives somebody admin access
-router.put('/make-admin/:id', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
-  try {
-    const userId = req.params.id
-    const queryText = `UPDATE "user" SET "access_level" = 3 WHERE "user".id = $1`
-    const response = await pool.query(queryText, [userId])
-    res.sendStatus(200)
-  } catch (err) {
-    console.log(`server make admin error: ${err}`);
-    res.sendStatus(500)
-  }
-})
+
 
 module.exports = router;

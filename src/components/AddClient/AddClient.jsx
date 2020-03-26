@@ -56,10 +56,8 @@ class AddClient extends Component {
   };
 
   handleClose = (id) => {
-    console.log(id);
 
     if (id === 'add') {
-      console.log(Date());
       this.props.dispatch({
         type: "ADD_CLIENT",
         payload: {
@@ -90,7 +88,6 @@ class AddClient extends Component {
   }
 
   render() {
-    console.log(this.state);
 
     return (
       <ThemeProvider theme={theme}>
@@ -116,6 +113,7 @@ class AddClient extends Component {
                 label="Name"
                 type="name"
                 fullWidth
+                value={this.state.name}
                 onChange={this.handleInputChangeFor('name')}
               />
               <TextField
@@ -124,6 +122,7 @@ class AddClient extends Component {
                 id="location"
                 label="Location"
                 type="location"
+                value={this.state.location}
                 fullWidth
               />
               <DialogContentText>
@@ -144,6 +143,7 @@ class AddClient extends Component {
                 type="bio"
                 fullWidth
                 multiline
+                value={this.state.bio}
                 rows="4"
               />
             </DialogContent>

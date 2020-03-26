@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-import { Paper, Grid, Typography, Button } from '@material-ui/core'
+import { Paper, Grid, Typography, Button, Box } from '@material-ui/core'
 import ShoppingList from '../ShoppingList/ShoppingList'
 import TextField from '@material-ui/core/TextField';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -29,7 +29,7 @@ const theme = createMuiTheme({
   },
   root: {
     flexGrow: 1,
-  }
+  },
 })
 
 class ClientPage extends Component {
@@ -55,16 +55,13 @@ class ClientPage extends Component {
       type: 'FETCH_SINGLE_CLIENT',
       payload: this.state.client_id
     })
-    console.log(this.props.reduxStore.client.selectSingleClient);
 
   }
 
   handleAddItem = (event) => {
-    console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
-    console.log(this.state);
   }
 
   handleComment = (event) => {
@@ -103,21 +100,36 @@ class ClientPage extends Component {
     const { classes } = this.props;
     const { client_id, team_id } = this.state
     const comment = this.props.reduxStore.client.comment
+    const user = this.props.reduxStore.user
+    const admin = user.access_level === 3
 
     return (
       <ThemeProvider theme={theme} classes={classes.root} >
-        <div className="camera-icon">
-          <Fab
-            variant="outlined"
-            color="primary"
-            onClick={() => { this.goToMedia(client_id) }}>
-            <PhotoCamera />
-          </Fab>
-        </div>
-        <h1>
-          {this.props.reduxStore.client.selectSingleClient.name}
-          <EditClient id={this.props.match.params.id} />
-        </h1>
+        <Grid container alignItems='center'>
+          <Grid item xs={11} container alignItems='center' spacing={1}>
+            <Grid item>
+              <h1>
+                {this.props.reduxStore.client.selectSingleClient.name}
+              </h1>
+            </Grid>
+            {admin ? <></> :
+              <Grid item>
+                <EditClient id={this.props.match.params.id} />
+              </Grid>
+            }
+          </Grid>
+          <Grid item xs={1} container justify='flex-end'>
+            <Fab
+              variant="outlined"
+              color="primary"
+              onClick={() => { this.goToMedia(client_id) }}>
+              <PhotoCamera />
+            </Fab>
+          </Grid>
+
+        </Grid>
+        <br />
+
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
@@ -133,46 +145,59 @@ class ClientPage extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <br />
-        <br />
-        <h2>Shopping List</h2>
+        <h3>Shopping List</h3>
         {/* <h4>Item Description</h4> */}
-        <TextField
-          onChange={this.handleAddItem}
-          variant="outlined"
-          fullWidth
-          placeholder='Item Description'
-          value={this.state.name} />
-        <div className="client-page-add-item-btn">
+        {admin ? <></> :
+          <Grid container>
+            <Grid item xs={9}>
+              <Box marginRight={3}>
+                <TextField
+                  onChange={this.handleAddItem}
+                  variant="outlined"
+                  fullWidth
+                  placeholder='Item Description'
+                  value={this.state.name} />
+              </Box>
+            </Grid>
+            <Grid item xs={3} container alignItems='center'>
+              <Fab
+                onClick={this.handleSubmit}
+                variant="extended"
+                color="secondary"
+                size="small"
+              >
+                Add Item
+          </Fab>
+            </Grid>
+          </Grid>
+        }
+        <ShoppingList client_id={client_id} team_id={team_id} />
+        {/* <br />
+        <br /> */}
+        <h2>Comments</h2>
+        <p>Enter comments/questions about shopping list items here:</p>
+        <Box marginBottom={2}>
+
+          <Grid container className='comment'>
+            <TextField
+              onChange={this.handleComment}
+              variant="outlined"
+              fullWidth
+              multiline
+              placeholder='Comments'
+              value={comment} />
+
+          </Grid>
+        </Box>
+        {admin ? <></> :
           <Fab
-            onClick={this.handleSubmit}
             variant="extended"
             color="secondary"
             size="small"
-          >
-            Add Item
-          </Fab>
-        </div>
-        <ShoppingList client_id={client_id} team_id={team_id} />
-        <br />
-        <br />
-        <h2>Comments</h2>
-        <p>Enter comments/questions about shopping list items here:</p>
-        <Grid container className='comment'>
-          <TextField
-            onChange={this.handleComment}
-            variant="outlined"
-            fullWidth
-            multiline
-            placeholder='Comments'
-            value={comment} />
-            <Fab
-              variant="extended"
-              color="secondary"
-              size="small"
-              onClick={this.submitComment}>
-              Submit Comment
+            onClick={this.submitComment}>
+            Submit Comment
             </Fab>
-        </Grid>
+        }
         {/* <ClientChat clientId={client_id} team_id={team_id} /> */}
       </ThemeProvider>
     )

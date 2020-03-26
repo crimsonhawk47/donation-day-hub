@@ -41,7 +41,6 @@ class EditClient extends Component {
   }
 
   handleClickOpen = () => {
-    console.log(`editclient id:`, this.props.id);
     
     this.setState({
       open: true,
@@ -53,7 +52,6 @@ class EditClient extends Component {
   };
 
   handleClose = (id) => {
-    console.log(id);
 
     if (id === 'edit') {
       this.props.dispatch({
@@ -84,7 +82,6 @@ class EditClient extends Component {
 
   render() {
     const { classes } = this.props;
-console.log(this.state);
 
     return (
 <>
