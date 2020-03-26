@@ -66,29 +66,32 @@ class ClientGallery extends Component {
 
     const { classes } = this.props;
     const loading = this.props.loading
-
-
+    const admin = this.props.admin
 
     return (
       <ThemeProvider theme={theme}>
         {loading ? <LoadingScreen /> :
           <>
 
-            <h1>Client Gallery</h1>
-            <p>1. Click "Choose File" to select receipts, images of clients, and videos to upload.
+            {admin ? <></> :
+              <>
+                <h1>Client Gallery</h1>
+                <p>1. Click "Choose File" to select receipts, images of clients, and videos to upload.
           <br />
           2. Then click "Upload" to save them.</p>
-            <br />
-            <div className="upload-btn">
-              <Grid container>
-                <Input
-                  id='upload-image'
-                  type='file'
-                  accept='image/*'
-                  onChange={this.setFile} />
-                <Fab variant="extended" color="secondary" size="small" onClick={this.uploadFile}>Upload</Fab>
-              </Grid>
-            </div>
+                <br />
+                <div className="upload-btn">
+                  <Grid container>
+                    <Input
+                      id='upload-image'
+                      type='file'
+                      accept='image/*'
+                      onChange={this.setFile} />
+                    <Fab variant="extended" color="secondary" size="small" onClick={this.uploadFile}>Upload</Fab>
+                  </Grid>
+                </div>
+              </>
+            }
 
 
             <Grid container spacing={3}>
@@ -98,7 +101,7 @@ class ClientGallery extends Component {
                     <Paper>
                       <Grid item>
                         <video width="320" height="240" controls className={classes.clientVideo}>
-                          <source src={file.link} type={file.type}  />
+                          <source src={file.link} type={file.type} />
                         </video>
                       </Grid>
                     </Paper>
@@ -107,12 +110,12 @@ class ClientGallery extends Component {
                 }
                 else {
                   return (
-                      <Grid item>
-                        <img
-                          className={classes.clientMedia}
-                          key={index}
-                          src={file.link} />
-                      </Grid>
+                    <Grid item>
+                      <img
+                        className={classes.clientMedia}
+                        key={index}
+                        src={file.link} />
+                    </Grid>
                   )
                 }
               })}
@@ -129,7 +132,8 @@ const mapStateToProps = reduxStore => {
   return (
     {
       media: reduxStore.client.selectedClientMedia,
-      loading: reduxStore.loading
+      loading: reduxStore.loading,
+      admin: reduxStore.user.access_level === 3
     }
   )
 }

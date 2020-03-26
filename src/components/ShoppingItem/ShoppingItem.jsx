@@ -30,13 +30,13 @@ const theme = createMuiTheme({
 
 class ShoppingItem extends Component {
 
-    state = {
-      client_id: this.props.client,
-      item: this.props.id,
-      open: false,
-      setOpen: false,
-      id: this.props.id
-    }
+  state = {
+    client_id: this.props.client,
+    item: this.props.id,
+    open: false,
+    setOpen: false,
+    id: this.props.id
+  }
 
   handleCheck = () => {
     this.props.dispatch({
@@ -55,8 +55,8 @@ class ShoppingItem extends Component {
     })
   }
 
-   // Popup open and close
-   handleClickOpen = () => {
+  // Popup open and close
+  handleClickOpen = () => {
     this.setState({ open: true });
   };
 
@@ -65,11 +65,12 @@ class ShoppingItem extends Component {
   };
 
   render() {
+    const admin = this.props.admin
 
     return (
       <ThemeProvider theme={theme}>
         <TableRow>
-          <TableCell><Checkbox onChange={this.handleCheck} checked={this.props.purchased}/></TableCell>
+          <TableCell><Checkbox onChange={this.handleCheck} checked={this.props.purchased} /></TableCell>
           <TableCell key={this.props.id}>{this.props.item}</TableCell>
           <TableCell>
             {/* <Fab
@@ -80,39 +81,41 @@ class ShoppingItem extends Component {
             >
               <EditIcon fontSize="small" />
             </Fab> */}
-            <EditListItem id={this.props.id} name={this.props.item} client_id={this.state.client_id}/>
+            {admin ? <></> : <EditListItem id={this.props.id} name={this.props.item} client_id={this.state.client_id} />}
           </TableCell>
           <TableCell>
-            <Fab
-              variant="contained"
-              color="secondary"
-              size="small"
-              onClick={this.handleClickOpen}
-            >
-              <DeleteIcon fontSize="small" />
-            </Fab>
-            </TableCell>
-            <div>
+            {admin ? <></> :
+              <Fab
+                variant="contained"
+                color="secondary"
+                size="small"
+                onClick={this.handleClickOpen}
+              >
+                <DeleteIcon fontSize="small" />
+              </Fab>
+            }
+          </TableCell>
+          <div>
             <Dialog open={this.state.open} onClose={this.handleClosePopup} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">DELETE ITEM</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Are you sure you want to delete this item?
+              <DialogTitle id="form-dialog-title">DELETE ITEM</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Are you sure you want to delete this item?
               </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClosePopup} color="primary">
-                No
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClosePopup} color="primary">
+                  No
               </Button>
-              <Button onClick={() => {
-                { this.handleDelete() };
-                { this.handleClosePopup() };
-              }} color="primary">
-                Yes
+                <Button onClick={() => {
+                  { this.handleDelete() };
+                  { this.handleClosePopup() };
+                }} color="primary">
+                  Yes
               </Button>
-            </DialogActions>
+              </DialogActions>
             </Dialog>
-            </div>
+          </div>
 
         </TableRow>
       </ThemeProvider>
@@ -123,7 +126,10 @@ class ShoppingItem extends Component {
 
 const mapStateToProps = reduxStore => {
   return (
-    { reduxStore }
+    {
+      reduxStore: reduxStore,
+      admin: reduxStore.user.access_level === 3
+    }
   )
 }
 export default (connect(mapStateToProps)(ShoppingItem))
