@@ -6,7 +6,7 @@ _Duration: 2 Week Sprint_
 
 We’ve designed a mobile application - the Donation Day Hub -  that allows this communication to happen in one centralized place, instead of through multiple text messages amongst the group of volunteers, as well as a massive influx of photos airdropped to Andrea.
 
-To see the fully function site, please visit: [DONATION DAY HUB](www.touyeexiong.com)
+To see the fully function site, please visit: [DONATION DAY HUB](https://touyeexiong.com)
 
 ## Screen Shot
 
@@ -68,6 +68,9 @@ Database
 4. Here, items can be added for the shopping team as well as media.
 
 ## Built With
+- HTML
+- CSS
+- Javascript
 - React.js
 - Node.js
 - Express
@@ -75,6 +78,8 @@ Database
 - Moment.js
 - Material-UI
 - AWS S3
+- Redux
+- Passport.js
 
 ## Acknowledgement
 Thanks to Prime Digital Academy who equipped and helped us to make this application a reality. 
