@@ -30,6 +30,7 @@
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "redux-saga": "^1.0.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
@@ -43,6 +44,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "history": "^4.10.1",
     "nodemon": "^1.18.10"
   },
   "browserslist": [
