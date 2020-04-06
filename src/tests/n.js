@@ -1,11 +1,9 @@
-import testClass from '../../testClass'
+import ReactTester from './ReactTester'
 import Nav from "../components/Nav/Nav";
 
 
-const test = new testClass(Nav, {user: {id: 3}});
 
-test.addTextContestTest('Should return 3')
-test.runTests();
+
 // import React from "react";
 // import { render, unmountComponentAtNode } from "react-dom";
 // import { act } from "react-dom/test-utils";

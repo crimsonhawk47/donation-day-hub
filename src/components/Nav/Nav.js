@@ -15,7 +15,7 @@ const Nav = (props) => (
     <Link to="/home">
       {/* <h2 className="nav-title">Donation Day Hub</h2> */}
       <img src={IntersectionIcon} alt="icon" className="intersectionIcon" />
-      <p className='test'>{props.user.id}</p>
+
     </Link>
     <div className="nav-right">
       
