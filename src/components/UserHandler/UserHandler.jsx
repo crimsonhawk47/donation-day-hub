@@ -4,18 +4,17 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard'
 import AdminNav from '../AdminNav/AdminNav'
 import { connect } from 'react-redux'
 
-class UserHandler extends Component {
+const UserHandler = (props) => {
 
-  render() {
-    const access_level = this.props.access_level
-    if (access_level < 3) {
+    const access_level = props.access_level
+    if (props.access_level < 3) {
       return <UserDashboard />
     }
-    else if (access_level === 3) {
+    else if (props.access_level === 3) {
       return <AdminDashboard />
     }
   }
-}
+
 
 const mapStateToProps = reduxStore => {
   return (
