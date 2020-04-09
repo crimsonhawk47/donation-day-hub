@@ -44,7 +44,7 @@ const AdminTeamPage = (props) => {
 
 
   useEffect(() => {
-    
+    const x = 
     dispatch({
       type: 'FETCH_TEAM_LIST'
     })
@@ -52,7 +52,9 @@ const AdminTeamPage = (props) => {
       type: 'ADMIN_FETCH_TEAM_INFO',
       payload: props.match.params.id
     })
-  }, [props.match.params.id])
+    return () => {dispatch({type: 'SET_TEAM_INFO', payload: []})}
+  }, [])
+  
   {
     const { classes } = props;
     const teamMembers = reduxStore.adminTeamInfo;
