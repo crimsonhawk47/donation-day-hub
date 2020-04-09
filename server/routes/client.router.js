@@ -10,10 +10,9 @@ const router = express.Router();
 //Admin Route
 router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const queryText = `SELECT * FROM "client";`
-  console.log('in team router.get')
+  console.log('in client router.get')
   pool.query(queryText)
     .then(result => {
-      console.log(result.rows)
       res.send(result.rows)
     }).catch(error => {
       console.log('error in client GET', error)

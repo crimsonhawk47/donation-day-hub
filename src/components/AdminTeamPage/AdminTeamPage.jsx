@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect, useDispatch,  useSelector } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 import AdminClientListForTeam from '../AdminClientListForTeam/AdminClientListForTeam'
 import '../App/App.css'
+import { useEffect } from 'react';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,29 +29,41 @@ const styles = theme => ({
   },
 });
 
-class AdminTeamPage extends Component {
-  componentDidMount() {
-    this.props.dispatch({
+const AdminTeamPage = (props) => {
+  // componentDidMount() {
+  //   props.dispatch({
+  //     type: 'FETCH_TEAM_LIST'
+  //   })
+  //   props.dispatch({
+  //     type: 'ADMIN_FETCH_TEAM_INFO',
+  //     payload: props.match.params.id
+  //   })
+  // }
+  const dispatch = useDispatch()
+  const reduxStore = useSelector(state => state)
+
+
+  useEffect(() => {
+    
+    dispatch({
       type: 'FETCH_TEAM_LIST'
     })
-    this.props.dispatch({
+    dispatch({
       type: 'ADMIN_FETCH_TEAM_INFO',
-      payload: this.props.match.params.id
+      payload: props.match.params.id
     })
-
-  }
-
-  render() {
-    const { classes } = this.props;
-    const teamMembers = this.props.reduxStore.adminTeamInfo;
-    const teamId = this.props.match.params.id
-    const team = this.props.reduxStore.adminTeamList.filter(team => team.id === Number(teamId))[0]
+  }, [props.match.params.id])
+  {
+    const { classes } = props;
+    const teamMembers = reduxStore.adminTeamInfo;
+    const teamId = props.match.params.id
+    const team = reduxStore.adminTeamList.filter(team => team.id === Number(teamId))[0]
 
     return (
       <ThemeProvider theme={theme}>
         {/* {team && !team.is_archived ?
           <Grid justify='center' container>
-            <CloseTeamDialog agreeFunction={() => { this.closeTeam(team.id) }} teamId={team.id} />
+            <CloseTeamDialog agreeFunction={() => { closeTeam(team.id) }} teamId={team.id} />
           </Grid>
           :
           <></>} */}
@@ -79,9 +92,5 @@ class AdminTeamPage extends Component {
   }
 }
 
-const mapStateToProps = reduxStore => {
-  return (
-    { reduxStore }
-  )
-}
-export default withStyles(styles)(connect(mapStateToProps)(AdminTeamPage))
+
+export default withStyles(styles)(AdminTeamPage)

@@ -12,7 +12,6 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     console.log('in team router.get')
     pool.query(queryText)
         .then(result => {
-            console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
             console.log('error in team GET', error)
@@ -32,7 +31,6 @@ router.get('/team-info/:id', rejectUnauthenticated, (req, res) => {
 
     pool.query(queryText, [req.params.id])
     .then(result => {
-        console.log(result.rows);
         
         res.send(result.rows)
     })
