@@ -25,6 +25,7 @@ import ClientGallery from '../ClientGallery/ClientGallery';
 import ClientPage from '../ClientPage/ClientPage';
 import Menu from '../Menu/Menu';
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import {UserProvider} from '../ContextMaker/ContextMaker'
 
 import './App.css';
 
@@ -37,6 +38,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {/* <UserProvider value={3}> */}
           <Menu />
           <div className="general-formatting">
           {/* <Nav /> */}
@@ -115,6 +117,7 @@ class App extends Component {
             </Switch>
             <Footer />
             </div>
+            {/* </UserProvider> */}
           </div>
       </Router >
     )

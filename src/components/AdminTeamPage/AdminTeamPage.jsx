@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect, useDispatch,  useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CloseTeamDialog from '../CloseTeamDialog/CloseTeamDialog'
 import AdminClientListForTeam from '../AdminClientListForTeam/AdminClientListForTeam'
+import ContextTest from '../ContextTest/ContestTest'
 import '../App/App.css'
 import { useEffect } from 'react';
 
@@ -44,17 +45,19 @@ const AdminTeamPage = (props) => {
 
 
   useEffect(() => {
-    const x = 
-    dispatch({
-      type: 'FETCH_TEAM_LIST'
-    })
+    console.log(`Use Effect Is Running`);
+
+    const x =
+      dispatch({
+        type: 'FETCH_TEAM_LIST'
+      })
     dispatch({
       type: 'ADMIN_FETCH_TEAM_INFO',
       payload: props.match.params.id
     })
-    return () => {dispatch({type: 'SET_TEAM_INFO', payload: []})}
+    return () => { dispatch({ type: 'SET_TEAM_INFO', payload: [] }) }
   }, [])
-  
+
   {
     const { classes } = props;
     const teamMembers = reduxStore.adminTeamInfo;
@@ -62,7 +65,9 @@ const AdminTeamPage = (props) => {
     const team = reduxStore.adminTeamList.filter(team => team.id === Number(teamId))[0]
 
     return (
+
       <ThemeProvider theme={theme}>
+        <ContextTest />
         {/* {team && !team.is_archived ?
           <Grid justify='center' container>
             <CloseTeamDialog agreeFunction={() => { closeTeam(team.id) }} teamId={team.id} />
